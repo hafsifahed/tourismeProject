@@ -28,6 +28,14 @@ use App\Http\Controllers\RestaurantController;
 
 
 Route::get('/restaurant-list', [RestaurantController::class, 'index'])->name('restaurant.list');
+Route::get('/restaurant-add', [RestaurantController::class, 'create'])->name('restaurant.add');
+Route::post('/restaurant-store', [RestaurantController::class, 'store'])->name('restaurant.store');
+Route::delete('/restaurant/{id}', [RestaurantController::class, 'destroy'])->name('restaurant.delete');
+Route::get('/restaurant-edit-{id}', [RestaurantController::class, 'edit'])->name('restaurant.edit');
+Route::put('/restaurant/update/{id}', [RestaurantController::class, 'update'])->name('restaurant.update');
+Route::get('/restaurant-details-{id}', [RestaurantController::class, 'show'])->name('restaurant.show');
+
+
 Route::get('/', function () {return redirect('/dashboard');})->middleware('auth');
 	Route::get('/register', [RegisterController::class, 'create'])->middleware('guest')->name('register');
 	Route::post('/register', [RegisterController::class, 'store'])->middleware('guest')->name('register.perform');
