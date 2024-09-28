@@ -33,6 +33,6 @@ class Restaurant extends Model
 
     public function avis()
     {
-        return $this->hasMany(AvisRestaurant::class);
+        return $this->hasMany(AvisRestaurant::class, 'id_restaurant');
     }
 }

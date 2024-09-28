@@ -17,11 +17,11 @@ class AvisRestaurant extends Model
 
     public function restaurant()
     {
-        return $this->belongsTo(Restaurant::class);
+        return $this->belongsTo(Restaurant::class, 'id_restaurant');
     }
 
-    public function utilisateur()
+    public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'id_utilisateur');
     }
 }

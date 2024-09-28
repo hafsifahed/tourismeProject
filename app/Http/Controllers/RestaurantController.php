@@ -11,14 +11,14 @@ class RestaurantController extends Controller
     public function index()
     {
         Debugbar::info('RestaurantController.index');
-        $restaurants = Restaurant::all();
-        return view('pages.restaurant-list', compact('restaurants'));
+        $restaurants = Restaurant::paginate(10);
+        return view('pages.restaurant.restaurant-list', compact('restaurants'));
     }
 
     public function create()
     {
         Debugbar::info('RestaurantController.create');
-        return view('pages.restaurant-create');
+        return view('pages.restaurant.restaurant-create');
     }
 
     public function store(Request $request)
@@ -56,7 +56,7 @@ class RestaurantController extends Controller
     public function edit($id)
     {
         $restaurant = Restaurant::findOrFail($id);
-        return view('pages.restaurant-edit', compact('restaurant'));
+        return view('pages.restaurant.restaurant-edit', compact('restaurant'));
     }
 
     public function update(Request $request, $id)
@@ -88,7 +88,7 @@ class RestaurantController extends Controller
     public function show($id)
     {
         $restaurant = Restaurant::findOrFail($id);
-        return view('pages.restaurant', compact('restaurant'));
+        return view('pages.restaurant.restaurant', compact('restaurant'));
     }
 
 }

@@ -64,6 +64,6 @@ class User extends Authenticatable
 
     public function avis()
     {
-        return $this->hasMany(AvisRestaurant::class);
+        return $this->hasMany(AvisRestaurant::class, 'id_utilisateur');
     }
 }

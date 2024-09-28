@@ -25,6 +25,7 @@ use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\ResetPassword;
 use App\Http\Controllers\ChangePassword;            
 use App\Http\Controllers\RestaurantController;
+use App\Http\Controllers\AvisRestaurantController;
 
 
 Route::get('/restaurant-list', [RestaurantController::class, 'index'])->name('restaurant.list');
@@ -35,6 +36,8 @@ Route::get('/restaurant-edit-{id}', [RestaurantController::class, 'edit'])->name
 Route::put('/restaurant/update/{id}', [RestaurantController::class, 'update'])->name('restaurant.update');
 Route::get('/restaurant-details-{id}', [RestaurantController::class, 'show'])->name('restaurant.show');
 
+Route::get('/avis-restaurant-list', [AvisRestaurantController::class, 'index'])->name('avis.restaurant.list');
+Route::delete('/avis-restaurant/{id}', [AvisRestaurantController::class, 'destroy'])->name('avis.restaurant.delete');
 
 Route::get('/', function () {return redirect('/dashboard');})->middleware('auth');
 	Route::get('/register', [RegisterController::class, 'create'])->middleware('guest')->name('register');
