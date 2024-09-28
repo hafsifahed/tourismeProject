@@ -21,7 +21,7 @@ return new class extends Migration
                 ->onDelete('cascade');
 
             $table->foreignId('id_utilisateur')
-                ->constrained('users', 'id_utilisateur')
+                ->constrained('users', 'id')
                 ->onDelete('cascade');
 
             $table->unsignedInteger('note')->check(function ($column) {
