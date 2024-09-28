@@ -14,6 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('transports', function (Blueprint $table) {
+            $table->bigIncrements('id_transport'); // Custom primary key
+
             $table->string('type');
             $table->string('model')->nullable();
             $table->string('status')->nullable(); // Enum for better status management

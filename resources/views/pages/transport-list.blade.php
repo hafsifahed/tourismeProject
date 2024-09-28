@@ -94,16 +94,17 @@
 
                                         <td class="align-middle text-end">
                                             <div class="d-flex px-3 py-1 justify-content-center align-items-center">
-                                                {{-- <a href="{{ route('transport.edit', $transport->id_transport) }}" class="text-sm font-weight-bold mb-0" style="color: blue; margin-right: 10px;">
+                                                <a href="{{ route('transport.edit', $transport->id_transport) }}" class="text-sm font-weight-bold mb-0" style="color: blue; margin-right: 10px;">
                                                     <i class="fas fa-edit"></i>
-                                                </a> --}}
-                                               {{--  <form method="POST" action="{{ route('transport.delete', $transport->id_transport) }}" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this transport?');">
+                                                </a>
+
+                                                 <form method="POST" action="{{ route('transport.delete', $transport->id_transport) }}" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this transport?');">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="text-sm font-weight-bold mb-0" style="background: none; border: none; color: red; cursor: pointer;">
                                                         <i class="fas fa-trash-alt"></i>
                                                     </button>
-                                                </form> --}}
+                                                </form> 
                                             </div>
                                         </td>
 

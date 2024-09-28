@@ -73,8 +73,11 @@ class TransportController extends Controller
      */
     public function edit($id)
     {
-        //
+        $transport = Transport::findOrFail($id);
+        return view('pages.transport-edit', compact('transport'));
     }
+
+
 
     /**
      * Update the specified resource in storage.
@@ -85,7 +88,19 @@ class TransportController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'type' => 'required|string|max:255',
+            'model' => 'required|string',
+            'status' => 'nullable|string',
+            'prix_heure' => 'nullable',
+            'battrie' => 'nullable',
+            'lieux_location' => 'nullable|string',
+            'image_url' => 'nullable|url',
+        ]);
+        $transport = Transport::findOrFail($id);
+        $transport->update($request->all());
+
+        return redirect()->route('transport.list')->with('success', 'transport updated successfully!');
     }
 
     /**
@@ -94,8 +109,12 @@ class TransportController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
-    }
+
+     public function destroy($id)
+     {
+         Debugbar::info('TransportController.destroy');
+         $transport = Transport::findOrFail($id);
+         $transport->delete();
+         return redirect()->route('transport.list')->with('success', 'transport Supprimer!');
+     }
 }
