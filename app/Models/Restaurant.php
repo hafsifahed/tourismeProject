@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\AvisRestaurant;
+
 class Restaurant extends Model
 {
     use HasFactory;
@@ -28,4 +30,9 @@ class Restaurant extends Model
         'description', 
         'image_url'
     ];
+
+    public function avis()
+    {
+        return $this->hasMany(AvisRestaurant::class);
+    }
 }
