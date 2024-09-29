@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActiviteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,6 +27,17 @@ use App\Http\Controllers\ResetPassword;
 use App\Http\Controllers\ChangePassword;            
             
 
+Route::get('/activites', [ActiviteController::class,'index'])->name('activites.list');
+Route::get('/activites-create', [ActiviteController::class,'create'])->name('activites.create');
+Route::post('/activites-store', [ActiviteController::class,'store'])->name('activites.store');
+Route::delete('/activites/{id}', [ActiviteController::class,'destroy'])->name('activites.destroy');
+Route::get('/activites-details-{id}', [ActiviteController::class,'show'])->name('activites.show');
+Route::get('/activites-edit-{id}', [ActiviteController::class,'edit'])->name('activites.edit');
+Route::put('/activites/update/{id}', [ActiviteController::class,'update'])->name('activites.update');
+
+
+
+
 Route::get('/', function () {return redirect('/dashboard');})->middleware('auth');
 	Route::get('/register', [RegisterController::class, 'create'])->middleware('guest')->name('register');
 	Route::post('/register', [RegisterController::class, 'store'])->middleware('guest')->name('register.perform');
@@ -46,4 +58,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/sign-up-static', [PageController::class, 'signup'])->name('sign-up-static'); 
 	Route::get('/{page}', [PageController::class, 'index'])->name('page');
 	Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+
+
+
 });
