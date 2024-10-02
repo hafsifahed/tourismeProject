@@ -27,13 +27,42 @@
                             <input type="text" class="form-control" id="nom" name="nom" value="{{ old('nom', $guide->nom) }}" required>
                         </div>
                         <div class="mb-3">
-                            <label for="adresse" class="form-label">Adresse</label>
-                            <input type="text" class="form-control" id="adresse" name="adresse" value="{{ old('adresse', $guide->adresse) }}" required>
+                            <label for="description" class="form-label">Description</label>
+                            <textarea class="form-control" id="description" name="description">{{ old('description', $guide->description) }}</textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="region" class="form-label">Région</label>
+                            <input type="text" class="form-control" id="region" name="region" value="{{ old('region', $guide->region) }}" required>
                         </div>
                         <div class="mb-3">
                             <label for="ville" class="form-label">Ville</label>
                             <input type="text" class="form-control" id="ville" name="ville" value="{{ old('ville', $guide->ville) }}">
                         </div>
+                        <div class="mb-3">
+                            <label for="type_tours" class="form-label">Type de Tours</label>
+                            <input type="text" class="form-control" id="type_tours" name="type_tours" value="{{ old('type_tours', $guide->type_tours) }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="disponibilites" class="form-label">Disponibilités</label>
+                            <input type="text" class="form-control" id="disponibilites" name="disponibilites" value="{{ old('disponibilites', $guide->disponibilites) }}">
+                        </div>
+
+                        <div class="form-check mb-3">
+                            <input type="hidden" name="certification" value="0">
+                            <input type="checkbox" class="form-check-input" id="certification" name="certification" value="1" {{ old('certification', $guide->certification) ? 'checked' : '' }}>
+                            <label class="form-check-label" for="certification">Certification</label>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input type="hidden" name="tour_groupe" value="0">
+                            <input type="checkbox" class="form-check-input" id="tour_groupe" name="tour_groupe" value="1" {{ old('tour_groupe', $guide->tour_groupe) ? 'checked' : '' }}>
+                            <label class="form-check-label" for="tour_groupe">Tour de Groupe</label>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input type="hidden" name="tour_prive" value="0">
+                            <input type="checkbox" class="form-check-input" id="tour_prive" name="tour_prive" value="1" {{ old('tour_prive', $guide->tour_prive) ? 'checked' : '' }}>
+                            <label class="form-check-label" for="tour_prive">Tour Privé</label>
+                        </div>
+
                         <div class="mb-3">
                             <label for="telephone" class="form-label">Téléphone</label>
                             <input type="text" class="form-control" id="telephone" name="telephone" value="{{ old('telephone', $guide->telephone) }}">
@@ -47,30 +76,8 @@
                             <input type="url" class="form-control" id="site_web" name="site_web" value="{{ old('site_web', $guide->site_web) }}">
                         </div>
                         <div class="mb-3">
-                            <label for="type_service" class="form-label">Type de Service</label>
-                            <select class="form-select" id="type_service" name="type_service" required>
-                                <option value="">Sélectionner un type de service</option>
-                                <option value="Touristique" {{ old('type_service', $guide->type_service) == 'Touristique' ? 'selected' : '' }}>Touristique</option>
-                                <option value="Culturel" {{ old('type_service', $guide->type_service) == 'Culturel' ? 'selected' : '' }}>Culturel</option>
-                                <option value="Aventure" {{ old('type_service', $guide->type_service) == 'Aventure' ? 'selected' : '' }}>Aventure</option>
-                                <!-- Ajoutez d'autres types de service si nécessaire -->
-                            </select>
-                        </div>
-
-                        <!-- Checkboxes pour les champs booléens -->
-                        <div class="form-check mb-3">
-                            <input type="hidden" name="disponible" value="0"> <!-- Input caché pour l'état non coché -->
-                            <input type="checkbox" class="form-check-input" id="disponible" name="disponible" value="1" {{ old('disponible', $guide->disponible) ? 'checked' : '' }}>
-                            <label class="form-check-label" for="disponible">Disponible</label>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="description" class="form-label">Description</label>
-                            <textarea class="form-control" id="description" name="description">{{ old('description', $guide->description) }}</textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label for="image_url" class="form-label">Image URL</label>
-                            <input type="url" class="form-control" id="image_url" name="image_url" value="{{ old('image_url', $guide->image_url) }}">
+                            <label for="photo_url" class="form-label">Photo URL</label>
+                            <input type="url" class="form-control" id="photo_url" name="photo_url" value="{{ old('photo_url', $guide->photo_url) }}">
                         </div>
 
                         <button type="submit" class="btn btn-primary">Mettre à jour</button>

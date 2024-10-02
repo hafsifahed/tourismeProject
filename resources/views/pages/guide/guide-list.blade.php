@@ -37,18 +37,19 @@
                             <tr>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nom</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Ville</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Type de Guide</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Plus d'infos</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Actions</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">Email</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">Téléphone</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">Site Web</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">Actions</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach ($guides as $guide)
                                 <tr>
                                     <td>
-                                        <div class="d-flex px-3 py-1">
-                                            <img src="{{ $guide->image_url }}" alt="{{ $guide->nom }}" class="avatar" style="border-radius: 200px;">
-                                            <div class="d-flex flex-column justify-content-center" style="margin-left: 20px">
+                                        <div class="d-flex align-items-center">
+                                            <img src="{{ $guide->photo_url }}" alt="{{ $guide->nom }}" class="avatar" style="border-radius: 200px; width: 50px; height: 50px;">
+                                            <div class="ms-3">
                                                 <h6 class="mb-0 text-sm">
                                                     <a href="{{ route('guidelocal.show', $guide->id) }}" class="text-decoration-none text-primary">
                                                         {{ $guide->nom }}
@@ -58,34 +59,21 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td>
-                                        <p class="text-sm font-weight-bold mb-0">{{ $guide->ville }}</p>
+                                    <td class="text-sm font-weight-bold mb-0">{{ $guide->ville }}</td>
+                                    <td class="text-center text-sm">{{ $guide->email }}</td>
+                                    <td class="text-center text-sm">{{ $guide->telephone }}</td>
+                                    <td class="text-center text-sm">
+                                        <a href="{{ $guide->site_web }}" target="_blank" rel="noopener noreferrer" class="text-decoration-none">Voir site web</a>
                                     </td>
-                                    <td class="align-middle text-center">
-                                        <p class="text-sm font-weight-bold mb-0">{{ $guide->type_guide }}</p>
-                                    </td>
-
-                                    <td>
-                                        <div class="d-flex px-3 py-1">
-                                            <div class="d-flex flex-column justify-content-center" style="margin-left: 20px">
-                                                <p class="mb-0 text-sm">{{ $guide->email }}</p>
-                                                <p class="text-sm text-secondary mb-0">{{ $guide->telephone }}</p>
-                                                <p class="text-sm text-secondary mb-0">
-                                                    <a href="{{ $guide->site_web }}" target="_blank" rel="noopener noreferrer" class="text-decoration-none">Voir site web</a>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </td>
-
                                     <td class="align-middle text-end">
-                                        <div class="d-flex px-3 py-1 justify-content-center align-items-center">
-                                            <a href="{{ route('guidelocal.edit', $guide->id) }}" class="text-sm font-weight-bold mb-0" style="color: blue; margin-right: 10px;">
+                                        <div class="d-flex justify-content-center align-items-center">
+                                            <a href="{{ route('guidelocal.edit', $guide->id) }}" class="text-sm font-weight-bold" style="color: blue; margin-right: 10px;">
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                             <form method="POST" action="{{ route('guidelocal.delete', $guide->id) }}" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce guide local ?');">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="text-sm font-weight-bold mb-0" style="background: none; border: none; color: red; cursor: pointer;">
+                                                <button type="submit" class="text-sm font-weight-bold" style="background: none; border: none; color: red; cursor: pointer;">
                                                     <i class="fas fa-trash-alt"></i>
                                                 </button>
                                             </form>
@@ -96,7 +84,7 @@
                             </tbody>
                         </table>
                         <br/>
-                        <div style="margin-left: 50px">
+                        <div style="margin-left: 50px;">
                             {{ $guides->links() }}
                         </div>
                     </div>
