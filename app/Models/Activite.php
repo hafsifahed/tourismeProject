@@ -14,4 +14,14 @@ class Activite extends Model
         'date',
         'lieu',
     ];
+
+    public function reservations()
+    {
+        return $this->hasMany(ReservationActivite::class);
+    }
+
+    public function avis()
+    {
+        return $this->hasMany(AvisActivite::class);
+    }
 }
