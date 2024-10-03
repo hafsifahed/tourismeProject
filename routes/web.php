@@ -16,15 +16,15 @@ Route::get('/', function () {
 
 
 // Routes pour l'admin
-Route::get('/missions/admin', [MissionVolontariatController::class, 'indexAdmin'])->name('missions.indexAdmin');
+Route::get('/missions-admin', [MissionVolontariatController::class, 'indexAdmin'])->name('missions.indexAdmin');
 
 // Routes pour les utilisateurs
-Route::get('/missions/user', [MissionVolontariatController::class, 'indexUser'])->name('missions.indexUser');
+Route::get('/missions', [MissionVolontariatController::class, 'indexUser'])->name('missions.indexUser');
 
 // Routes pour la création, modification, suppression
-Route::get('/missions/create', [MissionVolontariatController::class, 'create'])->name('missions.create');
+Route::get('/missions-create', [MissionVolontariatController::class, 'create'])->name('missions.create');
 Route::post('/missions', [MissionVolontariatController::class, 'store'])->name('missions.store');
-Route::get('/missions/{mission}/edit', [MissionVolontariatController::class, 'edit'])->name('missions.edit');
+Route::get('/missions-{mission}-edit', [MissionVolontariatController::class, 'edit'])->name('missions.edit');
 Route::put('/missions/{mission}', [MissionVolontariatController::class, 'update'])->name('missions.update');
 Route::delete('/missions/{mission}', [MissionVolontariatController::class, 'destroy'])->name('missions.destroy');
 

@@ -11,20 +11,20 @@ class MissionVolontariatController extends Controller
     public function indexAdmin()
     {
         $missions = MissionVolontariat::all();
-        return view('missions.index-admin', compact('missions'));
+        return view('pages.missions.index-admin', compact('missions'));
     }
 
     // Afficher les missions pour l'utilisateur
     public function indexUser()
     {
         $missions = MissionVolontariat::all();
-        return view('missions.index-user', compact('missions'));
+        return view('pages.missions.index-user', compact('missions'));
     }
 
     // Formulaire de création
     public function create()
     {
-        return view('missions.create');
+        return view('pages.missions.create');
     }
 
     // Enregistrer une nouvelle mission
@@ -48,7 +48,7 @@ class MissionVolontariatController extends Controller
     // Formulaire de modification
     public function edit(MissionVolontariat $mission)
     {
-        return view('missions.edit', compact('mission'));
+        return view('pages.missions.edit', compact('mission'));
     }
 
     // Mettre à jour une mission

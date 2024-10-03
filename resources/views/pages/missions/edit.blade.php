@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+@include('layouts.navbars.auth.topnav', ['title' => 'modifier une mission'])
 <div class="container mt-4">
     <h1 class="mb-4">Modifier la mission</h1>
 

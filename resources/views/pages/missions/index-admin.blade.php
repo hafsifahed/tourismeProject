@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+@include('layouts.navbars.auth.topnav', ['title' => 'liste des missions'])
 <div class="container mt-4">
+    <br><br><br><br><br><br><br><br><br><br><br>
     <h1 class="mb-4">Gestion des missions de volontariat</h1>
 
     <!-- Bouton pour créer une nouvelle mission -->
