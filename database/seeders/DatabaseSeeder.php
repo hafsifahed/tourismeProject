@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use App\Models\Restaurant;
+use App\Models\AvisRestaurant;
 
 
 class DatabaseSeeder extends Seeder
@@ -22,5 +24,11 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@argon.com',
             'password' => bcrypt('secret')
         ]);
+
+        $this->call([
+            RestaurantSeeder::class,
+        ]);
+
+        $this->call(AvisRestaurantSeeder::class);
     }
 }

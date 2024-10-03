@@ -33,6 +33,20 @@ Route::delete('/guide/{id}', [GuidesLocauxController::class, 'destroy'])->name('
 Route::get('/guide-edit-{id}', [GuidesLocauxController::class, 'edit'])->name('guidelocal.edit');
 Route::put('/guide/update/{id}', [GuidesLocauxController::class, 'update'])->name('guidelocal.update');
 Route::get('/guide-details-{id}', [GuidesLocauxController::class, 'show'])->name('guidelocal.show');
+use App\Http\Controllers\RestaurantController;
+use App\Http\Controllers\AvisRestaurantController;
+
+
+Route::get('/restaurant-list', [RestaurantController::class, 'index'])->name('restaurant.list');
+Route::get('/restaurant-add', [RestaurantController::class, 'create'])->name('restaurant.add');
+Route::post('/restaurant-store', [RestaurantController::class, 'store'])->name('restaurant.store');
+Route::delete('/restaurant/{id}', [RestaurantController::class, 'destroy'])->name('restaurant.delete');
+Route::get('/restaurant-edit-{id}', [RestaurantController::class, 'edit'])->name('restaurant.edit');
+Route::put('/restaurant/update/{id}', [RestaurantController::class, 'update'])->name('restaurant.update');
+Route::get('/restaurant-details-{id}', [RestaurantController::class, 'show'])->name('restaurant.show');
+
+Route::get('/avis-restaurant-list', [AvisRestaurantController::class, 'index'])->name('avis.restaurant.list');
+Route::delete('/avis-restaurant/{id}', [AvisRestaurantController::class, 'destroy'])->name('avis.restaurant.delete');
 
 Route::get('/', function () {return redirect('/dashboard');})->middleware('auth');
 	Route::get('/register', [RegisterController::class, 'create'])->middleware('guest')->name('register');
