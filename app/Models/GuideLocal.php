@@ -18,15 +18,12 @@ class GuideLocal extends Model
         'ville',
         'type_tours',
         'disponibilites',
-        'experience_annees',
-        'langues_parlees',
         'telephone',
         'email',
         'site_web',
         'certification',
         'tour_groupe',
         'tour_prive',
-        'commentaires',
         'photo_url',
     ];
 }

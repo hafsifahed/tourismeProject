@@ -21,15 +21,12 @@ return new class extends Migration
             $table->string('ville')->nullable();
             $table->string('type_tours')->nullable();
             $table->string('disponibilites')->nullable();
-            $table->integer('experience_annees')->nullable();
-            $table->string('langues_parlees')->nullable();
             $table->string('telephone', 20)->nullable();
             $table->string('email', 100)->nullable();
             $table->string('site_web')->nullable();
             $table->boolean('certification')->default(false);
             $table->boolean('tour_groupe')->default(false);
             $table->boolean('tour_prive')->default(false);
-            $table->text('commentaires')->nullable();
             $table->string('photo_url')->nullable();
             $table->timestamps();
         });
