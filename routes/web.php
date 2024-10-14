@@ -8,30 +8,40 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\ResetPassword;
 use App\Http\Controllers\ChangePassword;
-use App\Http\Controllers\MissionVolontariatController; // Import du contrôleur manquant
+use App\Http\Controllers\MissionVolontariatController;
+use App\Http\Controllers\CandidatureVolontariatController; // Import du contrôleur
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-
-// Routes pour l'admin
+// Routes pour l'admin - missions
 Route::get('/missions-admin', [MissionVolontariatController::class, 'indexAdmin'])->name('missions.indexAdmin');
 
-// Routes pour les utilisateurs
+// Routes pour les utilisateurs - missions
 Route::get('/missions', [MissionVolontariatController::class, 'indexUser'])->name('missions.indexUser');
 
-// Routes pour la création, modification, suppression
+// Routes pour la création, modification, suppression des missions
 Route::get('/missions-create', [MissionVolontariatController::class, 'create'])->name('missions.create');
 Route::post('/missions', [MissionVolontariatController::class, 'store'])->name('missions.store');
 Route::get('/missions-{mission}-edit', [MissionVolontariatController::class, 'edit'])->name('missions.edit');
 Route::put('/missions/{mission}', [MissionVolontariatController::class, 'update'])->name('missions.update');
 Route::delete('/missions/{mission}', [MissionVolontariatController::class, 'destroy'])->name('missions.destroy');
 
+// Routes pour l'admin - candidatures
+Route::get('/candidatures-admin', [CandidatureVolontariatController::class, 'indexAdmin'])->name('candidatures.indexAdmin');
+
+// Routes pour la création, modification, suppression des candidatures
+Route::get('/candidatures-create', [CandidatureVolontariatController::class, 'create'])->name('candidatures.create');
+
+//Route::get('/candidatures/create/{missionId}', [CandidatureVolontariatController::class, 'create'])->name('candidatures.create');
 
 
+Route::post('/candidatures', [CandidatureVolontariatController::class, 'store'])->name('candidatures.store');
+Route::get('/candidatures-{candidature}-edit', [CandidatureVolontariatController::class, 'edit'])->name('candidatures.edit');
+Route::put('/candidatures/{candidature}', [CandidatureVolontariatController::class, 'update'])->name('candidatures.update');
+Route::delete('/candidatures/{candidature}', [CandidatureVolontariatController::class, 'destroy'])->name('candidatures.destroy');
+// Route pour afficher les détails d'une candidature
+Route::get('/candidatures/{candidature}', [CandidatureVolontariatController::class, 'show'])->name('candidatures.show');
 
 
+// Other routes (already in your file)
 Route::get('/', function () {
     return redirect('/dashboard');
 })->middleware('auth');
@@ -56,6 +66,4 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/sign-up-static', [PageController::class, 'signup'])->name('sign-up-static');
     Route::get('/{page}', [PageController::class, 'index'])->name('page');
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');
-
-    
 });

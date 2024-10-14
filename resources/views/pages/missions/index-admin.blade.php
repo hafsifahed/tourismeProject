@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts.navbars.auth.topnav', ['title' => 'liste des missions'])
+@include('layouts.navbars.auth.topnav', ['title' => 'liste des'])
 <div class="container mt-4">
-    <br><br><br><br><br><br><br><br><br><br><br>
-    <h1 class="mb-4">Gestion des missions de volontariat</h1>
+    <br><br><br><br><br><br><br><br><br><br>
+    <h1 class="mb-4 text-center">Gestion des missions de volontariat</h1>
 
     <!-- Bouton pour créer une nouvelle mission -->
     <a href="{{ route('missions.create') }}" class="btn btn-primary mb-3">Créer une nouvelle mission</a>
@@ -13,32 +13,31 @@
     <div class="table-responsive">
         <table class="table table-bordered table-striped">
             <thead class="thead-light">
-                <tr>
-                    <th>Titre</th>
-                    <th>Description</th>
-                    <th>Lieu</th>
-                    <th>Date de début</th>
-                    <th>Date de fin</th>
-                    <th>Nom de l'association</th>
-                    <th>Description de l'association</th>
-                    <th>Actions</th>
+                <tr class="text-center">
+                    <th style="width: 10%;">Titre</th>
+                    <th style="width: 20%;">Description</th>
+                    <th style="width: 10%;">Lieu</th>
+                    <th style="width: 15%;">Période</th>
+                    <th style="width: 10%;">Nom de l'association</th>
+                    <th style="width: 20%;">Description de l'association</th>
+                    <th style="width: 15%;">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($missions as $mission)
                 <tr>
-                    <td>{{ $mission->titre }}</td>
-                    <td>{{ $mission->description }}</td>
-                    <td>{{ $mission->lieu }}</td>
-                    <td>{{ \Carbon\Carbon::parse($mission->date_debut)->format('d/m/Y') }}</td>
-                    <td>{{ \Carbon\Carbon::parse($mission->date_fin)->format('d/m/Y') }}</td>
-                    <td>{{ $mission->nom_association }}</td>
-                    <td>{{ $mission->description_association }}</td>
-                    <td>
-                        <!-- Bouton Modifier -->
+                    <td class="text-center">{{ $mission->titre }}</td>
+                    <td style="word-break: break-word;">{{ $mission->description }}</td>
+                    <td class="text-center">{{ $mission->lieu }}</td>
+                    <td class="text-center">
+                        {{ \Carbon\Carbon::parse($mission->date_debut)->format('d/m/Y') }} 
+                        <br> 
+                        {{ \Carbon\Carbon::parse($mission->date_fin)->format('d/m/Y') }}
+                    </td>
+                    <td class="text-center">{{ $mission->nom_association }}</td>
+                    <td style="word-break: break-word;">{{ $mission->description_association }}</td>
+                    <td class="text-center">
                         <a href="{{ route('missions.edit', $mission->id) }}" class="btn btn-warning btn-sm">Modifier</a>
-
-                        <!-- Formulaire pour supprimer une mission -->
                         <form action="{{ route('missions.destroy', $mission->id) }}" method="POST" class="d-inline">
                             @csrf
                             @method('DELETE')

@@ -3,7 +3,7 @@
 @section('content')
 @include('layouts.navbars.auth.topnav', ['title' => 'Ajouter une mission'])
 <div class="container mt-4">
-    <br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br>
     <h1 class="mb-4">Créer une nouvelle mission</h1>
 
     <!-- Formulaire de création -->

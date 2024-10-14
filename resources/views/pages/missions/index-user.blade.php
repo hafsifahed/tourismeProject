@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts.navbars.auth.topnav', ['title' => 'liste des missionss'])
+@include('layouts.navbars.auth.topnav', ['title' => 'Liste des Missions'])
 <div class="container mt-4">
     <h1 class="mb-4">Opportunités de volontariat écoresponsable</h1>
 
@@ -18,8 +18,8 @@
                     <p><strong>Association :</strong> {{ $mission->nom_association }}</p>
                     <p class="card-text"><small>{{ Str::limit($mission->description_association, 100) }}</small></p>
 
-                    <!-- Bouton Postuler (statique) -->
-                    <a href="#" class="btn btn-success">Postuler</a>
+                    <!-- Bouton Postuler qui redirige vers le formulaire de création d'une candidature -->
+                    <a href="{{ route('candidatures.create') }}" class="btn btn-success">Postuler</a>
                 </div>
             </div>
         </div>
