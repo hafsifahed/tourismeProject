@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AvisActivite;
 use Illuminate\Http\Request;
 
 class AvisActiviteController extends Controller
@@ -13,7 +14,9 @@ class AvisActiviteController extends Controller
      */
     public function index()
     {
-        //
+        $avis = AvisActivite::paginate(10); // Fetch all reviews with associated activities
+        return view('pages.avisactivites.index', compact('avis'));
+
     }
 
     /**
@@ -34,7 +37,15 @@ class AvisActiviteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'activite_id' => 'required|exists:activites,id',
+            'utilisateur_id' => 'required|exists:users,id', // Assuming you have a User model
+            'note' => 'required|integer|min:1|max:5',
+            'commentaire' => 'nullable|string',
+        ]);
+
+        AvisActivite::create($request->all());
+        return redirect()->route('avis.index')->with('success', 'Avis créé avec succès.');
     }
 
     /**
@@ -66,9 +77,15 @@ class AvisActiviteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, AvisActivite $avis)
     {
-        //
+        $request->validate([
+            'note' => 'required|integer|min:1|max:5',
+            'commentaire' => 'nullable|string',
+        ]);
+
+        $avis->update($request->all());
+        return redirect()->route('avis.index')->with('success', 'Avis mis à jour avec succès.');
     }
 
     /**
@@ -77,8 +94,9 @@ class AvisActiviteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(AvisActivite $avis)
     {
-        //
+        $avis->delete();
+        return redirect()->route('avis.index')->with('success', 'Avis supprimé avec succès.');
     }
 }

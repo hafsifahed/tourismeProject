@@ -17,6 +17,11 @@ class ActiviteController extends Controller
         $activites = Activite::paginate(10);
         return view('pages.activites.list', compact('activites'));
     }
+    public function indexx()
+    {
+        $activites = Activite::paginate(10);
+        return view('pages.activites.activities', compact('activites'));
+    }
 
     /**
      * Show the form for creating a new resource.

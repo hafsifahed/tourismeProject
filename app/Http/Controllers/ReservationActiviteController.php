@@ -51,6 +51,27 @@ class ReservationActiviteController extends Controller
         return redirect()->route('reservations.list')->with('success', 'Réservation créée avec succès.');
     }
 
+    public function storee(Request $request)
+    {
+        // Validate the incoming request
+        $request->validate([
+            'activite_id' => 'required|exists:activites,id',
+            'nombre_places' => 'required|integer|min:1', // Ensure this is included
+        ]);
+    
+        // Fetch user ID from authenticated session
+        $userId = auth()->id(); 
+    
+        // Create a new reservation
+        ReservationActivite::create([
+            'activite_id' => $request->input('activite_id'),
+            'utilisateur_id' => $userId,
+            'nombre_places' => $request->input('nombre_places'), // Use user input here
+        ]);
+    
+        return redirect()->route('reservations.list')->with('success', 'Réservation créée avec succès.');
+    }
+
     /**
      * Display the specified resource.
      *

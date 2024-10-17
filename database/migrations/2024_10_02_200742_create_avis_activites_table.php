@@ -15,10 +15,9 @@ return new class extends Migration
     {
         Schema::create('avis_activites', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('activite_id')->constrained()->onDelete('cascade');
-            $table->foreignId('utilisateur_id')->constrained()->onDelete('cascade');
-            $table->integer('note')->between(1, 5);
-            $table->text('commentaire')->nullable();
+            $table->foreignId('activite_id')->constrained('activites')->onDelete('cascade');
+            $table->foreignId('utilisateur_id')->constrained('users')->onDelete('cascade'); // Ensure this matches your users table
+            $table->integer('note')->unsigned(); // Use unsigned for positive integers
             $table->timestamps();
         });
     }

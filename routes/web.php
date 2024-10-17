@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ActiviteController;
+use App\Http\Controllers\AvisActiviteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,6 +43,18 @@ Route::delete('/reservationactivites/{id}', [ReservationActiviteController::clas
 Route::get('/reservationactivites-details-{id}', [ReservationActiviteController::class,'show'])->name('reservations.show');
 Route::get('/reservationactivites-edit-{id}', [ReservationActiviteController::class,'edit'])->name('reservations.edit');
 Route::put('/reservationactivites/update/{id}', [ReservationActiviteController::class,'update'])->name('reservations.update');
+
+Route::get('/avisactivites', [AvisActiviteController::class,'index'])->name('avis.list');
+Route::post('/avisactivites-store', [AvisActiviteController::class,'store'])->name('avis.store');
+Route::delete('/avisactivites/{id}', [AvisActiviteController::class,'destroy'])->name('avis.destroy');
+
+
+
+
+Route::post('/reservationactivites-storee', [ReservationActiviteController::class, 'storee'])->name('reservations.storee');
+Route::get('/activitesuser', [ActiviteController::class, 'indexx'])->name('activites.list');
+
+
 
 
 
