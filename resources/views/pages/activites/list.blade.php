@@ -29,7 +29,13 @@
                     }, 3000);
                 </script>
 
+                <!-- Search Form -->
                 <div class="card-body px-0 pt-0 pb-2">
+                    <form action="{{ route('activites.list') }}" method="GET" class="mb-3">
+                        <input type="text" name="search" value="{{ request()->input('search') }}" placeholder="Rechercher..." class="form-control" />
+                        <button type="submit" class="btn btn-primary mt-2">Chercher</button>
+                    </form>
+
                     <div class="table-responsive p-0">
                         <table class="table align-items-center mb-0">
                             <thead>

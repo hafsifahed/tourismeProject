@@ -12,11 +12,22 @@ class ActiviteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $activites = Activite::paginate(10);
-        return view('pages.activites.list', compact('activites'));
-    }
+    public function index(Request $request)
+{
+    // Get the search query from the request
+    $search = $request->input('search');
+
+    // Query the Activite model with optional search
+    $activites = Activite::when($search, function ($query) use ($search) {
+        return $query->where('nom', 'LIKE', "%{$search}%")
+                     ->orWhere('description', 'LIKE', "%{$search}%")
+                     ->orWhere('lieu', 'LIKE', "%{$search}%");
+    }, function ($query) {
+        return $query; // Return all activities if no search term is provided
+    })->paginate(10);
+
+    return view('pages.activites.list', compact('activites', 'search'));
+}
     public function indexx()
     {
         $activites = Activite::paginate(10);

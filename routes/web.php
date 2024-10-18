@@ -52,7 +52,7 @@ Route::delete('/avisactivites/{id}', [AvisActiviteController::class,'destroy'])-
 
 
 Route::post('/reservationactivites-storee', [ReservationActiviteController::class, 'storee'])->name('reservations.storee');
-Route::get('/activitesuser', [ActiviteController::class, 'indexx'])->name('activites.list');
+Route::get('/activitesuser', [ActiviteController::class, 'indexx'])->name('activites.activities');
 
 
 

@@ -30,7 +30,13 @@
                     }, 3000);
                 </script>
 
+                <!-- Search Form -->
                 <div class="card-body px-0 pt-0 pb-2">
+                    <form action="{{ route('reservations.list') }}" method="GET" class="mb-3">
+                        <input type="text" name="search" value="{{ request()->input('search') }}" placeholder="Rechercher par activité ou utilisateur..." class="form-control" />
+                        <button type="submit" class="btn btn-primary mt-2">Chercher</button>
+                    </form>
+
                     <div class="table-responsive p-0">
                         <table class="table align-items-center mb-0">
                             <thead>
@@ -44,8 +50,8 @@
                             <tbody>
                                 @foreach ($reservations as $reservation)
                                     <tr>
-                                        <td>{{ $reservation->activite->nom }}</td>
-                                        <td>{{ optional($reservation->utilisateur)->name }}</td> <!-- Assuming you have a name field in User -->
+                                        <td>{{ optional($reservation->activite)->nom }}</td> <!-- Safely access activity name -->
+                                        <td>{{ optional($reservation->utilisateur)->email }}</td> <!-- Assuming you have a name field in User -->
                                         <td>{{ $reservation->nombre_places }}</td>
                                         <td class="align-middle text-end">
                                             <a href="{{ route('reservations.show', $reservation->id) }}" class="btn btn-info">Voir</a>

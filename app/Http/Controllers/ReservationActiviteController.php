@@ -14,12 +14,24 @@ class ReservationActiviteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $reservations = ReservationActivite::paginate(10);
-        return view('pages.reservationactivites.index', compact('reservations'));
-        
-    }
+    public function index(Request $request)
+{
+    // Get the search query from the request
+    $search = $request->input('search');
+
+    // Query the ReservationActivite model with optional search
+    $reservations = ReservationActivite::with('activite', 'utilisateur') // Eager load relationships
+        ->when($search, function ($query) use ($search) {
+            return $query->whereHas('activite', function ($query) use ($search) {
+                $query->where('nom', 'LIKE', "%{$search}%");
+            })->orWhereHas('utilisateur', function ($query) use ($search) {
+                $query->where('email', 'LIKE', "%{$search}%"); // Assuming 'name' is a field in User model
+            });
+        })
+        ->paginate(10);
+
+    return view('pages.reservationactivites.index', compact('reservations', 'search'));
+}
 
     /**
      * Show the form for creating a new resource.
@@ -61,6 +73,7 @@ class ReservationActiviteController extends Controller
     
         // Fetch user ID from authenticated session
         $userId = auth()->id(); 
+        
     
         // Create a new reservation
         ReservationActivite::create([
