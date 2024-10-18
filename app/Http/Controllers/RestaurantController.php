@@ -15,6 +15,13 @@ class RestaurantController extends Controller
         return view('pages.restaurant.restaurant-list', compact('restaurants'));
     }
 
+    public function indexClient()
+    {
+        Debugbar::info('RestaurantController.index');
+        $restaurants = Restaurant::paginate(9);
+        return view('pages.restaurant.all-client', compact('restaurants'));
+    }
+
     public function create()
     {
         Debugbar::info('RestaurantController.create');
@@ -89,6 +96,12 @@ class RestaurantController extends Controller
     {
         $restaurant = Restaurant::findOrFail($id);
         return view('pages.restaurant.restaurant', compact('restaurant'));
+    }
+    
+    public function showClient($id)
+    {
+        $restaurant = Restaurant::with('avis.user')->findOrFail($id); // Eager load avis with user relationship
+        return view('pages.restaurant.restaurant-client', compact('restaurant'));
     }
 
 }
