@@ -10,27 +10,23 @@ class RestaurantController extends Controller
 {
     public function index()
     {
-        Debugbar::info('RestaurantController.index');
         $restaurants = Restaurant::paginate(10);
         return view('pages.restaurant.restaurant-list', compact('restaurants'));
     }
 
     public function indexClient()
     {
-        Debugbar::info('RestaurantController.index');
         $restaurants = Restaurant::paginate(9);
         return view('pages.restaurant.all-client', compact('restaurants'));
     }
 
     public function create()
     {
-        Debugbar::info('RestaurantController.create');
         return view('pages.restaurant.restaurant-create');
     }
 
     public function store(Request $request)
     {
-        Debugbar::info('RestaurantController.store');
         $request->validate([
             'nom' => 'required|string|max:255',
             'adresse' => 'required|string',
@@ -54,7 +50,6 @@ class RestaurantController extends Controller
 
     public function destroy($id)
     {
-        Debugbar::info('RestaurantController.destroy');
         $restaurant = Restaurant::findOrFail($id);
         $restaurant->delete();
         return redirect()->route('restaurant.list')->with('success', 'Restaurant Supprimer!');
