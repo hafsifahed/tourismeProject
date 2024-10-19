@@ -45,7 +45,7 @@ class AvisRestaurantController extends Controller
 
         AvisRestaurant::create([
             'id_restaurant' => $id,
-            'id_utilisateur' => '3',
+            'id_utilisateur' => auth()->id(),
             'note' => $request->input('note'),
             'commentaire' => $request->input('commentaire'),
         ]);
@@ -58,6 +58,11 @@ class AvisRestaurantController extends Controller
         $request->validate([
             'note' => 'required|integer|between:1,5',
             'commentaire' => 'required|string|max:500',
+        ], [
+            'note.between' => 'La note doit être entre 1 et 5.',
+            'commentaire.max' => 'Le commentaire ne peut pas dépasser 500 caractères.',
+            'note.required' => 'La note est obligatoire.',
+            'commentaire.required' => 'Le commentaire est obligatoire.',
         ]);
 
         $avis = AvisRestaurant::findOrFail($id);

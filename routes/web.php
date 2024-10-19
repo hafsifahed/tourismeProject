@@ -40,11 +40,16 @@ Route::get('/restaurant-details-{id}', [RestaurantController::class, 'show'])->n
 Route::get('/restaurant-list-client', [RestaurantController::class, 'indexClient'])->name('restaurant.list.client');
 Route::get('/restaurant-client-details-{id}', [RestaurantController::class, 'showClient'])->name('restaurant.show.client');
 
+
+
 Route::delete('/avis-restaurant-client/{id}', [AvisRestaurantController::class, 'destroyClient'])->name('avis.restaurant.client.delete');
 Route::get('/avis-restaurant-list', [AvisRestaurantController::class, 'index'])->name('avis.restaurant.list');
 Route::delete('/avis-restaurant/{id}', [AvisRestaurantController::class, 'destroy'])->name('avis.restaurant.delete');
 Route::post('/restaurant-avis-store/{id}', [AvisRestaurantController::class, 'store'])->name('avis.restaurant.store');
 Route::put('/avis-restaurant-update/{id}', [AvisRestaurantController::class, 'update'])->name('avis.restaurant.update');
+Route::post('/restaurant-reserver', [ReservationRestaurantController::class, 'store'])->name('restaurant.reserver');
+
+
 
 Route::get('/reservation-restaurant-list', [ReservationRestaurantController::class, 'index'])->name('reservation.restaurant.list');
 Route::delete('/reservation-restaurant/{id}', [ReservationRestaurantController::class, 'destroy'])->name('reservation.restaurant.delete');
