@@ -40,19 +40,27 @@ class TransportController extends Controller
      */
     public function store(Request $request)
     {
-        Debugbar::info('RestaurantController.store');
+        Debugbar::info('TransportController.store');
+
+        // Règles de validation pour chaque champ
         $request->validate([
-            'type' => 'required|string|max:255',
-            'model' => 'required|string',
-            'status' => 'nullable|string',
-            'prix_heure' => 'nullable',
-            'battrie' => 'nullable',
-            'lieux_location' => 'nullable|string',
-            'image_url' => 'nullable|url',
+            'type' => 'required|string|max:255', // Le type est obligatoire et doit être une chaîne de caractères
+            'model' => 'required|string|max:255', // Le modèle est obligatoire et doit être une chaîne de caractères
+            'status' => 'required|string|in:Available,Not Available', // Le statut est obligatoire avec des valeurs prédéfinies
+            'prix_heure' => 'required|numeric|min:0', // Le prix par heure est obligatoire, doit être un nombre positif
+            'battrie' => 'required|numeric|min:0|max:100', // La batterie est obligatoire, doit être entre 0 et 100
+            'lieux_location' => 'required|string|max:255', // Le lieu de location est obligatoire
+            'image_url' => 'nullable|url|max:2048', // L'URL de l'image est optionnelle mais doit être valide si présente
         ]);
+
+        // Création du transport
         Transport::create($request->all());
-        return redirect()->route('transport.list')->with('success', 'transport ajouter!');
+
+        // Redirection avec un message de succès
+        return redirect()->route('transport.list')->with('success', 'Transport ajouté avec succès!');
     }
+
+
 
     /**
      * Display the specified resource.
