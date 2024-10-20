@@ -24,7 +24,7 @@
                         @csrf
                         <div class="mb-3">
                             <label for="activite_id" class="form-label">Activité</label>
-                            <select class="form-select" id="activite_id" name="activite_id" required>
+                            <select class="form-select" id="activite_id" name="activite_id" >
                                 <option value="">Sélectionner une activité</option>
                                 @foreach ($activites as $activite)
                                     <option value="{{ $activite->id }}">{{ $activite->nom }}</option>
@@ -34,7 +34,7 @@
 
                         <div class="mb-3">
                             <label for="utilisateur_id" class="form-label">Utilisateur</label>
-                            <select class="form-select" id="utilisateur_id" name="utilisateur_id" required>
+                            <select class="form-select" id="utilisateur_id" name="utilisateur_id" >
                                 <option value="">Sélectionner un utilisateur</option>
                                 @foreach ($utilisateurs as $utilisateur)
                                     <option value="{{ $utilisateur->id }}">{{ $utilisateur->username }}</option>
@@ -44,7 +44,7 @@
 
                         <div class="mb-3">
                             <label for="nombre_places" class="form-label">Nombre de Places</label>
-                            <input type="number" class="form-control" id="nombre_places" name="nombre_places" required min="1">
+                            <input type="number" class="form-control" id="nombre_places" name="nombre_places"  >
                         </div>
 
                         <button type="submit" class='btn btn-success'>Créer la Réservation</button>

@@ -21,22 +21,22 @@
                     @csrf
                     <div class="mb-3">
                         <label for="nom" class="form-label">Nom</label>
-                        <input type="text" class="form-control" id="nom" name="nom" required placeholder="Entrez le nom de l'activité">
+                        <input type="text" class="form-control" id="nom" name="nom"  placeholder="Entrez le nom de l'activité">
                     </div>
 
                     <div class="mb-3">
                         <label for="description" class="form-label">Description</label>
-                        <textarea class="form-control" id="description" name="description" required placeholder="Entrez une description de l'activité"></textarea>
+                        <textarea class="form-control" id="description" name="description"  placeholder="Entrez une description de l'activité"></textarea>
                     </div>
 
                     <div class="mb-3">
                         <label for="date" class="form-label">Date</label>
-                        <input type="date" class="form-control" id="date" name="date" required>
+                        <input type="date" class="form-control" id="date" name="date" >
                     </div>
 
                     <div class="mb-3">
                         <label for="lieu" class="form-label">Lieu</label>
-                        <input type="text" class="form-control" id="lieu" name="lieu" required placeholder="Entrez le lieu de l'activité">
+                        <input type="text" class="form-control" id="lieu" name="lieu"  placeholder="Entrez le lieu de l'activité">
                     </div>
 
 

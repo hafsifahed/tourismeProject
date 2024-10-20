@@ -15,4 +15,8 @@ class AvisActivite extends Model
     {
         return $this->belongsTo(Activite::class);
     }
+    public function utilisateur()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

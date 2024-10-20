@@ -18,6 +18,6 @@ class ReservationActivite extends Model
 
     public function utilisateur()
     {
-        return $this->belongsTo(User::class); // Assuming you have a User model
+        return $this->belongsTo(User::class);
     }
 }

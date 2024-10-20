@@ -47,7 +47,9 @@ Route::put('/reservationactivites/update/{id}', [ReservationActiviteController::
 Route::get('/avisactivites', [AvisActiviteController::class,'index'])->name('avis.list');
 Route::post('/avisactivites-store', [AvisActiviteController::class,'store'])->name('avis.store');
 Route::delete('/avisactivites/{id}', [AvisActiviteController::class,'destroy'])->name('avis.destroy');
-
+Route::get('/avisactivites-details-{id}', [AvisActiviteController::class, 'show'])->name('avis.show');
+Route::get('/avisactivites-{id}-edit', [AvisActiviteController::class, 'edit'])->name('avis.edit');
+Route::put('/avisactivites-{id}', [AvisActiviteController::class, 'update'])->name('avis.update');
 
 
 

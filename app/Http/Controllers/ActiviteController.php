@@ -57,6 +57,17 @@ class ActiviteController extends Controller
             'description' => 'required|string',
             'date' => 'required|date',
             'lieu' => 'required|string|max:255',
+        ], [
+            'nom.required' => 'Le champ Nom est requis.',
+            'nom.string' => 'Le champ Nom doit être une chaîne de caractères.',
+            'nom.max' => 'Le champ Nom ne peut pas dépasser :max caractères.',
+            'description.required' => 'Le champ Description est requis.',
+            'description.string' => 'Le champ Description doit être une chaîne de caractères.',
+            'date.required' => 'Le champ Date est requis.',
+            'date.date' => 'Le champ Date doit être une date valide.',
+            'lieu.required' => 'Le champ Lieu est requis.',
+            'lieu.string' => 'Le champ Lieu doit être une chaîne de caractères.',
+            'lieu.max' => 'Le champ Lieu ne peut pas dépasser :max caractères.',
         ]);
 
         Activite::create($request->all());
@@ -102,6 +113,20 @@ class ActiviteController extends Controller
             'description' => 'required|string',
             'date' => 'required|date',
             'lieu' => 'required|string|max:255',
+        ], [
+            'nom.required' => 'Le champ Nom est requis.',
+            'nom.string' => 'Le champ Nom doit être une chaîne de caractères.',
+            'nom.max' => 'Le champ Nom ne doit pas dépasser :max caractères.',
+            
+            'description.required' => 'Le champ Description est requis.',
+            'description.string' => 'Le champ Description doit être une chaîne de caractères.',
+            
+            'date.required' => 'Le champ Date est requis.',
+            'date.date' => 'Le champ Date doit être une date valide.',
+            
+            'lieu.required' => 'Le champ Lieu est requis.',
+            'lieu.string' => 'Le champ Lieu doit être une chaîne de caractères.',
+            'lieu.max' => 'Le champ Lieu ne doit pas dépasser :max caractères.',
         ]);
 
         $activite = Activite::findOrFail($id);

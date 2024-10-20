@@ -6,6 +6,7 @@ use App\Models\Activite;
 use App\Models\ReservationActivite;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReservationActiviteController extends Controller
 {
@@ -19,16 +20,29 @@ class ReservationActiviteController extends Controller
     // Get the search query from the request
     $search = $request->input('search');
 
-    // Query the ReservationActivite model with optional search
-    $reservations = ReservationActivite::with('activite', 'utilisateur') // Eager load relationships
-        ->when($search, function ($query) use ($search) {
-            return $query->whereHas('activite', function ($query) use ($search) {
-                $query->where('nom', 'LIKE', "%{$search}%");
-            })->orWhereHas('utilisateur', function ($query) use ($search) {
-                $query->where('email', 'LIKE', "%{$search}%"); // Assuming 'name' is a field in User model
-            });
-        })
-        ->paginate(10);
+    // Check if the authenticated user has the role of "user"
+    if (Auth::user()->role === 'user') {
+        // Query the ReservationActivite model for reservations of the authenticated user
+        $reservations = ReservationActivite::with('activite', 'utilisateur')
+            ->where('utilisateur_id', Auth::id())
+            ->when($search, function ($query) use ($search) {
+                return $query->whereHas('activite', function ($query) use ($search) {
+                    $query->where('nom', 'LIKE', "%{$search}%");
+                });
+            })
+            ->paginate(10);
+    } else {
+        // Query all reservations for users with roles other than "user"
+        $reservations = ReservationActivite::with('activite', 'utilisateur')
+            ->when($search, function ($query) use ($search) {
+                return $query->whereHas('activite', function ($query) use ($search) {
+                    $query->where('nom', 'LIKE', "%{$search}%");
+                })->orWhereHas('utilisateur', function ($query) use ($search) {
+                    $query->where('email', 'LIKE', "%{$search}%");
+                });
+            })
+            ->paginate(10);
+    }
 
     return view('pages.reservationactivites.index', compact('reservations', 'search'));
 }
@@ -55,8 +69,16 @@ class ReservationActiviteController extends Controller
     {
         $request->validate([
             'activite_id' => 'required|exists:activites,id',
-            'utilisateur_id' => 'required|exists:users,id', // Assuming you have a User model
+            'utilisateur_id' => 'required|exists:users,id',
             'nombre_places' => 'required|integer|min:1',
+        ], [
+            'activite_id.required' => 'Le champ Activité est requis.',
+            'activite_id.exists' => 'L\'activité sélectionnée est invalide.',
+            'utilisateur_id.required' => 'Le champ Utilisateur est requis.',
+            'utilisateur_id.exists' => 'L\'utilisateur sélectionné est invalide.',
+            'nombre_places.required' => 'Le champ Nombre de places est requis.',
+            'nombre_places.integer' => 'Le champ Nombre de places doit être un entier.',
+            'nombre_places.min' => 'Le champ Nombre de places doit être au moins :min.',
         ]);
 
         ReservationActivite::create($request->all());
@@ -121,6 +143,10 @@ class ReservationActiviteController extends Controller
     {
         $request->validate([
             'nombre_places' => 'required|integer|min:1',
+        ], [
+            'nombre_places.required' => 'Le champ Nombre de places est requis.',
+            'nombre_places.integer' => 'Le champ Nombre de places doit être un entier.',
+            'nombre_places.min' => 'Le Nombre de places doit être au moins :min.',
         ]);
         $reservation = ReservationActivite::findOrFail($id);
         $reservation->update($request->all());

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('activite_id')->constrained('activites')->onDelete('cascade');
             $table->foreignId('utilisateur_id')->constrained('users')->onDelete('cascade'); // Ensure this matches your users table
             $table->integer('note')->unsigned(); // Use unsigned for positive integers
+            $table->text('commentaire')->nullable();
             $table->timestamps();
         });
     }

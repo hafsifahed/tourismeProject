@@ -24,22 +24,22 @@
 
                         <div class="mb-3">
                             <label for="nom" class="form-label">Nom</label>
-                            <input type="text" class="form-control" id="nom" name="nom" value="{{ old('nom', $activite->nom) }}" required>
+                            <input type="text" class="form-control" id="nom" name="nom" value="{{ old('nom', $activite->nom) }}" >
                         </div>
 
                         <div class="mb-3">
                             <label for="description" class="form-label">Description</label>
-                            <textarea class="form-control" id="description" name="description" required>{{ old('description', $activite->description) }}</textarea>
+                            <textarea class="form-control" id="description" name="description" >{{ old('description', $activite->description) }}</textarea>
                         </div>
 
                         <div class="mb-3">
                             <label for="date" class="form-label">Date</label>
-                            <input type="date" class="form-control" id="date" name="date" value="{{ old('date', $activite->date) }}" required>
+                            <input type="date" class="form-control" id="date" name="date" value="{{ old('date', $activite->date) }}" >
                         </div>
 
                         <div class="mb-3">
                             <label for="lieu" class="form-label">Lieu</label>
-                            <input type="text" class="form-control" id="lieu" name="lieu" value="{{ old('lieu', $activite->lieu) }}" required>
+                            <input type="text" class="form-control" id="lieu" name="lieu" value="{{ old('lieu', $activite->lieu) }}" >
                         </div>
 
                         <!-- Bouton de soumission -->

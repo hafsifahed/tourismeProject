@@ -32,4 +32,37 @@
             </div>
         </div>
     </div>
+
+    <!-- Review Form -->
+    @if(Auth::check())
+        <div class="row mt-4 mx-4">
+            <div class="col-12">
+                <div class="card mb-4">
+                    <div class="card-body px-0 pt-0 pb-2">
+                        <h3>Laisser un avis</h3>
+                        <form action="{{ route('avis.store') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="activite_id" value="{{ $activite->id }}">
+                            <input type="hidden" name="utilisateur_id" value="{{ Auth::id() }}">
+
+                            <div class="form-group">
+                                <label for="note">Note (1 à 5)</label>
+                                <input type="number" name="note" id="note" min="1" max="5" required class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="commentaire">Commentaire (facultatif)</label>
+                                <textarea name="commentaire" id="commentaire" rows="3" class="form-control"></textarea>
+                            </div>
+
+                            <button type="submit" class='btn btn-primary'>Soumettre</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @else
+        <p class="text-danger">Vous devez être connecté pour laisser un avis.</p>
+    @endif
+
 @endsection
