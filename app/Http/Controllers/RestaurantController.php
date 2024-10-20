@@ -10,26 +10,29 @@ class RestaurantController extends Controller
 {
     public function index()
     {
-        Debugbar::info('RestaurantController.index');
         $restaurants = Restaurant::paginate(10);
         return view('pages.restaurant.restaurant-list', compact('restaurants'));
     }
 
+    public function indexClient()
+    {
+        $restaurants = Restaurant::paginate(9);
+        return view('pages.restaurant.all-client', compact('restaurants'));
+    }
+
     public function create()
     {
-        Debugbar::info('RestaurantController.create');
         return view('pages.restaurant.restaurant-create');
     }
 
     public function store(Request $request)
     {
-        Debugbar::info('RestaurantController.store');
         $request->validate([
-            'nom' => 'required|string|max:255',
+            'nom' => 'required|string|max:20|min:3',
             'adresse' => 'required|string',
             'ville' => 'nullable|string',
             'code_postal' => 'nullable|string|max:10',
-            'telephone' => 'nullable|string|max:20',
+            'telephone' => 'nullable|string|max:8|min:8',
             'email' => 'nullable|email|max:100',
             'site_web' => 'nullable|url',
             'type_cuisine' => 'nullable|string',
@@ -40,6 +43,23 @@ class RestaurantController extends Controller
             'economie_eau' => 'required|boolean',
             'description' => 'nullable|string',
             'image_url' => 'nullable|url',
+        ],[
+            'nom.required' => 'Le nom du restaurant est obligatoire',
+            'adresse.required' => 'L\'adresse du restaurant est obligatoire',
+            'certification_bio.required' => 'La certification bio est obligatoire',
+            'produits_locaux.required' => 'Les produits locaux sont obligatoires',
+            'saisonnalite.required' => 'La saisonnalité est obligatoire',
+            'gestion_dechets.required' => 'La gestion des déchets est obligatoire',
+            'economie_eau.required' => 'L\'économie d\'eau est obligatoire',
+
+            'nom.min' => 'Le nom du restaurant doit contenir au moins 3 caractères',
+            'nom.max' => 'Le nom du restaurant doit contenir au maximum 20 caractères',
+            'code_postal.max' => 'Le code postal doit contenir au maximum 10 caractères',
+            'telephone.max' => 'Le numéro de téléphone doit contenir au maximum 8 caractères',
+            'telephone.min' => 'Le numéro de téléphone doit contenir au minimum 8 caractères',
+            'email.max' => 'L\'email doit contenir au maximum 100 caractères',
+            'site_web.url' => 'Le site web doit être une URL valide',
+            'image_url.url' => 'L\'URL de l\'image doit être valide',
         ]);
         Restaurant::create($request->all());
         return redirect()->route('restaurant.list')->with('success', 'Restaurant ajouter!');
@@ -47,7 +67,6 @@ class RestaurantController extends Controller
 
     public function destroy($id)
     {
-        Debugbar::info('RestaurantController.destroy');
         $restaurant = Restaurant::findOrFail($id);
         $restaurant->delete();
         return redirect()->route('restaurant.list')->with('success', 'Restaurant Supprimer!');
@@ -66,7 +85,7 @@ class RestaurantController extends Controller
             'adresse' => 'required|string',
             'ville' => 'nullable|string',
             'code_postal' => 'nullable|string|max:10',
-            'telephone' => 'nullable|string|max:20',
+            'telephone' => 'nullable|string|max:8',
             'email' => 'nullable|email|max:100',
             'site_web' => 'nullable|url',
             'type_cuisine' => 'nullable|string',
@@ -89,6 +108,12 @@ class RestaurantController extends Controller
     {
         $restaurant = Restaurant::findOrFail($id);
         return view('pages.restaurant.restaurant', compact('restaurant'));
+    }
+    
+    public function showClient($id)
+    {
+        $restaurant = Restaurant::with('avis.user')->findOrFail($id); // Eager load avis with user relationship
+        return view('pages.restaurant.restaurant-client', compact('restaurant'));
     }
 
 }
