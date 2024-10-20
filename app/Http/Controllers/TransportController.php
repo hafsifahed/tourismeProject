@@ -19,9 +19,16 @@ class TransportController extends Controller
         Debugbar::info('TransportController.index');
         $transport = Transport::all();
         return view('pages.transport-list', compact('transport'));
-       // return view('dashboard', compact('transport'));
 
     }
+
+    public function index1()
+    {
+        Debugbar::info('TransportController.index1');
+        $transport = Transport::paginate(6); // Pagination added to manage large datasets
+        return view('pages.fronttransport', compact('transport'));
+    }
+
 
     /**
      * Show the form for creating a new resource.
