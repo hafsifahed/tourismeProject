@@ -1,11 +1,8 @@
 <?php
 
-<<<<<<< HEAD
-=======
 use App\Http\Controllers\GuidesLocauxController;
 use App\Http\Controllers\ActiviteController;
 use App\Http\Controllers\AvisActiviteController;
->>>>>>> 528e72681e5b11cb6df965f1084bc34be9e603d0
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,7 +26,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\ResetPassword;
-<<<<<<< HEAD
+
 use App\Http\Controllers\ChangePassword;            
 use App\Http\Controllers\HebergementController;   
 use App\Http\Controllers\ReservationsHebergementController;  
@@ -53,8 +50,7 @@ Route::post('/reservations/{reservation}/createPaymentIntent', [ReservationsHebe
     ->name('reservations.createPaymentIntent');
 Route::get('/reservations-{id}', [ReservationsHebergementController::class, 'show'])->name('reservations.details');
 Route::get('/reservations/{id}/delete', [ReservationsHebergementController::class, 'delete'])->name('reservations.delete');	
-=======
-use App\Http\Controllers\ChangePassword;
+
 use App\Http\Controllers\ReservationActiviteController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\AvisRestaurantController;
@@ -124,7 +120,6 @@ Route::put('/avisactivites-{id}', [AvisActiviteController::class, 'update'])->na
 Route::post('/reservationactivites-storee', [ReservationActiviteController::class, 'storee'])->name('reservations.storee');
 Route::get('/activitesuser', [ActiviteController::class, 'indexx'])->name('activites.activities');
 
->>>>>>> 528e72681e5b11cb6df965f1084bc34be9e603d0
 
 
 Route::get('/', function () {return redirect('/dashboard');})->middleware('auth');
@@ -142,18 +137,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/rtl', [PageController::class, 'rtl'])->name('rtl');
 	Route::get('/profile', [UserProfileController::class, 'show'])->name('profile');
 	Route::post('/profile', [UserProfileController::class, 'update'])->name('profile.update');
-<<<<<<< HEAD
-	Route::get('/profile-static', [PageController::class, 'profile'])->name('profile-static'); 
-	Route::get('/sign-in-static', [PageController::class, 'signin'])->name('sign-in-static');
-	Route::get('/sign-up-static', [PageController::class, 'signup'])->name('sign-up-static'); 
-	Route::get('/{page}', [PageController::class, 'index'])->name('page');
-	Route::post('logout', [LoginController::class, 'logout'])->name('logout');
-});
-=======
 	Route::get('/profile-static', [PageController::class, 'profile'])->name('profile-static');
 	Route::get('/sign-in-static', [PageController::class, 'signin'])->name('sign-in-static');
 	Route::get('/sign-up-static', [PageController::class, 'signup'])->name('sign-up-static');
 	Route::get('/{page}', [PageController::class, 'index'])->name('page');
 	Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 });
->>>>>>> 528e72681e5b11cb6df965f1084bc34be9e603d0
