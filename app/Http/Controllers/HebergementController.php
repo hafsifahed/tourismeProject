@@ -12,7 +12,27 @@ class HebergementController extends Controller
             $accommodations = Hebergement::all();
             return view('pages.Hebergement.index', compact('accommodations'));
         }
-    
+        // Afficher tous les hébergements cote client 
+        public function UI_index()
+        {
+            $hebergements = Hebergement::all(); // Vous pouvez ajouter des filtres selon vos besoins
+            return view('pages.Hebergement.UI_hebergement', compact('hebergements'));
+        }
+         // Afficher tous les hébergements cote client avec le search
+        public function search(Request $request)
+        {
+            $criteria = $request->only(['name', 'type', 'region', 'price_min', 'price_max']);
+            $hebergements = Hebergement::search($criteria);
+
+            return view('pages.Hebergement.UI_hebergement', compact('hebergements'));
+        }
+        // Afficher  les daitels d'hébergements cote client
+        public function detailsHebergement($id)
+        {
+            // Récupérer l'hébergement avec les avis et réservations
+            $accommodation = Hebergement::with('avis')->findOrFail($id);
+            return view('pages.Hebergement.UI_detailsHebergement', compact('accommodation'));
+        }
         // Afficher le formulaire de création
         public function create()
         {

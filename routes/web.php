@@ -24,7 +24,9 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\ResetPassword;
 use App\Http\Controllers\ChangePassword;            
-use App\Http\Controllers\HebergementController;             
+use App\Http\Controllers\HebergementController;   
+use App\Http\Controllers\ReservationsHebergementController;  
+      
 Route::get('/hebergements', [HebergementController::class,'index'])->name('hebergement.index');
 Route::get('/hebergement-create', [HebergementController::class,'create'])->name('hebergement.create');
 Route::post('/hebergement-store', [HebergementController::class,'store'])->name('hebergement.store');
@@ -32,6 +34,17 @@ Route::delete('/hebergement/{id}', [HebergementController::class,'destroy'])->na
 Route::get('/hebergement-details-{id}', [HebergementController::class,'show'])->name('hebergement.show');
 Route::get('/hebergement-edit-{id}', [HebergementController::class,'edit'])->name('hebergement.edit');
 Route::put('/hebergement/update/{id}', [HebergementController::class,'update'])->name('hebergement.update');
+Route::get('/hebergements-search', [HebergementController::class, 'search'])->name('hebergement.search');
+Route::get('/UIDetailsHebergement-{id}', [HebergementController::class, 'detailsHebergement'])->name('hebergement.details'); 
+Route::get('/UIhebergements', [HebergementController::class, 'UI_index'])->name('hebergement.UI_index');   
+Route::post('/reservations', [ReservationsHebergementController::class, 'store'])->name('reservations.store');
+
+Route::get('/MyReservations', [ReservationsHebergementController::class, 'index'])->name('reservations.index');
+Route::get('/reservations-{reservation}-payment', [ReservationsHebergementController::class, 'showPaymentForm'])->name('reservations.payment');
+Route::post('/reservations/{reservation}/createPaymentIntent', [ReservationsHebergementController::class, 'createPaymentIntent'])
+    ->name('reservations.createPaymentIntent');
+Route::get('/reservations-{id}', [ReservationsHebergementController::class, 'show'])->name('reservations.details');
+Route::get('/reservations/{id}/delete', [ReservationsHebergementController::class, 'delete'])->name('reservations.delete');	
 
 
 Route::get('/', function () {return redirect('/dashboard');})->middleware('auth');
