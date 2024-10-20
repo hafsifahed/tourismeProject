@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\GuidesLocauxController;
+use App\Http\Controllers\ActiviteController;
+use App\Http\Controllers\AvisActiviteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,6 +27,9 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\ResetPassword;
 use App\Http\Controllers\ChangePassword;
+use App\Http\Controllers\ReservationActiviteController;
+use App\Http\Controllers\RestaurantController;
+use App\Http\Controllers\AvisRestaurantController;
 
 Route::get('/guide-list', [GuidesLocauxController::class, 'index'])->name('guidelocal.list');
 Route::get('/guide-add', [GuidesLocauxController::class, 'create'])->name('guidelocal.add');
@@ -33,8 +38,7 @@ Route::delete('/guide/{id}', [GuidesLocauxController::class, 'destroy'])->name('
 Route::get('/guide-edit-{id}', [GuidesLocauxController::class, 'edit'])->name('guidelocal.edit');
 Route::put('/guide/update/{id}', [GuidesLocauxController::class, 'update'])->name('guidelocal.update');
 Route::get('/guide-details-{id}', [GuidesLocauxController::class, 'show'])->name('guidelocal.show');
-use App\Http\Controllers\RestaurantController;
-use App\Http\Controllers\AvisRestaurantController;
+
 
 
 Route::get('/restaurant-list', [RestaurantController::class, 'index'])->name('restaurant.list');
@@ -47,6 +51,36 @@ Route::get('/restaurant-details-{id}', [RestaurantController::class, 'show'])->n
 
 Route::get('/avis-restaurant-list', [AvisRestaurantController::class, 'index'])->name('avis.restaurant.list');
 Route::delete('/avis-restaurant/{id}', [AvisRestaurantController::class, 'destroy'])->name('avis.restaurant.delete');
+
+
+
+
+
+
+Route::get('/activites', [ActiviteController::class,'index'])->name('activites.list');
+Route::get('/activites-create', [ActiviteController::class,'create'])->name('activites.create');
+Route::post('/activites-store', [ActiviteController::class,'store'])->name('activites.store');
+Route::delete('/activites/{id}', [ActiviteController::class,'destroy'])->name('activites.destroy');
+Route::get('/activites-details-{id}', [ActiviteController::class,'show'])->name('activites.show');
+Route::get('/activites-edit-{id}', [ActiviteController::class,'edit'])->name('activites.edit');
+Route::put('/activites/update/{id}', [ActiviteController::class,'update'])->name('activites.update');
+Route::get('/reservationactivites', [ReservationActiviteController::class,'index'])->name('reservations.list');
+Route::get('/reservationactivites-create', [ReservationActiviteController::class,'create'])->name('reservations.create');
+Route::post('/reservationactivites-store', [ReservationActiviteController::class,'store'])->name('reservations.store');
+Route::delete('/reservationactivites/{id}', [ReservationActiviteController::class,'destroy'])->name('reservations.destroy');
+Route::get('/reservationactivites-details-{id}', [ReservationActiviteController::class,'show'])->name('reservations.show');
+Route::get('/reservationactivites-edit-{id}', [ReservationActiviteController::class,'edit'])->name('reservations.edit');
+Route::put('/reservationactivites/update/{id}', [ReservationActiviteController::class,'update'])->name('reservations.update');
+Route::get('/avisactivites', [AvisActiviteController::class,'index'])->name('avis.list');
+Route::post('/avisactivites-store', [AvisActiviteController::class,'store'])->name('avis.store');
+Route::delete('/avisactivites/{id}', [AvisActiviteController::class,'destroy'])->name('avis.destroy');
+Route::get('/avisactivites-details-{id}', [AvisActiviteController::class, 'show'])->name('avis.show');
+Route::get('/avisactivites-{id}-edit', [AvisActiviteController::class, 'edit'])->name('avis.edit');
+Route::put('/avisactivites-{id}', [AvisActiviteController::class, 'update'])->name('avis.update');
+Route::post('/reservationactivites-storee', [ReservationActiviteController::class, 'storee'])->name('reservations.storee');
+Route::get('/activitesuser', [ActiviteController::class, 'indexx'])->name('activites.activities');
+
+
 
 Route::get('/', function () {return redirect('/dashboard');})->middleware('auth');
 	Route::get('/register', [RegisterController::class, 'create'])->middleware('guest')->name('register');
