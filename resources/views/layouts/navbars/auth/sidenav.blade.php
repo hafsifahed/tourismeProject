@@ -6,6 +6,7 @@
         <a class="navbar-brand m-0" href="{{ route('home') }}"
             target="_blank">
             <img src="./img/logo-ct-dark.png" class="navbar-brand-img h-100" alt="main_logo">
+<<<<<<< HEAD
             <span class="ms-1 font-weight-bold">Argon Dashboard 2 Laravel</span>
         </a>
     </div>
@@ -29,6 +30,8 @@
             </li>
             <li class="nav-item">
 
+=======
+>>>>>>> 73d994c4ffe6b352ffeb00f5b6cc457bb0e2482d
             <span class="ms-1 font-weight-bold">Tourisme</span>
         </a>
     </div>
@@ -47,6 +50,7 @@
 
             </li>
             <li class="nav-item">
+<<<<<<< HEAD
                 <a class="nav-link {{ str_contains(request()->url(), 'transport-list') ? 'active' : '' }}" href="{{ route('transport.list') }}">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
@@ -69,6 +73,8 @@
 
             </li>
             <li class="nav-item">
+=======
+>>>>>>> 73d994c4ffe6b352ffeb00f5b6cc457bb0e2482d
                 <a class="nav-link {{ Route::currentRouteName() == 'hebergement' ? 'active' : '' }}" href="{{ route('hebergement.index') }}" href="{{ route('page', ['page' => 'user-management']) }}">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
@@ -208,6 +214,7 @@
                     </div>
                     <span class="nav-link-text ms-1">RTL</span>
                 </a>
+<<<<<<< HEAD
             </li>
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
@@ -215,6 +222,8 @@
 
             <li class="nav-item">
 
+=======
+>>>>>>> 73d994c4ffe6b352ffeb00f5b6cc457bb0e2482d
             </li>-->
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
@@ -245,6 +254,7 @@
                     </div>
                     <span class="nav-link-text ms-1">Sign Up</span>
                 </a>
+<<<<<<< HEAD
             </li>
         </ul>
     </div>
@@ -265,6 +275,8 @@
             href="https://www.creative-tim.com/product/argon-dashboard-pro-laravel" target="_blank" type="button">Upgrade to PRO</a>
     </div>
 
+=======
+>>>>>>> 73d994c4ffe6b352ffeb00f5b6cc457bb0e2482d
             </li>-->
         </ul>
     </div>

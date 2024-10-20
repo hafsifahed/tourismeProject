@@ -8,7 +8,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 73d994c4ffe6b352ffeb00f5b6cc457bb0e2482d
 use App\Models\AvisRestaurant;
 
 class User extends Authenticatable
@@ -67,7 +70,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(AvisRestaurant::class, 'id_utilisateur');
     }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 73d994c4ffe6b352ffeb00f5b6cc457bb0e2482d
     public function avisa()
     {
         return $this->hasMany(AvisActivite::class);
