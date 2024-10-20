@@ -19,6 +19,8 @@ class TransportController extends Controller
         Debugbar::info('TransportController.index');
         $transport = Transport::all();
         return view('pages.transport-list', compact('transport'));
+       // return view('dashboard', compact('transport'));
+
     }
 
     /**
@@ -38,29 +40,39 @@ class TransportController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+
     public function store(Request $request)
     {
-        Debugbar::info('TransportController.store');
-
-        // Règles de validation pour chaque champ
         $request->validate([
-            'type' => 'required|string|max:255', // Le type est obligatoire et doit être une chaîne de caractères
-            'model' => 'required|string|max:255', // Le modèle est obligatoire et doit être une chaîne de caractères
-            'status' => 'required|string|in:Available,Not Available', // Le statut est obligatoire avec des valeurs prédéfinies
-            'prix_heure' => 'required|numeric|min:0', // Le prix par heure est obligatoire, doit être un nombre positif
-            'battrie' => 'required|numeric|min:0|max:100', // La batterie est obligatoire, doit être entre 0 et 100
-            'lieux_location' => 'required|string|max:255', // Le lieu de location est obligatoire
-            'image_url' => 'nullable|url|max:2048', // L'URL de l'image est optionnelle mais doit être valide si présente
+            'type' => 'required|string',
+            'model' => 'required|string',
+            'status' => 'required|string',
+            'prix_heure' => 'required|numeric|min:0',
+            'battrie' => 'required|integer|min:0|max:100',
+            'lieux_location' => 'required|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validation de l'image
         ]);
 
-        // Création du transport
-        Transport::create($request->all());
+        // Gérer le téléchargement de l'image
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('transports', 'public');
+        }
 
-        // Redirection avec un message de succès
+        // Enregistrement du transport
+        Transport::create([
+            'type' => $request->input('type'),
+            'model' => $request->input('model'),
+            'status' => $request->input('status'),
+            'prix_heure' => $request->input('prix_heure'),
+            'battrie' => $request->input('battrie'),
+            'lieux_location' => $request->input('lieux_location'),
+            'image_url' => $imagePath, // Enregistrer le chemin de l'image
+        ]);
+
         return redirect()->route('transport.list')->with('success', 'Transport ajouté avec succès!');
     }
-
-
 
     /**
      * Display the specified resource.

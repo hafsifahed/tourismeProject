@@ -84,7 +84,7 @@
                                                 <div class="d-flex flex-column justify-content-center" style="margin-left: 20px">
 
 
-                                                    <img src="{{ $transport->image_url }}"  class="avatar" style="border-radius: 200px;">
+                                                    <img src="{{ asset('storage/' . $transport->image_url) }}" alt="{{ $transport->model }}" class="img-fluid">
 
                                                 </div>
                                             </div>
@@ -104,7 +104,7 @@
                                                     <button type="submit" class="text-sm font-weight-bold mb-0" style="background: none; border: none; color: red; cursor: pointer;">
                                                         <i class="fas fa-trash-alt"></i>
                                                     </button>
-                                                </form> 
+                                                </form>
                                             </div>
                                         </td>
 
