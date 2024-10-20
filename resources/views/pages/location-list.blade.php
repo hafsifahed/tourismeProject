@@ -47,20 +47,20 @@
                             <tbody>
                                 @foreach ($locationTransports as $locationTransport)
                                     <tr>
-                                        <td>{{ $locationTransport->transport->type }}</td>
-                                        <td>{{ $locationTransport->transport->model }}</td>
-                                        <td>{{ $locationTransport->user->name }}</td>
+                                        <td>{{ $locationTransport->transport ? $locationTransport->transport->type : 'N/A' }}</td>
+                                        <td>{{ $locationTransport->transport ? $locationTransport->transport->model : 'N/A' }}</td>
+                                        <td>{{ $locationTransport->user ? $locationTransport->user->name : 'N/A' }}</td>
                                         <td>{{ \Carbon\Carbon::parse($locationTransport->date_debut)->format('d/m/Y') }}</td>
                                         <td>{{ \Carbon\Carbon::parse($locationTransport->date_fin)->format('d/m/Y') }}</td>
                                         <td>{{ $locationTransport->status }}</td>
                                         <td>{{ $locationTransport->prix_total }}</td>
                                         <td class="align-middle text-end">
                                             <div class="d-flex px-3 py-1 justify-content-center align-items-center">
-                                                <!-- Edit Button -->
-                                                <a href="{{ route('location-transport.edit', $locationTransport->id_location) }}" class="text-sm font-weight-bold mb-0" style="color: blue; text-decoration: none;">
-                                                    <i class="fas fa-edit"></i>
+                                                
+                                                <a href="{{ route('location.edit', ['id' => $locationTransport->id_location]) }}" class="text-sm font-weight-bold mb-0" style="color: blue; text-decoration: none;">
+                                                    Edit
                                                 </a>
-                                                <!-- Delete Form -->
+
                                                 <form method="POST" action="{{ route('location.delete', $locationTransport->id_location) }}" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this location?');">
                                                     @csrf
                                                     @method('DELETE')
@@ -73,6 +73,7 @@
                                     </tr>
                                 @endforeach
                             </tbody>
+                            
                         </table>
                         @if($locationTransports->isEmpty())
                             <p class="text-center">No Transport Locations available.</p>

@@ -8,6 +8,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+
+use App\Models\AvisRestaurant;
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -58,5 +61,15 @@ class User extends Authenticatable
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = bcrypt($value);
+    }
+
+    public function avis()
+    {
+        return $this->hasMany(AvisRestaurant::class, 'id_utilisateur');
+    }
+
+    public function avisa()
+    {
+        return $this->hasMany(AvisActivite::class);
     }
 }

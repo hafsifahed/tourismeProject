@@ -25,9 +25,20 @@ class TransportController extends Controller
     public function index1()
     {
         Debugbar::info('TransportController.index1');
-        $transport = Transport::paginate(6); // Pagination added to manage large datasets
-        return view('pages.fronttransport', compact('transport'));
+        
+        // Récupérer les modèles uniques et lieux de location depuis la base de données
+        $models = Transport::select('model')->distinct()->pluck('model');
+        $lieux = Transport::select('lieux_location')->distinct()->pluck('lieux_location');
+    
+        // Récupérer les transports paginés
+        $transport = Transport::paginate(6);
+    
+        // Passer les modèles et lieux à la vue
+        return view('pages.fronttransport', compact('transport', 'models', 'lieux'));
     }
+    
+
+    
 
 
     /**
@@ -87,11 +98,17 @@ class TransportController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id_transport)
     {
-        //
+        $transport = Transport::where('id_transport', $id_transport)->firstOrFail();
+    
+        // Utilisez le bon chemin pour la vue
+        return view('pages.show', compact('transport'));
     }
-
+    
+    
+    
+    
     /**
      * Show the form for editing the specified resource.
      *
@@ -104,6 +121,16 @@ class TransportController extends Controller
         return view('pages.transport-edit', compact('transport'));
     }
 
+
+    public function detailsTransport($id)
+    {
+        // Récupérer le transport par ID
+        $transport = Transport::findOrFail($id);
+    
+        // Passer les données à la vue
+        return view('pages.Transport.UI_detailsTransport', compact('transport'));
+    }
+    
 
 
     /**
@@ -144,4 +171,44 @@ class TransportController extends Controller
          $transport->delete();
          return redirect()->route('transport.list')->with('success', 'transport Supprimer!');
      }
+
+
+
+     public function search(Request $request)
+     {
+         // Commencer une nouvelle requête sur le modèle Transport
+         $query = Transport::query();
+     
+         // Appliquer les filtres si les champs sont remplis
+         if ($request->filled('model')) {
+             $query->where('model', $request->input('model'));
+         }
+     
+         if ($request->filled('type')) {
+             $query->where('type', $request->input('type'));
+         }
+     
+         if ($request->filled('lieux_location')) {
+             $query->where('lieux_location', 'like', '%' . $request->input('lieux_location') . '%');
+         }
+     
+         if ($request->filled('prix_min')) {
+             $query->where('prix_heure', '>=', $request->input('prix_min'));
+         }
+     
+         if ($request->filled('prix_max')) {
+             $query->where('prix_heure', '<=', $request->input('prix_max'));
+         }
+     
+         // Obtenir les résultats filtrés
+         $transport = $query->paginate(6);
+     
+         // Récupérer les modèles et lieux distincts pour le formulaire de filtre
+         $models = Transport::select('model')->distinct()->pluck('model');
+         $lieux = Transport::select('lieux_location')->distinct()->pluck('lieux_location');
+     
+         // Retourner la vue avec les résultats filtrés
+         return view('pages.fronttransport', compact('transport', 'models', 'lieux'));
+     }
+     
 }

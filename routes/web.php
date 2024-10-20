@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\GuidesLocauxController;
+use App\Http\Controllers\ActiviteController;
+use App\Http\Controllers\AvisActiviteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,7 +39,11 @@ Route::post('/transport-store', [TransportController::class, 'store'])->name('tr
 Route::delete('/transport/{id}', [TransportController::class, 'destroy'])->name('transport.delete');
 Route::get('/transport-edit-{id}', [TransportController::class, 'edit'])->name('transport.edit');
 Route::put('/transport/update/{id}', [TransportController::class, 'update'])->name('transport.update');
-Route::get('/transport-details-{id}', [TransportController::class, 'show'])->name('transport.show');
+Route::get('/transport-detail-{id}', [TransportController::class, 'show'])->name('transport.show');
+Route::get('/transport-search', [TransportController::class, 'search'])->name('transport.search');
+
+
+
 
 
 // Location Transport routes
@@ -49,6 +56,98 @@ Route::put('/location-transport/update/{id}', [LocationController::class, 'updat
 
 
 
+
+use App\Http\Controllers\HebergementController;
+use App\Http\Controllers\ReservationsHebergementController;
+
+Route::get('/hebergements', [HebergementController::class,'index'])->name('hebergement.index');
+Route::get('/hebergement-create', [HebergementController::class,'create'])->name('hebergement.create');
+Route::post('/hebergement-store', [HebergementController::class,'store'])->name('hebergement.store');
+Route::delete('/hebergement/{id}', [HebergementController::class,'destroy'])->name('hebergement.destroy');
+Route::get('/hebergement-details-{id}', [HebergementController::class,'show'])->name('hebergement.show');
+Route::get('/hebergement-edit-{id}', [HebergementController::class,'edit'])->name('hebergement.edit');
+Route::put('/hebergement/update/{id}', [HebergementController::class,'update'])->name('hebergement.update');
+Route::get('/hebergements-search', [HebergementController::class, 'search'])->name('hebergement.search');
+Route::get('/UIDetailsHebergement-{id}', [HebergementController::class, 'detailsHebergement'])->name('hebergement.details');
+Route::get('/UIhebergements', [HebergementController::class, 'UI_index'])->name('hebergement.UI_index');
+
+Route::post('/reservations', [ReservationsHebergementController::class, 'store'])->name('reservations.store');
+Route::get('/BOReservations', [ReservationsHebergementController::class, 'index_BackOffice'])->name('reservations.index_BackOffice');
+Route::get('/MyReservations', [ReservationsHebergementController::class, 'index'])->name('reservations.index');
+Route::get('/reservations-{reservation}-payment', [ReservationsHebergementController::class, 'showPaymentForm'])->name('reservations.payment');
+Route::post('/reservations/{reservation}/createPaymentIntent', [ReservationsHebergementController::class, 'createPaymentIntent'])
+    ->name('reservations.createPaymentIntent');
+Route::get('/reservations-{id}', [ReservationsHebergementController::class, 'show'])->name('reservations.details');
+Route::get('/reservations/{id}/delete', [ReservationsHebergementController::class, 'delete'])->name('reservations.delete');
+
+use App\Http\Controllers\ReservationActiviteController;
+use App\Http\Controllers\RestaurantController;
+use App\Http\Controllers\AvisRestaurantController;
+use App\Http\Controllers\ReservationRestaurantController;
+
+Route::get('/guide-list', [GuidesLocauxController::class, 'index'])->name('guidelocal.list');
+Route::get('/guide-add', [GuidesLocauxController::class, 'create'])->name('guidelocal.add');
+Route::post('/guide-store', [GuidesLocauxController::class, 'store'])->name('guidelocal.store');
+Route::delete('/guide/{id}', [GuidesLocauxController::class, 'destroy'])->name('guidelocal.delete');
+Route::get('/guide-edit-{id}', [GuidesLocauxController::class, 'edit'])->name('guidelocal.edit');
+Route::put('/guide/update/{id}', [GuidesLocauxController::class, 'update'])->name('guidelocal.update');
+Route::get('/guide-details-{id}', [GuidesLocauxController::class, 'show'])->name('guidelocal.show');
+
+
+
+Route::get('/restaurant-list', [RestaurantController::class, 'index'])->name('restaurant.list');
+Route::get('/restaurant-add', [RestaurantController::class, 'create'])->name('restaurant.add');
+Route::post('/restaurant-store', [RestaurantController::class, 'store'])->name('restaurant.store');
+Route::delete('/restaurant/{id}', [RestaurantController::class, 'destroy'])->name('restaurant.delete');
+Route::get('/restaurant-edit-{id}', [RestaurantController::class, 'edit'])->name('restaurant.edit');
+Route::put('/restaurant/update/{id}', [RestaurantController::class, 'update'])->name('restaurant.update');
+Route::get('/restaurant-details-{id}', [RestaurantController::class, 'show'])->name('restaurant.show');
+
+Route::get('/restaurant-list-client', [RestaurantController::class, 'indexClient'])->name('restaurant.list.client');
+Route::get('/restaurant-client-details-{id}', [RestaurantController::class, 'showClient'])->name('restaurant.show.client');
+
+
+
+Route::delete('/avis-restaurant-client/{id}', [AvisRestaurantController::class, 'destroyClient'])->name('avis.restaurant.client.delete');
+Route::get('/avis-restaurant-list', [AvisRestaurantController::class, 'index'])->name('avis.restaurant.list');
+Route::delete('/avis-restaurant/{id}', [AvisRestaurantController::class, 'destroy'])->name('avis.restaurant.delete');
+Route::post('/restaurant-avis-store/{id}', [AvisRestaurantController::class, 'store'])->name('avis.restaurant.store');
+Route::put('/avis-restaurant-update/{id}', [AvisRestaurantController::class, 'update'])->name('avis.restaurant.update');
+Route::post('/restaurant-reserver', [ReservationRestaurantController::class, 'store'])->name('restaurant.reserver');
+
+
+
+Route::get('/reservation-restaurant-list', [ReservationRestaurantController::class, 'index'])->name('reservation.restaurant.list');
+Route::delete('/reservation-restaurant/{id}', [ReservationRestaurantController::class, 'destroy'])->name('reservation.restaurant.delete');
+
+
+
+
+
+
+
+Route::get('/activites', [ActiviteController::class,'index'])->name('activites.list');
+Route::get('/activites-create', [ActiviteController::class,'create'])->name('activites.create');
+Route::post('/activites-store', [ActiviteController::class,'store'])->name('activites.store');
+Route::delete('/activites/{id}', [ActiviteController::class,'destroy'])->name('activites.destroy');
+Route::get('/activites-details-{id}', [ActiviteController::class,'show'])->name('activites.show');
+Route::get('/activites-edit-{id}', [ActiviteController::class,'edit'])->name('activites.edit');
+Route::put('/activites/update/{id}', [ActiviteController::class,'update'])->name('activites.update');
+Route::get('/reservationactivites', [ReservationActiviteController::class,'index'])->name('reservations.list');
+Route::get('/reservationactivites-create', [ReservationActiviteController::class,'create'])->name('reservations.create');
+Route::post('/reservationactivites-store', [ReservationActiviteController::class,'store'])->name('reservations.store');
+Route::delete('/reservationactivites/{id}', [ReservationActiviteController::class,'destroy'])->name('reservations.destroy');
+Route::get('/reservationactivites-details-{id}', [ReservationActiviteController::class,'show'])->name('reservations.show');
+Route::get('/reservationactivites-edit-{id}', [ReservationActiviteController::class,'edit'])->name('reservations.edit');
+Route::put('/reservationactivites/update/{id}', [ReservationActiviteController::class,'update'])->name('reservations.update');
+Route::get('/avisactivites', [AvisActiviteController::class,'index'])->name('avis.list');
+Route::post('/avisactivites-store', [AvisActiviteController::class,'store'])->name('avis.store');
+Route::delete('/avisactivites/{id}', [AvisActiviteController::class,'destroy'])->name('avis.destroy');
+Route::get('/avisactivites-details-{id}', [AvisActiviteController::class, 'show'])->name('avis.show');
+Route::get('/avisactivites-{id}-edit', [AvisActiviteController::class, 'edit'])->name('avis.edit');
+Route::put('/avisactivites-{id}', [AvisActiviteController::class, 'update'])->name('avis.update');
+Route::post('/reservationactivites-storee', [ReservationActiviteController::class, 'storee'])->name('reservations.storee');
+Route::get('/activitesuser', [ActiviteController::class, 'indexx'])->name('activites.activities');
 
 
 
