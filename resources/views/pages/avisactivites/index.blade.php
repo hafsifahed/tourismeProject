@@ -68,8 +68,6 @@
                             </tbody>
                         </table>
 
-                        <!-- Pagination Links -->
-                        {{ $avis->links() }}
                     </div> 
                     <!-- Chart for Average Ratings -->
                     @if(auth()->check() && auth()->user()->role === 'admin')

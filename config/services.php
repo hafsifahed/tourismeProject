@@ -30,12 +30,11 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
-<<<<<<< HEAD
+
     'stripe' => [
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
-=======
->>>>>>> 528e72681e5b11cb6df965f1084bc34be9e603d0
+
 
 ];

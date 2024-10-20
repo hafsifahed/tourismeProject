@@ -11,12 +11,10 @@
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
-<<<<<<< HEAD
+
         "laravel/ui": "^4.5",
         "stripe/stripe-php": "^16.1"
-=======
-        "laravel/ui": "^4.5"
->>>>>>> 528e72681e5b11cb6df965f1084bc34be9e603d0
+
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.14",
