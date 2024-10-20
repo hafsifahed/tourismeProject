@@ -36,9 +36,10 @@ Route::get('/hebergement-edit-{id}', [HebergementController::class,'edit'])->nam
 Route::put('/hebergement/update/{id}', [HebergementController::class,'update'])->name('hebergement.update');
 Route::get('/hebergements-search', [HebergementController::class, 'search'])->name('hebergement.search');
 Route::get('/UIDetailsHebergement-{id}', [HebergementController::class, 'detailsHebergement'])->name('hebergement.details'); 
-Route::get('/UIhebergements', [HebergementController::class, 'UI_index'])->name('hebergement.UI_index');   
-Route::post('/reservations', [ReservationsHebergementController::class, 'store'])->name('reservations.store');
+Route::get('/UIhebergements', [HebergementController::class, 'UI_index'])->name('hebergement.UI_index');  
 
+Route::post('/reservations', [ReservationsHebergementController::class, 'store'])->name('reservations.store');
+Route::get('/BOReservations', [ReservationsHebergementController::class, 'index_BackOffice'])->name('reservations.index_BackOffice');
 Route::get('/MyReservations', [ReservationsHebergementController::class, 'index'])->name('reservations.index');
 Route::get('/reservations-{reservation}-payment', [ReservationsHebergementController::class, 'showPaymentForm'])->name('reservations.payment');
 Route::post('/reservations/{reservation}/createPaymentIntent', [ReservationsHebergementController::class, 'createPaymentIntent'])

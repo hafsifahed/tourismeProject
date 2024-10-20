@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Support\Facades\DB;
 class ReservationsHebergement extends Model
 {
     use HasFactory;
@@ -28,4 +28,29 @@ class ReservationsHebergement extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public static function totalReservations()
+{
+    return self::count();
+}
+
+public static function reservationsByStatus()
+{
+    return self::select('status', DB::raw('count(*) as count'))
+        ->groupBy('status')
+        ->get();
+}
+
+public static function totalRevenue() 
+{
+    return self::where('status', 'confirmée')->sum('total_price');
+}
+
+
+public static function monthlyReservations()
+{
+    return self::select(DB::raw('MONTH(start_date) as month, COUNT(*) as count'))
+        ->groupBy('month')
+        ->orderBy('month')
+        ->get();
+}
 }

@@ -104,6 +104,17 @@ class ReservationsHebergementController extends Controller
         return redirect()->route('reservations.index')->with('error', 'Seules les réservations en attente peuvent être annulées.');
     }
 
+    public function index_BackOffice()
+    {
+        $reservations = ReservationsHebergement::with(['hebergement', 'user'])->get();
+        $totalReservations = ReservationsHebergement::totalReservations();
+        $reservationsByStatus = ReservationsHebergement::reservationsByStatus();
+        $totalRevenue = ReservationsHebergement::totalRevenue();
+        $monthlyReservations = ReservationsHebergement::monthlyReservations();
+
+        return view('pages.Reservation.Index_BackOffice', compact('reservations', 'totalReservations', 'reservationsByStatus', 'totalRevenue', 'monthlyReservations'));
+    }
+
 }
 
 
