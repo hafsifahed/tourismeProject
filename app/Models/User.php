@@ -60,7 +60,7 @@ class User extends Authenticatable
         $this->attributes['password'] = bcrypt($value);
     }
 
-    public function avis()
+    public function avisa()
     {
         return $this->hasMany(AvisActivite::class);
     }
