@@ -10,8 +10,11 @@
         "lodash": "^4.17.19",
         "postcss": "^8.1.14",
         "vite": "^4.0.0"
+<<<<<<< HEAD
+=======
     },
     "dependencies": {
         "perfect-scrollbar": "^1.5.5"
+>>>>>>> 528e72681e5b11cb6df965f1084bc34be9e603d0
     }
 }

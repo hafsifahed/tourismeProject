@@ -159,7 +159,10 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
+<<<<<<< HEAD
+=======
         Barryvdh\Debugbar\ServiceProvider::class,
+>>>>>>> 528e72681e5b11cb6df965f1084bc34be9e603d0
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,

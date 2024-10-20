@@ -1,8 +1,11 @@
 <?php
 
+<<<<<<< HEAD
+=======
 use App\Http\Controllers\GuidesLocauxController;
 use App\Http\Controllers\ActiviteController;
 use App\Http\Controllers\AvisActiviteController;
+>>>>>>> 528e72681e5b11cb6df965f1084bc34be9e603d0
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,6 +29,31 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\ResetPassword;
+<<<<<<< HEAD
+use App\Http\Controllers\ChangePassword;            
+use App\Http\Controllers\HebergementController;   
+use App\Http\Controllers\ReservationsHebergementController;  
+      
+Route::get('/hebergements', [HebergementController::class,'index'])->name('hebergement.index');
+Route::get('/hebergement-create', [HebergementController::class,'create'])->name('hebergement.create');
+Route::post('/hebergement-store', [HebergementController::class,'store'])->name('hebergement.store');
+Route::delete('/hebergement/{id}', [HebergementController::class,'destroy'])->name('hebergement.destroy');
+Route::get('/hebergement-details-{id}', [HebergementController::class,'show'])->name('hebergement.show');
+Route::get('/hebergement-edit-{id}', [HebergementController::class,'edit'])->name('hebergement.edit');
+Route::put('/hebergement/update/{id}', [HebergementController::class,'update'])->name('hebergement.update');
+Route::get('/hebergements-search', [HebergementController::class, 'search'])->name('hebergement.search');
+Route::get('/UIDetailsHebergement-{id}', [HebergementController::class, 'detailsHebergement'])->name('hebergement.details'); 
+Route::get('/UIhebergements', [HebergementController::class, 'UI_index'])->name('hebergement.UI_index');  
+
+Route::post('/reservations', [ReservationsHebergementController::class, 'store'])->name('reservations.store');
+Route::get('/BOReservations', [ReservationsHebergementController::class, 'index_BackOffice'])->name('reservations.index_BackOffice');
+Route::get('/MyReservations', [ReservationsHebergementController::class, 'index'])->name('reservations.index');
+Route::get('/reservations-{reservation}-payment', [ReservationsHebergementController::class, 'showPaymentForm'])->name('reservations.payment');
+Route::post('/reservations/{reservation}/createPaymentIntent', [ReservationsHebergementController::class, 'createPaymentIntent'])
+    ->name('reservations.createPaymentIntent');
+Route::get('/reservations-{id}', [ReservationsHebergementController::class, 'show'])->name('reservations.details');
+Route::get('/reservations/{id}/delete', [ReservationsHebergementController::class, 'delete'])->name('reservations.delete');	
+=======
 use App\Http\Controllers\ChangePassword;
 use App\Http\Controllers\ReservationActiviteController;
 use App\Http\Controllers\RestaurantController;
@@ -96,6 +124,7 @@ Route::put('/avisactivites-{id}', [AvisActiviteController::class, 'update'])->na
 Route::post('/reservationactivites-storee', [ReservationActiviteController::class, 'storee'])->name('reservations.storee');
 Route::get('/activitesuser', [ActiviteController::class, 'indexx'])->name('activites.activities');
 
+>>>>>>> 528e72681e5b11cb6df965f1084bc34be9e603d0
 
 
 Route::get('/', function () {return redirect('/dashboard');})->middleware('auth');
@@ -113,9 +142,18 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/rtl', [PageController::class, 'rtl'])->name('rtl');
 	Route::get('/profile', [UserProfileController::class, 'show'])->name('profile');
 	Route::post('/profile', [UserProfileController::class, 'update'])->name('profile.update');
+<<<<<<< HEAD
+	Route::get('/profile-static', [PageController::class, 'profile'])->name('profile-static'); 
+	Route::get('/sign-in-static', [PageController::class, 'signin'])->name('sign-in-static');
+	Route::get('/sign-up-static', [PageController::class, 'signup'])->name('sign-up-static'); 
+	Route::get('/{page}', [PageController::class, 'index'])->name('page');
+	Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+});
+=======
 	Route::get('/profile-static', [PageController::class, 'profile'])->name('profile-static');
 	Route::get('/sign-in-static', [PageController::class, 'signin'])->name('sign-in-static');
 	Route::get('/sign-up-static', [PageController::class, 'signup'])->name('sign-up-static');
 	Route::get('/{page}', [PageController::class, 'index'])->name('page');
 	Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 });
+>>>>>>> 528e72681e5b11cb6df965f1084bc34be9e603d0
