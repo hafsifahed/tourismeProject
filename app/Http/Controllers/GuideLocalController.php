@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\GuideLocal;
 use Debugbar;
 
-class GuidesLocauxController extends Controller
+class GuideLocalController extends Controller
 {
     public function index()
     {

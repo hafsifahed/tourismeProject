@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\GuidesLocauxController;
+use App\Http\Controllers\GuideLocalController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,13 +26,13 @@ use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\ResetPassword;
 use App\Http\Controllers\ChangePassword;
 
-Route::get('/guide-list', [GuidesLocauxController::class, 'index'])->name('guidelocal.list');
-Route::get('/guide-add', [GuidesLocauxController::class, 'create'])->name('guidelocal.add');
-Route::post('/guide-store', [GuidesLocauxController::class, 'store'])->name('guidelocal.store');
-Route::delete('/guide/{id}', [GuidesLocauxController::class, 'destroy'])->name('guidelocal.delete');
-Route::get('/guide-edit-{id}', [GuidesLocauxController::class, 'edit'])->name('guidelocal.edit');
-Route::put('/guide/update/{id}', [GuidesLocauxController::class, 'update'])->name('guidelocal.update');
-Route::get('/guide-details-{id}', [GuidesLocauxController::class, 'show'])->name('guidelocal.show');
+Route::get('/guide-list', [GuideLocalController::class, 'index'])->name('guidelocal.list');
+Route::get('/guide-add', [GuideLocalController::class, 'create'])->name('guidelocal.add');
+Route::post('/guide-store', [GuideLocalController::class, 'store'])->name('guidelocal.store');
+Route::delete('/guide/{id}', [GuideLocalController::class, 'destroy'])->name('guidelocal.delete');
+Route::get('/guide-edit-{id}', [GuideLocalController::class, 'edit'])->name('guidelocal.edit');
+Route::put('/guide/update/{id}', [GuideLocalController::class, 'update'])->name('guidelocal.update');
+Route::get('/guide-details-{id}', [GuideLocalController::class, 'show'])->name('guidelocal.show');
 
 Route::get('/', function () {return redirect('/dashboard');})->middleware('auth');
 	Route::get('/register', [RegisterController::class, 'create'])->middleware('guest')->name('register');
