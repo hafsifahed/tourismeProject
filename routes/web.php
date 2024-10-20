@@ -26,11 +26,48 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\ResetPassword;
+<<<<<<< HEAD
+use App\Http\Controllers\ChangePassword;
+use App\Http\Controllers\TransportController;
+use App\Http\Controllers\LocationController;
+
+
+
+Route::get('/transport-list', [TransportController::class, 'index'])->name('transport.list');
+Route::get('/transportfront', [TransportController::class, 'index1'])->name('transport.front');
+Route::get('/transport-add', [TransportController::class, 'create'])->name('transport.add');
+Route::post('/transport-store', [TransportController::class, 'store'])->name('transport.store');
+Route::delete('/transport/{id}', [TransportController::class, 'destroy'])->name('transport.delete');
+Route::get('/transport-edit-{id}', [TransportController::class, 'edit'])->name('transport.edit');
+Route::put('/transport/update/{id}', [TransportController::class, 'update'])->name('transport.update');
+Route::get('/transport-detail-{id}', [TransportController::class, 'show'])->name('transport.show');
+Route::get('/transport-search', [TransportController::class, 'search'])->name('transport.search');
+
+
+
+
+
+// Location Transport routes
+Route::get('/location-list', [LocationController::class, 'index'])->name('location.list');
+Route::get('/location-add', [LocationController::class, 'create'])->name('location-transport.create');
+Route::post('/location-transport', [LocationController::class, 'store'])->name('location-transport.store');
+Route::delete('/location/{id}', [LocationController::class, 'destroy'])->name('location.delete');
+Route::get('/location-edit-{id}', [LocationController::class, 'edit'])->name('location.edit');
+Route::put('/location-transport/update/{id}', [LocationController::class, 'update'])->name('location-transport.update');
+
+
+
+
+use App\Http\Controllers\HebergementController;
+use App\Http\Controllers\ReservationsHebergementController;
+
+=======
 
 use App\Http\Controllers\ChangePassword;            
 use App\Http\Controllers\HebergementController;   
 use App\Http\Controllers\ReservationsHebergementController;  
       
+>>>>>>> 73d994c4ffe6b352ffeb00f5b6cc457bb0e2482d
 Route::get('/hebergements', [HebergementController::class,'index'])->name('hebergement.index');
 Route::get('/hebergement-create', [HebergementController::class,'create'])->name('hebergement.create');
 Route::post('/hebergement-store', [HebergementController::class,'store'])->name('hebergement.store');
@@ -39,8 +76,13 @@ Route::get('/hebergement-details-{id}', [HebergementController::class,'show'])->
 Route::get('/hebergement-edit-{id}', [HebergementController::class,'edit'])->name('hebergement.edit');
 Route::put('/hebergement/update/{id}', [HebergementController::class,'update'])->name('hebergement.update');
 Route::get('/hebergements-search', [HebergementController::class, 'search'])->name('hebergement.search');
+<<<<<<< HEAD
+Route::get('/UIDetailsHebergement-{id}', [HebergementController::class, 'detailsHebergement'])->name('hebergement.details');
+Route::get('/UIhebergements', [HebergementController::class, 'UI_index'])->name('hebergement.UI_index');
+=======
 Route::get('/UIDetailsHebergement-{id}', [HebergementController::class, 'detailsHebergement'])->name('hebergement.details'); 
 Route::get('/UIhebergements', [HebergementController::class, 'UI_index'])->name('hebergement.UI_index');  
+>>>>>>> 73d994c4ffe6b352ffeb00f5b6cc457bb0e2482d
 
 Route::post('/reservations', [ReservationsHebergementController::class, 'store'])->name('reservations.store');
 Route::get('/BOReservations', [ReservationsHebergementController::class, 'index_BackOffice'])->name('reservations.index_BackOffice');
@@ -49,7 +91,11 @@ Route::get('/reservations-{reservation}-payment', [ReservationsHebergementContro
 Route::post('/reservations/{reservation}/createPaymentIntent', [ReservationsHebergementController::class, 'createPaymentIntent'])
     ->name('reservations.createPaymentIntent');
 Route::get('/reservations-{id}', [ReservationsHebergementController::class, 'show'])->name('reservations.details');
+<<<<<<< HEAD
+Route::get('/reservations/{id}/delete', [ReservationsHebergementController::class, 'delete'])->name('reservations.delete');
+=======
 Route::get('/reservations/{id}/delete', [ReservationsHebergementController::class, 'delete'])->name('reservations.delete');	
+>>>>>>> 73d994c4ffe6b352ffeb00f5b6cc457bb0e2482d
 
 use App\Http\Controllers\ReservationActiviteController;
 use App\Http\Controllers\RestaurantController;
