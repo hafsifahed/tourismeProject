@@ -1,8 +1,12 @@
 <?php
-use App\Http\Controllers\GuidesLocauxController;
 use App\Http\Controllers\ActiviteController;
 use App\Http\Controllers\AvisActiviteController;
 
+
+use App\Http\Controllers\AvisTourController;
+use App\Http\Controllers\GuideLocalController;
+use App\Http\Controllers\ReservationTourController;
+use App\Http\Controllers\TypeTourController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -85,13 +89,37 @@ use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\AvisRestaurantController;
 use App\Http\Controllers\ReservationRestaurantController;
 
-Route::get('/guide-list', [GuidesLocauxController::class, 'index'])->name('guidelocal.list');
-Route::get('/guide-add', [GuidesLocauxController::class, 'create'])->name('guidelocal.add');
-Route::post('/guide-store', [GuidesLocauxController::class, 'store'])->name('guidelocal.store');
-Route::delete('/guide/{id}', [GuidesLocauxController::class, 'destroy'])->name('guidelocal.delete');
-Route::get('/guide-edit-{id}', [GuidesLocauxController::class, 'edit'])->name('guidelocal.edit');
-Route::put('/guide/update/{id}', [GuidesLocauxController::class, 'update'])->name('guidelocal.update');
-Route::get('/guide-details-{id}', [GuidesLocauxController::class, 'show'])->name('guidelocal.show');
+Route::get('/guide-list', [GuideLocalController::class, 'index'])->name('guidelocal.list');
+Route::get('/guide-add', [GuideLocalController::class, 'create'])->name('guidelocal.add');
+Route::post('/guide-store', [GuideLocalController::class, 'store'])->name('guidelocal.store');
+Route::delete('/guide/{id}', [GuideLocalController::class, 'destroy'])->name('guidelocal.delete');
+Route::get('/guide-edit-{id}', [GuideLocalController::class, 'edit'])->name('guidelocal.edit');
+Route::put('/guide/update/{id}', [GuideLocalController::class, 'update'])->name('guidelocal.update');
+Route::get('/guide-details-{id}', [GuideLocalController::class, 'show'])->name('guidelocal.show');
+
+Route::get('/type-tour-list', [TypeTourController::class, 'index'])->name('typetour.list');
+Route::get('/type-tour-add', [TypeTourController::class, 'create'])->name('typetour.add');
+Route::post('/type-tour-store', [TypeTourController::class, 'store'])->name('typetour.store');
+Route::delete('/type-tour/{id}', [TypeTourController::class, 'destroy'])->name('typetour.delete');
+Route::get('/type-tour-edit-{id}', [TypeTourController::class, 'edit'])->name('typetour.edit');
+Route::put('/type-tour/update/{id}', [TypeTourController::class, 'update'])->name('typetour.update');
+Route::get('/type-tour-details-{id}', [TypeTourController::class, 'show'])->name('typetour.show');
+
+Route::get('/reservationtour-list', [ReservationTourController::class, 'index'])->name('reservationtour.list');
+Route::get('/reservationtour-add', [ReservationTourController::class, 'create'])->name('reservationtour.add');
+Route::post('/reservationtour-store', [ReservationTourController::class, 'store'])->name('reservationtour.store');
+Route::delete('/reservationtour/{id}', [ReservationTourController::class, 'destroy'])->name('reservationtour.delete');
+Route::get('/reservationtour-edit-{id}', [ReservationTourController::class, 'edit'])->name('reservationtour.edit');
+Route::put('/reservationtour/update/{id}', [ReservationTourController::class, 'update'])->name('reservationtour.update');
+Route::get('/reservationtour-details-{id}', [ReservationTourController::class, 'show'])->name('reservationtour.show');
+
+Route::get('/avis-list', [AvisTourController::class, 'index'])->name('avistour.list');
+Route::get('/avis-add', [AvisTourController::class, 'create'])->name('avistour.add');
+Route::post('/avis-store', [AvisTourController::class, 'store'])->name('avistour.store');
+Route::delete('/avis/{id}', [AvisTourController::class, 'destroy'])->name('avistour.delete');
+Route::get('/avis-edit-{id}', [AvisTourController::class, 'edit'])->name('avistour.edit');
+Route::put('/avis/update/{id}', [AvisTourController::class, 'update'])->name('avistour.update');
+Route::get('/avis-details-{id}', [AvisTourController::class, 'show'])->name('avistour.show');
 
 
 

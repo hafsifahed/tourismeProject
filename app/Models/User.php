@@ -2,23 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticable;
+use App\Models\ReservationTour;
+use App\Models\AvisTour;
+use App\Models\TypeTour;
 
-use App\Models\AvisRestaurant;
-
-class User extends Authenticatable
+class User extends Authenticable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
+    protected $table = 'users';
     protected $fillable = [
         'username',
         'firstname',
@@ -69,5 +64,16 @@ class User extends Authenticatable
     public function avisa()
     {
         return $this->hasMany(AvisActivite::class);
+    public function typeTour()
+    {
+        return $this->belongsTo(TypeTour::class, 'type_tour');
+    }
+
+    public function reservations() {
+        return $this->hasMany(ReservationTour::class, 'utilisateur');
+    }
+
+    public function avisTours() {
+        return $this->hasMany(AvisTour::class, 'utilisateur');
     }
 }

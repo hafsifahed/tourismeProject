@@ -18,7 +18,7 @@
                         </div>
                     @endif
 
-                    <form action="{{ route('guidelocal.update', $guide->id) }}" method="POST">
+                    <form action="{{ route('guidelocal.update', $guide->id) }}" method="POST" enctype="multipart/form-data"> <!-- Added enctype for file uploads -->
                         @csrf
                         @method('PUT') <!-- Utiliser la méthode PUT pour la mise à jour -->
 
@@ -38,10 +38,27 @@
                             <label for="ville" class="form-label">Ville</label>
                             <input type="text" class="form-control" id="ville" name="ville" value="{{ old('ville', $guide->ville) }}">
                         </div>
+
                         <div class="mb-3">
                             <label for="type_tours" class="form-label">Type de Tours</label>
-                            <input type="text" class="form-control" id="type_tours" name="type_tours" value="{{ old('type_tours', $guide->type_tours) }}">
+                            <select class="form-select" id="type_tours" name="type_tour" required>
+                                <option value="" disabled>Selectionner un type</option>
+                                @if($types->isEmpty())
+                                    <option value="" disabled>Aucun type disponible</option>
+                                @else
+                                    @foreach ($types as $type)
+                                        <option value="{{ $type->id }}"
+                                            {{ (old('type_tour', $guide->type_tour) == $type->id) ? 'selected' : '' }}>
+                                            {{ $type->nom_tour }}
+                                        </option>
+                                    @endforeach
+                                @endif
+                            </select>
+                            @if(empty($guide->type_tour))
+                                <small class="text-muted">Aucun type spécifié.</small>
+                            @endif
                         </div>
+
                         <div class="mb-3">
                             <label for="disponibilites" class="form-label">Disponibilités</label>
                             <input type="text" class="form-control" id="disponibilites" name="disponibilites" value="{{ old('disponibilites', $guide->disponibilites) }}">
@@ -76,8 +93,8 @@
                             <input type="url" class="form-control" id="site_web" name="site_web" value="{{ old('site_web', $guide->site_web) }}">
                         </div>
                         <div class="mb-3">
-                            <label for="photo_url" class="form-label">Photo URL</label>
-                            <input type="url" class="form-control" id="photo_url" name="photo_url" value="{{ old('photo_url', $guide->photo_url) }}">
+                            <label for="photo_url" class="form-label">Télécharger une photo</label>
+                            <input type="file" class="form-control" id="photo_url" name="photo" accept="image/*"> <!-- Change to file input -->
                         </div>
 
                         <button type="submit" class="btn btn-primary">Mettre à jour</button>

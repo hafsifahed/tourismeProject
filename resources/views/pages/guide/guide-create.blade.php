@@ -17,7 +17,7 @@
                         </div>
                     @endif
 
-                    <form action="{{ route('guidelocal.store') }}" method="POST">
+                    <form action="{{ route('guidelocal.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
                             <label for="nom" class="form-label">Nom</label>
@@ -37,7 +37,16 @@
                         </div>
                         <div class="mb-3">
                             <label for="type_tours" class="form-label">Type de Tours</label>
-                            <input type="text" class="form-control" id="type_tours" name="type_tours">
+                            <select class="form-select" id="type_tours" name="type_tour" required>
+                                <option value="" disabled selected>Sélectionner un type</option>
+                                @if($types->isEmpty())
+                                    <option value="" disabled>Aucun type disponible</option>
+                                @else
+                                    @foreach ($types as $type)
+                                        <option value="{{ $type->id }}">{{ $type->nom_tour }}</option>
+                                    @endforeach
+                                @endif
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label for="disponibilites" class="form-label">Disponibilités</label>
@@ -73,8 +82,8 @@
                             <input type="url" class="form-control" id="site_web" name="site_web">
                         </div>
                         <div class="mb-3">
-                            <label for="photo_url" class="form-label">Photo URL</label>
-                            <input type="url" class="form-control" id="photo_url" name="photo_url">
+                            <label for="photo" class="form-label">Photo URL</label>
+                            <input type="file" class="form-control" id="photo" name="photo" accept="image/*" required>
                         </div>
 
                         <button type="submit" class="btn btn-primary">Ajouter</button>
