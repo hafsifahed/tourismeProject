@@ -12,37 +12,39 @@ class AvisTourController extends Controller
     // Retrieve all reviews
     public function index()
     {
-        $avis = AvisTour::all();
+        $avis = AvisTour::with(['guideLocal', 'utilisateur'])->get(); // Eager load relations
         return view('pages.avis.avis-list', compact('avis'));
     }
 
-    // Create a new review
-    public function store(Request $request)
+    // Show the form for creating a new review
+    public function create()
     {
-        $validatedData = $request->validate([
-            'guide_local' => 'required|exists:guides_locaux,id',
-            'utilisateur' => 'required|exists:users,id',
-            'note' => 'required|string|max:10',
-            'commentaire' => 'required|string',
-        ]);
-
-        //$avis = 
-        AvisTour::create($validatedData);
-        //return response()->json($avis, 201);
-        return to_route('avistour.list')->with('success', "Avis de tour cree avec succes");
-    }
-
-    public function create() {
         $guides = GuideLocal::all();
         $utilisateurs = User::all();
         return view('pages.avis.avis-create', compact('guides', 'utilisateurs'));
     }
 
-    public function edit($id) {
+    // Store a new review
+    public function store(Request $request)
+    {
+        $validatedData = $request->validate([
+            'guide_local' => 'required|exists:guides_locaux,id',
+            'utilisateur' => 'required|exists:users,id',
+            'note' => 'required|integer|min:1|max:10', // Changed to integer for ratings
+            'commentaire' => 'required|string|max:1000', // Optional max length for comments
+        ]);
+
+        AvisTour::create($validatedData);
+        return to_route('avistour.list')->with('success', "Avis de tour créé avec succès");
+    }
+
+    // Show the form for editing a specific review
+    public function edit($id)
+    {
         $avis = AvisTour::findOrFail($id);
         $guides = GuideLocal::all();
-        $utilisateur = User::all();
-        return view('pages.avis.avis-edit', compact('guides', 'utilisateur', 'avis'));
+        $utilisateurs = User::all(); // Changed to plural for consistency
+        return view('pages.avis.avis-edit', compact('guides', 'utilisateurs', 'avis'));
     }
 
     // Retrieve a specific review by ID
@@ -56,8 +58,17 @@ class AvisTourController extends Controller
     public function update(Request $request, $id)
     {
         $avis = AvisTour::findOrFail($id);
-        $avis->update($request->all());
-        return to_route('avistour.list')->with('success', "Avis de tour mise a jour avec succes");
+
+        // Validate the incoming data
+        $validatedData = $request->validate([
+            'guide_local' => 'required|exists:guides_locaux,id',
+            'utilisateur' => 'required|exists:users,id',
+            'note' => 'required|integer|min:1|max:10',
+            'commentaire' => 'required|string|max:1000',
+        ]);
+
+        $avis->update($validatedData); // Update with validated data
+        return to_route('avistour.list')->with('success', "Avis de tour mis à jour avec succès");
     }
 
     // Delete a review
@@ -65,6 +76,6 @@ class AvisTourController extends Controller
     {
         $avis = AvisTour::findOrFail($id);
         $avis->delete();
-        return to_route('avistour.list')->with('success', "Avis de tour supprimee avec succes");
+        return to_route('avistour.list')->with('success', "Avis de tour supprimé avec succès");
     }
 }

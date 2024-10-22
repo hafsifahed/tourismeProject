@@ -22,15 +22,18 @@ class TypeTourController extends Controller
         ]);
 
         TypeTour::create($validatedData);
-        //return response()->json($typeTour, 201);
-        return to_route('typetour.list')->with('success', 'Votre type de tours a ete enregistree avec sucees');
+        return to_route('typetour.list')->with('success', 'Votre type de tour a été enregistré avec succès');
     }
 
-    public function create() {
+    // Show the form to create a new type of tour
+    public function create()
+    {
         return view('pages.types.types-create');
     }
 
-    public function edit($id) {
+    // Show the form to edit an existing type of tour
+    public function edit($id)
+    {
         $type = TypeTour::findOrFail($id);
         return view('pages.types.types-edit', compact('type'));
     }
@@ -45,9 +48,13 @@ class TypeTourController extends Controller
     // Update a type of tour
     public function update(Request $request, $id)
     {
+        $validatedData = $request->validate([
+            'nom_tour' => 'required|string|max:255',
+        ]);
+
         $typeTour = TypeTour::findOrFail($id);
-        $typeTour->update($request->all());
-        return response()->json($typeTour, 200);
+        $typeTour->update($validatedData);
+        return to_route('typetour.list')->with('success', 'Votre type de tour a été mis à jour avec succès');
     }
 
     // Delete a type of tour
@@ -55,6 +62,6 @@ class TypeTourController extends Controller
     {
         $typeTour = TypeTour::findOrFail($id);
         $typeTour->delete();
-        return response()->json(null, 204);
+        return to_route('typetour.list')->with('success', 'Votre type de tour a été supprimé avec succès');
     }
 }

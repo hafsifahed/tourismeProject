@@ -46,7 +46,9 @@
                             @foreach ($avis as $avie)
                                 <tr>
                                     <td class="text-sm font-weight-bold mb-0">{{ $avie->guideLocal->nom }}</td>
-                                    <td class="text-sm font-weight-bold mb-0">{{ App\Models\User::where('id', $avie->utilisateur)->get()[0]["username"] }}</td>
+                                    <td class="text-sm font-weight-bold mb-0">
+                                        {{ optional(App\Models\User::find($avie->utilisateur))->username ?? 'Utilisateur non trouvé' }}
+                                    </td>
                                     <td class="text-center text-sm">{{ $avie->note }}</td>
                                     <td class="text-center text-sm">{{ $avie->commentaire }}</td>
                                     <td class="align-middle text-end">
