@@ -7,7 +7,7 @@
     <h1 class="mb-4">Créer une nouvelle mission</h1>
 
     <!-- Formulaire de création -->
-    <form action="{{ route('missions.store') }}" method="POST">
+    <form action="{{ route('missions.store') }}" method="POST" enctype="multipart/form-data"> <!-- Ajoutez l'attribut enctype -->
         @csrf
 
         <div class="form-group">
@@ -43,6 +43,12 @@
         <div class="form-group">
             <label for="description_association">Description de l'association</label>
             <textarea class="form-control" id="description_association" name="description_association" rows="4" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="image">Image de couverture</label>
+            <input type="file" class="form-control-file" id="image" name="image" accept="image/*"> <!-- Champ pour l'image -->
+            <small class="form-text text-muted">Formats acceptés : JPG, JPEG, PNG (max 2 Mo).</small>
         </div>
 
         <button type="submit" class="btn btn-primary mt-3">Créer</button>

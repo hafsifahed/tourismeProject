@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\MissionVolontariat;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class MissionVolontariatController extends Controller
 {
@@ -38,7 +39,14 @@ class MissionVolontariatController extends Controller
             'date_fin' => 'required|date',
             'nom_association' => 'required',
             'description_association' => 'required',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048', // Validation de l'image
         ]);
+
+        // Sauvegarder l'image si elle est fournie
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('images/missions', 'public'); // Stocker l'image dans le dossier public
+            $validated['image'] = $path; // Ajouter le chemin de l'image aux données validées
+        }
 
         MissionVolontariat::create($validated);
 
@@ -62,7 +70,19 @@ class MissionVolontariatController extends Controller
             'date_fin' => 'required|date',
             'nom_association' => 'required',
             'description_association' => 'required',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048', // Validation de l'image
         ]);
+
+        // Sauvegarder l'image si elle est fournie
+        if ($request->hasFile('image')) {
+            // Supprimer l'ancienne image si elle existe
+            if ($mission->image) {
+                Storage::disk('public')->delete($mission->image);
+            }
+
+            $path = $request->file('image')->store('images/missions', 'public'); // Stocker l'image
+            $validated['image'] = $path; // Ajouter le chemin de l'image aux données validées
+        }
 
         $mission->update($validated);
 
@@ -72,6 +92,11 @@ class MissionVolontariatController extends Controller
     // Supprimer une mission
     public function destroy(MissionVolontariat $mission)
     {
+        // Supprimer l'image si elle existe
+        if ($mission->image) {
+            Storage::disk('public')->delete($mission->image);
+        }
+
         $mission->delete();
         return redirect()->route('missions.indexAdmin')->with('success', 'Mission supprimée avec succès');
     }

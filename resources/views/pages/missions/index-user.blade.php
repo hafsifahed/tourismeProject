@@ -9,6 +9,12 @@
         @foreach($missions as $mission)
         <div class="col-md-4 mb-4">
             <div class="card h-100">
+                @if($mission->image) <!-- Affichage de l'image si elle existe -->
+                    <img src="{{ asset('storage/' . $mission->image) }}" class="card-img-top" alt="Image de couverture de {{ $mission->titre }}" style="height: 200px; object-fit: cover;">
+                @else
+                    <img src="https://via.placeholder.com/400x200" class="card-img-top" alt="Image par défaut" style="height: 200px; object-fit: cover;"> <!-- Image par défaut si aucune image -->
+                @endif
+
                 <div class="card-body">
                     <h5 class="card-title">{{ $mission->titre }}</h5>
                     <p class="card-text">{{ Str::limit($mission->description, 100) }}</p>

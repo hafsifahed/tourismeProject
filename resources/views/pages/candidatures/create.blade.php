@@ -1,59 +1,40 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Postuler</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-            padding: 20px;
-        }
-        form {
-            max-width: 600px;
-            margin: 0 auto;
-            background-color: white;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        }
-        input, textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-        label {
-            font-weight: bold;
-        }
-        .btn {
-            padding: 10px 15px;
-            background-color: #5cb85c;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-    </style>
-</head>
-<body>
-    <h1>Postuler pour une Candidature</h1>
+@extends('layouts.app')
 
-    <form action="{{ route('candidatures.store') }}" method="POST">
-        @csrf
+@section('content')
+@include('layouts.navbars.auth.topnav', ['title' => 'Postuler pour une Candidature'])
 
-        <label for="nom">Nom du candidat</label>
-        <input type="text" id="nom" name="nom" required>
+<div class="container mt-4">
+    <h1 class="mb-4 text-center">Postuler pour une Candidature</h1>
+    <br><br><br><br><br><br><br><br>
+    <!-- Form for submitting a new candidacy -->
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <form action="{{ route('candidatures.store') }}" method="POST" enctype="multipart/form-data"> <!-- Add enctype -->
+                @csrf
+                <div class="form-group">
+                    <label for="nom">Nom du candidat</label>
+                    <input type="text" id="nom" name="nom" class="form-control" required>
+                </div>
 
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" required>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" class="form-control" required>
+                </div>
 
-        <label for="motivation">Motivation</label>
-        <textarea id="motivation" name="motivation" rows="4" required></textarea>
+                <div class="form-group">
+                    <label for="motivation">Motivation</label>
+                    <textarea id="motivation" name="motivation" class="form-control" rows="4" required></textarea>
+                </div>
 
-        <button type="submit" class="btn">Soumettre la Candidature</button>
-    </form>
-</body>
-</html>
+                <!-- New field for CV upload -->
+                <div class="form-group">
+                    <label for="cv">Télécharger le CV (format PDF)</label>
+                    <input type="file" id="cv" name="cv" class="form-control-file" accept=".pdf" required>
+                </div>
+
+                <button type="submit" class="btn btn-success">Soumettre la Candidature</button>
+            </form>
+        </div>
+    </div>
+</div>
+@endsection

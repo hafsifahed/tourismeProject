@@ -14,7 +14,8 @@ class MissionVolontariat extends Model
         'date_debut', 
         'date_fin', 
         'nom_association', 
-        'description_association'
+        'description_association',
+        'image',
     ];
 }
 

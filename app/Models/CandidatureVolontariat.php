@@ -15,5 +15,6 @@ class CandidatureVolontariat extends Model
         'nom',
         'email',
         'motivation',
+        'cv',
     ];
 }

@@ -15,11 +15,11 @@
         <table class="table table-bordered table-striped">
             <thead class="thead-light">
                 <tr class="text-center">
-                    <th style="width: 25%;">Nom du Candidat</th>
-                    <th style="width: 30%;">Email</th>
+                    <th style="width: 20%;">Nom du Candidat</th>
+                    <th style="width: 20%;">Email</th>
                     <th style="width: 25%;">Motivation</th>
                     <th style="width: 15%;">Date de Candidature</th>
-                    <th style="width: 15%;">Actions</th>
+                    <th style="width: 20%;">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -30,7 +30,16 @@
                     <td style="word-break: break-word;">{{ $candidature->motivation }}</td>
                     <td class="text-center">{{ $candidature->created_at->format('d/m/Y') }}</td>
                     <td class="text-center">
-                        
+                        <!-- Bouton de prévisualisation du CV -->
+                        @if($candidature->cv)
+                        <a href="{{ asset('storage/' . $candidature->cv) }}" target="_blank" class="btn btn-primary btn-sm">
+                            Voir CV
+                        </a>
+                        @else
+                        <span class="text-muted">Aucun CV</span>
+                        @endif
+
+                        <!-- Formulaire de suppression -->
                         <form action="{{ route('candidatures.destroy', $candidature->id) }}" method="POST" class="d-inline">
                             @csrf
                             @method('DELETE')
