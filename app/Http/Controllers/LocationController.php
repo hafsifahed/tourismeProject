@@ -59,7 +59,7 @@ class LocationController extends Controller
             'user_id' => 'required|exists:users,id', // Vérifie que l'ID de l'utilisateur existe
             'date_debut' => 'required|date|before_or_equal:date_fin', // Date de début obligatoire et avant ou égale à la date de fin
             'date_fin' => 'required|date|after_or_equal:date_debut', // Date de fin obligatoire et après ou égale à la date de début
-'status' => 'required|string|in:Active,Completed,Cancelled', // Le statut est obligatoire
+            'status' => 'required|string|in:Active,Completed,Cancelled', // Le statut est obligatoire
             'prix_total' => 'required|numeric|min:0', // Le prix total est obligatoire et doit être un nombre positif
         ]);
 
@@ -159,4 +159,46 @@ class LocationController extends Controller
 
         return redirect()->route('location.list')->with('success', 'Location deleted successfully.');
     }
+
+    public function louerTransport(Request $request)
+    {
+        // Validate the form data
+        $request->validate([
+            'id_transport' => 'required|exists:transports,id_transport',
+            'user_id' => 'required|exists:users,id',
+            'date_debut' => 'required|date|before_or_equal:date_fin',
+            'date_fin' => 'required|date|after_or_equal:date_debut',
+        ]);
+    
+        // Retrieve the transport details
+        $transport = Transport::findOrFail($request->id_transport);
+    
+        // Calculate the total price based on the duration
+        $startDate = new \DateTime($request->date_debut);
+        $endDate = new \DateTime($request->date_fin);
+        $interval = $startDate->diff($endDate);
+    
+        // Calculate total hours
+        $hours = ($interval->days * 24) + $interval->h;
+        $prix_total = $hours * $transport->prix_heure;
+    
+        // Create a new rental (LocationTransport)
+        LocationTransport::create([
+            'id_transport' => $request->id_transport,
+            'user_id' => $request->user_id,
+            'date_debut' => $request->date_debut,
+            'date_fin' => $request->date_fin,
+            'status' => 'Active',
+            'prix_total' => $prix_total,
+        ]);
+    
+        // Redirect with success message
+        return redirect()->route('transport.show', ['id' => $request->id_transport])
+            ->with('success', 'Transport loué avec succès!');
+    }
+    
+    
+    
+
+
 }
