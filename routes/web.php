@@ -45,13 +45,13 @@ Route::get('/type-tour-edit-{id}', [TypeTourController::class, 'edit'])->name('t
 Route::put('/type-tour/update/{id}', [TypeTourController::class, 'update'])->name('typetour.update');
 Route::get('/type-tour-details-{id}', [TypeTourController::class, 'show'])->name('typetour.show');
 
-Route::get('/reservation-list', [ReservationTourController::class, 'index'])->name('reservationtour.list');
-Route::get('/reservation-add', [ReservationTourController::class, 'create'])->name('reservationtour.add');
-Route::post('/reservation-store', [ReservationTourController::class, 'store'])->name('reservationtour.store');
-Route::delete('/reservation/{id}', [ReservationTourController::class, 'destroy'])->name('reservationtour.delete');
-Route::get('/reservation-edit-{id}', [ReservationTourController::class, 'edit'])->name('reservationtour.edit');
-Route::put('/reservation/update/{id}', [ReservationTourController::class, 'update'])->name('reservationtour.update');
-Route::get('/reservation-details-{id}', [ReservationTourController::class, 'show'])->name('reservationtour.show');
+Route::get('/reservationtour-list', [ReservationTourController::class, 'index'])->name('reservationtour.list');
+Route::get('/reservationtour-add', [ReservationTourController::class, 'create'])->name('reservationtour.add');
+Route::post('/reservationtour-store', [ReservationTourController::class, 'store'])->name('reservationtour.store');
+Route::delete('/reservationtour/{id}', [ReservationTourController::class, 'destroy'])->name('reservationtour.delete');
+Route::get('/reservationtour-edit-{id}', [ReservationTourController::class, 'edit'])->name('reservationtour.edit');
+Route::put('/reservationtour/update/{id}', [ReservationTourController::class, 'update'])->name('reservationtour.update');
+Route::get('/reservationtour-details-{id}', [ReservationTourController::class, 'show'])->name('reservationtour.show');
 
 Route::get('/avis-list', [AvisTourController::class, 'index'])->name('avistour.list');
 Route::get('/avis-add', [AvisTourController::class, 'create'])->name('avistour.add');

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Éditer Guide Local'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Éditer Type de Tour'])
 
     <div class="row mt-4 mx-4">
         <div class="col-12">
@@ -24,7 +24,7 @@
 
                         <div class="mb-3">
                             <label for="nom_tour" class="form-label">Nom du type de tour</label>
-                            <input type="text" class="form-control" id="nom_tour" name="nom_tour" value="{{ old('nom_tour', $type->nom) }}" required>
+                            <input type="text" class="form-control" id="nom_tour" name="nom_tour" value="{{ old('nom_tour', $type->nom_tour) }}" required>
                         </div>
 
                         <button type="submit" class="btn btn-primary">Mettre à jour</button>

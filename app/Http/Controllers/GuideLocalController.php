@@ -42,10 +42,20 @@ class GuideLocalController extends Controller
             'tour_groupe' => 'required|boolean',
             'tour_prive' => 'required|boolean',
             'commentaires' => 'nullable|string',
-            'photo_url' => 'nullable|url',
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Add file upload validation
         ]);
 
-        GuideLocal::create($request->all());
+        // Handle the file upload
+        if ($request->hasFile('photo')) {
+            $photoPath = $request->file('photo')->store('photos', 'public'); // Store photo in public/photos directory
+        }
+
+        // Create the guide with the photo path
+        GuideLocal::create([
+            ...$request->except('photo'), // Exclude the photo field from the request
+            'photo_url' => $photoPath, // Store the photo path in the database
+        ]);
+
         return redirect()->route('guidelocal.list')->with('success', 'Guide local ajouté!');
     }
 
@@ -83,11 +93,19 @@ class GuideLocalController extends Controller
             'tour_groupe' => 'required|boolean',
             'tour_prive' => 'required|boolean',
             'commentaires' => 'nullable|string',
-            'photo_url' => 'nullable|url',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Allow photo upload
         ]);
 
         $guide = GuideLocal::findOrFail($id);
-        $guide->update($request->all());
+        $data = $request->except('photo'); // Exclude photo from the update request
+
+        // Handle file upload if a new photo is provided
+        if ($request->hasFile('photo')) {
+            $photoPath = $request->file('photo')->store('photos', 'public'); // Store photo in public/photos directory
+            $data['photo_url'] = $photoPath; // Update the photo path
+        }
+
+        $guide->update($data); // Update the guide with the new data
 
         return redirect()->route('guidelocal.list')->with('success', 'Guide local mis à jour!');
     }

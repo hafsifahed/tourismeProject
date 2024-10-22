@@ -49,7 +49,7 @@
                                 <tr>
                                     <td>
                                         <div class="d-flex align-items-center">
-                                            <img src="{{ $guide->photo_url }}" alt="{{ $guide->nom }}" class="avatar" style="border-radius: 200px; width: 50px; height: 50px;">
+                                            <img src="{{ asset('storage/' . $guide->photo_url) }}" alt="{{ $guide->nom }}" class="avatar" style="border-radius: 200px; width: 50px; height: 50px;">
                                             <div class="ms-3">
                                                 <h6 class="mb-0 text-sm">
                                                     <a href="{{ route('guidelocal.show', $guide->id) }}" class="text-decoration-none text-primary">
