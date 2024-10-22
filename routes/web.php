@@ -40,6 +40,12 @@ Route::delete('/candidatures/{candidature}', [CandidatureVolontariatController::
 // Route pour afficher les détails d'une candidature
 Route::get('/candidatures/{candidature}', [CandidatureVolontariatController::class, 'show'])->name('candidatures.show');
 
+// Routes pour accepter et refuser une candidature avec des tirets
+Route::post('/candidatures-{id}-accepter', [CandidatureVolontariatController::class, 'accepter'])->name('candidatures.accepter');
+Route::post('/candidatures-{id}-refuser', [CandidatureVolontariatController::class, 'refuser'])->name('candidatures.refuser');
+
+
+
 
 // Other routes (already in your file)
 Route::get('/', function () {

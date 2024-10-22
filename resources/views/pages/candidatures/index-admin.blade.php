@@ -7,9 +7,6 @@
     <br><br><br><br><br><br><br><br><br><br>
     <h1 class="mb-4 text-center">Gestion des Candidatures de Volontariat</h1>
 
-    <!-- Bouton pour créer une nouvelle candidature -->
-    
-
     <!-- Table pour afficher la liste des candidatures -->
     <div class="table-responsive">
         <table class="table table-bordered table-striped">
@@ -38,6 +35,18 @@
                         @else
                         <span class="text-muted">Aucun CV</span>
                         @endif
+
+                        <!-- Formulaire pour accepter une candidature -->
+                        <form action="{{ route('candidatures.accepter', $candidature->id) }}" method="POST" class="d-inline">
+                            @csrf
+                            <button type="submit" class="btn btn-success btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir accepter cette candidature ?')">Accepter</button>
+                        </form>
+
+                        <!-- Formulaire pour refuser une candidature -->
+                        <form action="{{ route('candidatures.refuser', $candidature->id) }}" method="POST" class="d-inline">
+                            @csrf
+                            <button type="submit" class="btn btn-warning btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir refuser cette candidature ?')">Refuser</button>
+                        </form>
 
                         <!-- Formulaire de suppression -->
                         <form action="{{ route('candidatures.destroy', $candidature->id) }}" method="POST" class="d-inline">

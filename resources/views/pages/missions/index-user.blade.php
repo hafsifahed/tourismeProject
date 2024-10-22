@@ -5,6 +5,16 @@
 <div class="container mt-4">
     <h1 class="mb-4">Opportunités de volontariat écoresponsable</h1>
 
+    <!-- Barre de recherche -->
+    <form method="GET" action="{{ route('missions.indexUser') }}" class="mb-4">
+        <div class="input-group">
+            <input type="text" name="search" class="form-control" placeholder="Rechercher par nom d'association" value="{{ request('search') }}">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">Rechercher</button>
+            </div>
+        </div>
+    </form>
+
     <div class="row">
         @foreach($missions as $mission)
         <div class="col-md-4 mb-4">

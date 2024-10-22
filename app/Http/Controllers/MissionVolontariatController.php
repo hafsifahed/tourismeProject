@@ -15,10 +15,17 @@ class MissionVolontariatController extends Controller
         return view('pages.missions.index-admin', compact('missions'));
     }
 
-    // Afficher les missions pour l'utilisateur
-    public function indexUser()
+    // Afficher les missions pour l'utilisateur avec option de recherche
+    public function indexUser(Request $request)
     {
-        $missions = MissionVolontariat::all();
+        // Récupérer le terme de recherche
+        $searchTerm = $request->input('search');
+
+        // Récupérer les missions, filtrées par nom d'association si un terme de recherche est fourni
+        $missions = MissionVolontariat::when($searchTerm, function ($query, $searchTerm) {
+            return $query->where('nom_association', 'like', '%' . $searchTerm . '%');
+        })->get(); // Si le terme de recherche est vide, toutes les missions sont retournées.
+
         return view('pages.missions.index-user', compact('missions'));
     }
 

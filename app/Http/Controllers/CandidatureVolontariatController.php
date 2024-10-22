@@ -10,10 +10,12 @@ class CandidatureVolontariatController extends Controller
 {
     // Afficher toutes les candidatures (pour l'admin)
     public function indexAdmin()
-    {
-        $candidatures = CandidatureVolontariat::all();
-        return view('pages.candidatures.index-admin', compact('candidatures'));
-    }
+{
+    // Récupérer uniquement les candidatures en attente
+    $candidatures = CandidatureVolontariat::where('etat', 'en attente')->get();
+    return view('pages.candidatures.index-admin', compact('candidatures'));
+}
+
 
     // Afficher le formulaire de candidature (pour l'utilisateur)
     public function create()
@@ -37,12 +39,13 @@ class CandidatureVolontariatController extends Controller
             $cvPath = $request->file('cv')->store('cvs', 'public');
         }
 
-        // Create new Candidature with the CV file path
+        // Create new Candidature with the CV file path and default 'etat'
         CandidatureVolontariat::create([
             'nom' => $validated['nom'],
             'email' => $validated['email'],
             'motivation' => $validated['motivation'],
             'cv' => $cvPath, // Store the file path in the 'cv' column
+            'etat' => 'en attente', // Set default state
         ]);
 
         return redirect()->route('missions.indexUser')->with('success', 'Candidature soumise avec succès');
@@ -96,11 +99,29 @@ class CandidatureVolontariatController extends Controller
         return redirect()->route('candidatures.indexAdmin')->with('success', 'Candidature supprimée avec succès');
     }
 
-    
     // Afficher les détails d'une candidature
     public function show(CandidatureVolontariat $candidature)
     {
         return view('pages.candidatures.show', compact('candidature'));
     }
-    
+
+    // Accepter une candidature
+    public function accepter($id)
+    {
+        $candidature = CandidatureVolontariat::findOrFail($id);
+        $candidature->etat = 'acceptée'; // Mettre à jour l'état
+        $candidature->save();
+
+        return redirect()->route('candidatures.indexAdmin')->with('success', 'Candidature acceptée avec succès.');
+    }
+
+    // Refuser une candidature
+    public function refuser($id)
+    {
+        $candidature = CandidatureVolontariat::findOrFail($id);
+        $candidature->etat = 'refusée'; // Mettre à jour l'état
+        $candidature->save();
+
+        return redirect()->route('candidatures.indexAdmin')->with('success', 'Candidature refusée avec succès.');
+    }
 }
