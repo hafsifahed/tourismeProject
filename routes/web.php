@@ -63,7 +63,6 @@ use App\Http\Controllers\HebergementController;
 use App\Http\Controllers\ReservationsHebergementController;
 
 
-use App\Http\Controllers\ReservationsHebergementController;  
       
 Route::get('/hebergements', [HebergementController::class,'index'])->name('hebergement.index');
 Route::get('/hebergement-create', [HebergementController::class,'create'])->name('hebergement.create');
