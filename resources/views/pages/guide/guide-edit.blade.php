@@ -38,10 +38,27 @@
                             <label for="ville" class="form-label">Ville</label>
                             <input type="text" class="form-control" id="ville" name="ville" value="{{ old('ville', $guide->ville) }}">
                         </div>
+
                         <div class="mb-3">
                             <label for="type_tours" class="form-label">Type de Tours</label>
-                            <input type="text" class="form-control" id="type_tours" name="type_tours" value="{{ old('type_tours', $guide->type_tours) }}">
+                            <select class="form-select" id="type_tours" name="type_tour" required>
+                                <option value="" disabled>Selectionner un type</option>
+                                @if($types->isEmpty())
+                                    <option value="" disabled>Aucun type disponible</option>
+                                @else
+                                    @foreach ($types as $type)
+                                        <option value="{{ $type->id }}" 
+                                            {{ (old('type_tour', $guide->type_tour) == $type->id) ? 'selected' : '' }}>
+                                            {{ $type->nom_tour }}
+                                        </option>
+                                    @endforeach
+                                @endif
+                            </select>
+                            @if(empty($guide->type_tour))
+                                <small class="text-muted">Aucun type spécifié.</small>
+                            @endif
                         </div>
+
                         <div class="mb-3">
                             <label for="disponibilites" class="form-label">Disponibilités</label>
                             <input type="text" class="form-control" id="disponibilites" name="disponibilites" value="{{ old('disponibilites', $guide->disponibilites) }}">

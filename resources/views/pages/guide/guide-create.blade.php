@@ -37,7 +37,16 @@
                         </div>
                         <div class="mb-3">
                             <label for="type_tours" class="form-label">Type de Tours</label>
-                            <input type="text" class="form-control" id="type_tours" name="type_tours">
+                            <select class="form-select" id="type_tours" name="type_tour" required>
+                                <option value="" disabled selected>Sélectionner un type</option>
+                                @if($types->isEmpty())
+                                    <option value="" disabled>Aucun type disponible</option>
+                                @else
+                                    @foreach ($types as $type)
+                                        <option value="{{ $type->id }}">{{ $type->nom_tour }}</option>
+                                    @endforeach
+                                @endif
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label for="disponibilites" class="form-label">Disponibilités</label>

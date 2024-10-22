@@ -12,7 +12,7 @@ class TypeTour extends Model
     protected $table = 'types_tours';
     protected $fillable = ['nom_tour'];
 
-    public function guidesLocaux()
+    public function guideLocal()
     {
         return $this->hasMany(GuideLocal::class, 'type_tour');
     }

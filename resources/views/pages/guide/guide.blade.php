@@ -12,10 +12,10 @@
                     <p><strong>Description:</strong> {{ $guide->description }}</p>
                     <p><strong>Région:</strong> {{ $guide->region }}</p>
                     <p><strong>Ville:</strong> {{ $guide->ville }}</p>
-                    <p><strong>Type de Tours:</strong> {{ $guide->type_tours }}</p>
+                    <p><strong>Type de Tours:</strong> {{ $guide->type_tour }}</p>
                     <p><strong>Disponibilités:</strong> {{ $guide->disponibilites }}</p>
-                    <p><strong>Années d'Expérience:</strong> {{ $guide->experience_annees }}</p>
-                    <p><strong>Langues Parlées:</strong> {{ $guide->langues_parlees }}</p>
+                    <!-- <p><strong>Années d'Expérience:</strong> {{ $guide->experience_annees }}</p>
+                    <p><strong>Langues Parlées:</strong> {{ $guide->langues_parlees }}</p> -->
                     <p><strong>Téléphone:</strong> {{ $guide->telephone }}</p>
                     <p><strong>Email:</strong> {{ $guide->email }}</p>
                     <p><strong>Site Web:</strong> <a href="{{ $guide->site_web }}" target="_blank">{{ $guide->site_web }}</a></p>

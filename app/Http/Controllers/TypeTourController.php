@@ -10,7 +10,8 @@ class TypeTourController extends Controller
     // Retrieve all types of tours
     public function index()
     {
-        return TypeTour::all();
+        $types = TypeTour::all();
+        return view('pages.types.types-list', compact('types'));
     }
 
     // Create a new type of tour
@@ -20,8 +21,18 @@ class TypeTourController extends Controller
             'nom_tour' => 'required|string|max:255',
         ]);
 
-        $typeTour = TypeTour::create($validatedData);
-        return response()->json($typeTour, 201);
+        TypeTour::create($validatedData);
+        //return response()->json($typeTour, 201);
+        return to_route('typetour.list')->with('success', 'Votre type de tours a ete enregistree avec sucees');
+    }
+
+    public function create() {
+        return view('pages.types.types-create');
+    }
+
+    public function edit($id) {
+        $type = TypeTour::findOrFail($id);
+        return view('pages.types.types-edit', compact('type'));
     }
 
     // Retrieve a specific type of tour by ID

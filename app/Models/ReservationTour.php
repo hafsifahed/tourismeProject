@@ -21,7 +21,7 @@ class ReservationTour extends Model
         return $this->belongsTo(GuideLocal::class, 'guide_local');
     }
 
-    public function user()
+    public function utilisateur()
     {
         return $this->belongsTo(User::class, 'utilisateur');
     }

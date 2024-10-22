@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\GuideLocal;
 use Debugbar;
+use App\Models\TypeTour;
 
 class GuideLocalController extends Controller
 {
@@ -17,8 +18,9 @@ class GuideLocalController extends Controller
 
     public function create()
     {
+        $types = TypeTour::all();
         Debugbar::info('GuideLocauxController.create');
-        return view('pages.guide.guide-create');
+        return view('pages.guide.guide-create', compact('types'));
     }
 
     public function store(Request $request)
@@ -58,7 +60,8 @@ class GuideLocalController extends Controller
     public function edit($id)
     {
         $guide = GuideLocal::findOrFail($id);
-        return view('pages.guide.guide-edit', compact('guide'));
+        $types = TypeTour::all();
+        return view('pages.guide.guide-edit', compact('guide', 'types'));
     }
 
     public function update(Request $request, $id)

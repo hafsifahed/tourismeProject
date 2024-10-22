@@ -40,6 +40,7 @@
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">Email</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">Téléphone</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">Site Web</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">Description</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">Actions</th>
                             </tr>
                             </thead>
@@ -55,7 +56,7 @@
                                                         {{ $guide->nom }}
                                                     </a>
                                                 </h6>
-                                                <p class="text-sm text-secondary mb-0">{{ $guide->adresse }}</p>
+                                                <p class="text-sm text-secondary mb-0">{{ $guide->adresse ?? 'N/A' }}</p>
                                             </div>
                                         </div>
                                     </td>
@@ -65,6 +66,7 @@
                                     <td class="text-center text-sm">
                                         <a href="{{ $guide->site_web }}" target="_blank" rel="noopener noreferrer" class="text-decoration-none">Voir site web</a>
                                     </td>
+                                    <td class="text-center text-sm">{{ $guide->description ?? 'N/A' }}</td>
                                     <td class="align-middle text-end">
                                         <div class="d-flex justify-content-center align-items-center">
                                             <a href="{{ route('guidelocal.edit', $guide->id) }}" class="text-sm font-weight-bold" style="color: blue; margin-right: 10px;">
