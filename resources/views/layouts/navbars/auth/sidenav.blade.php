@@ -13,7 +13,7 @@
     <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
         <ul class="navbar-nav">
 
-           <li class="nav-item">
+            <li class="nav-item">
                 <a class="nav-link {{ Route::currentRouteName() == 'profile' ? 'active' : '' }}" href="{{ route('profile') }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -81,7 +81,6 @@
                 <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Pages</h6>
             </li>
             <li class="nav-item">
-
             </li>
             <li class="nav-item">
                 <a class="nav-link {{ Route::currentRouteName() == 'activites' ? 'active' : '' }}" href="{{ route('activites.list') }}">
@@ -89,7 +88,16 @@
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1">Activites</span>
+                    <span class="nav-link-text ms-1">BOActivites</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ Route::currentRouteName() == 'activites' ? 'active' : '' }}" href="{{ route('activites.activities') }}">
+                    <div
+                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">UIActivites</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -98,7 +106,7 @@
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1">Avis Reservation</span>
+                    <span class="nav-link-text ms-1">B+F Avis Reservation</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -106,7 +114,7 @@
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1">Reservation</span>
+                    <span class="nav-link-text ms-1">BO Reservation</span>
                 </a>
             </li>
 
@@ -124,7 +132,7 @@
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1">Restaurants</span>
+                    <span class="nav-link-text ms-1">BORestaurants</span>
                 </a>
             </li>
 
@@ -146,11 +154,8 @@
                 </a>
             </li>
 
-            <li class="nav-item mt-3">
-                <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Pages</h6>
-            </li>
+           
             <!--<li class="nav-item">
-
                 <a class="nav-link {{ str_contains(request()->url(), 'tables') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'tables']) }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -185,7 +190,7 @@
                     </div>
                     <span class="nav-link-text ms-1">RTL</span>
                 </a>
-            </li>-->
+            </li>
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
             </li>
@@ -198,7 +203,7 @@
                     <span class="nav-link-text ms-1">Profile</span>
                 </a>
             </li>
-           <!-- <li class="nav-item">
+            <li class="nav-item">
                 <a class="nav-link " href="{{ route('sign-in-static') }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">

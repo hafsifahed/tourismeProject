@@ -68,7 +68,6 @@
                             </tbody>
                         </table>
 
-                       
                     </div> 
                     <!-- Chart for Average Ratings -->
                     @if(auth()->check() && auth()->user()->role === 'admin')

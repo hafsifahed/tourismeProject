@@ -22,7 +22,7 @@
 
                 <!-- Formulaire de réservation -->
                 <h4 class="mt-4">Réserver cet hébergement</h4>
-                <form action="{{ route('reservations.store') }}" method="POST" id="reservationForm" class="border p-4 rounded">
+                <form action="{{ route('reservationsHebergement.store') }}" method="POST" id="reservationForm" class="border p-4 rounded">
                     @csrf
                     <input type="hidden" name="hebergement_id" value="{{ $accommodation->id }}">
 
