@@ -65,6 +65,7 @@ class User extends Authenticable
     public function avisa()
     {
         return $this->hasMany(AvisActivite::class);
+    }
     public function typeTour()
     {
         return $this->belongsTo(TypeTour::class, 'type_tour');

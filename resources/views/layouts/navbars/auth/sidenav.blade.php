@@ -50,7 +50,7 @@
 
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ str_contains(request()->url(), 'transport-list') ? 'active' : '' }}" href="{{ route('transport.list') }}">
+                <a class="nav-link {{ str_contains(request()->url(), 'guidelocal-list') ? 'active' : '' }}" href="{{ route('guidelocal.list') }}">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
                     </div>
@@ -209,7 +209,7 @@
                 </a>
             </li>
 
-            
+
 
 
 

@@ -5,6 +5,8 @@ use App\Http\Controllers\AvisActiviteController;
 
 use App\Http\Controllers\AvisTourController;
 use App\Http\Controllers\GuideLocalController;
+use App\Http\Controllers\HebergementController;
+use App\Http\Controllers\ReservationsHebergementController;
 use App\Http\Controllers\ReservationTourController;
 use App\Http\Controllers\TypeTourController;
 use Illuminate\Support\Facades\Route;
@@ -61,14 +63,6 @@ Route::post('/location/louer', [LocationController::class, 'louerTransport'])->n
 
 
 
-
-
-use App\Http\Controllers\HebergementController;
-use App\Http\Controllers\ReservationsHebergementController;
-
-
-use App\Http\Controllers\ReservationsHebergementController;  
-      
 Route::get('/hebergements', [HebergementController::class,'index'])->name('hebergement.index');
 Route::get('/hebergement-create', [HebergementController::class,'create'])->name('hebergement.create');
 Route::post('/hebergement-store', [HebergementController::class,'store'])->name('hebergement.store');
@@ -80,8 +74,8 @@ Route::get('/hebergements-search', [HebergementController::class, 'search'])->na
 Route::get('/UIDetailsHebergement-{id}', [HebergementController::class, 'detailsHebergement'])->name('hebergement.details');
 Route::get('/UIhebergements', [HebergementController::class, 'UI_index'])->name('hebergement.UI_index');
 
-Route::get('/UIDetailsHebergement-{id}', [HebergementController::class, 'detailsHebergement'])->name('hebergement.details'); 
-Route::get('/UIhebergements', [HebergementController::class, 'UI_index'])->name('hebergement.UI_index');  
+Route::get('/UIDetailsHebergement-{id}', [HebergementController::class, 'detailsHebergement'])->name('hebergement.details');
+Route::get('/UIhebergements', [HebergementController::class, 'UI_index'])->name('hebergement.UI_index');
 
 Route::post('/reservations', [ReservationsHebergementController::class, 'store'])->name('reservationsHebergement.store');
 Route::get('/BOReservations', [ReservationsHebergementController::class, 'index_BackOffice'])->name('reservations.index_BackOffice');
@@ -91,7 +85,7 @@ Route::post('/reservations/{reservation}/createPaymentIntent', [ReservationsHebe
 Route::get('/reservations-{id}', [ReservationsHebergementController::class, 'show'])->name('reservations.details');
 Route::get('/reservations/{id}/delete', [ReservationsHebergementController::class, 'delete'])->name('reservations.delete');
 
-Route::get('/reservations/{id}/delete', [ReservationsHebergementController::class, 'delete'])->name('reservations.delete');	
+Route::get('/reservations/{id}/delete', [ReservationsHebergementController::class, 'delete'])->name('reservations.delete');
 
 use App\Http\Controllers\ReservationActiviteController;
 use App\Http\Controllers\RestaurantController;
