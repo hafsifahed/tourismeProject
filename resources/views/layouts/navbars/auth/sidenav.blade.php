@@ -1,10 +1,10 @@
 <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 "
-    id="sidenav-main">
+       id="sidenav-main">
     <div class="sidenav-header">
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
-            aria-hidden="true" id="iconSidenav"></i>
+           aria-hidden="true" id="iconSidenav"></i>
         <a class="navbar-brand m-0" href="{{ route('home') }}"
-            target="_blank">
+           target="_blank">
             <img src="./img/logo-ct-dark.png" class="navbar-brand-img h-100" alt="main_logo">
             <span class="ms-1 font-weight-bold">Tourisme</span>
         </a>
@@ -153,14 +153,18 @@
                     <span class="nav-link-text ms-1">Reservation Restaurants</span>
                 </a>
             </li>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3cd8e19f1722b198d3b6c3c68bd98f47b9ba15e8
             <li class="nav-item">
-                <a class="nav-link {{ str_contains(request()->url(), 'reservation-restaurant-list') == true ? 'active' : '' }}" href="{{ route('transport.front') }}">
+                <a class="nav-link {{ str_contains(request()->url(), 'guidelocal-list') ? 'active' : '' }}" href="{{ route('guidelocal.list') }}">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1">UI Transport</span>
+                    <span class="nav-link-text ms-1">bo Guides Locaux</span>
                 </a>
+<<<<<<< HEAD
             </li>
 
            
@@ -169,28 +173,28 @@
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
+=======
+                <a class="nav-link {{ Route::currentRouteName() == 'reservationtour.list' ? 'active' : '' }}" href="{{ route('reservationtour.list') }}">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
+>>>>>>> 3cd8e19f1722b198d3b6c3c68bd98f47b9ba15e8
                     </div>
-                    <span class="nav-link-text ms-1">Tables</span>
+                    <span class="nav-link-text ms-1">bo Reservations Tours</span>
+                </a>
+                <a class="nav-link {{ Route::currentRouteName() == 'avistour.list' ? 'active' : '' }}" href="{{ route('avistour.list') }}">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">bo Avis Tours</span>
+                </a>
+                <a class="nav-link {{ Route::currentRouteName() == 'typetour.list' ? 'active' : '' }}" href="{{ route('typetour.list') }}">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">bo Types Tours</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link {{  str_contains(request()->url(), 'billing') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'billing']) }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Billing</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{ Route::currentRouteName() == 'virtual-reality' ? 'active' : '' }}" href="{{ route('virtual-reality') }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-app text-info text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Virtual Reality</span>
-                </a>
-            </li>
+<<<<<<< HEAD
             <li class="nav-item">
                 <a class="nav-link {{ Route::currentRouteName() == 'rtl' ? 'active' : '' }}" href="{{ route('rtl') }}">
                     <div
@@ -230,6 +234,8 @@
                     <span class="nav-link-text ms-1">Sign Up</span>
                 </a>
             </li>-->
+=======
+>>>>>>> 3cd8e19f1722b198d3b6c3c68bd98f47b9ba15e8
         </ul>
     </div>
 
