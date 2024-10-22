@@ -30,16 +30,20 @@ class ReservationsHebergementController extends Controller
         $totalPrice = $days * $hebergement->price_per_night * $request->guests;
 
         // Création de la réservation
-        $reservation = ReservationsHebergement::create([
-            'hebergement_id' => $request->hebergement_id,
-            'user_id' => Auth::id(),
-            'start_date' => $request->start_date,
-            'end_date' => $request->end_date,
-            'guests' => $request->guests,
-            'total_price' => $totalPrice,
-            'status' => 'en attente',
-            'special_requests' => $request->special_requests,
-        ]);
+        try {
+            $reservation = ReservationsHebergement::create([
+                'hebergement_id' => $request->hebergement_id,
+                'user_id' => Auth::id(),
+                'start_date' => $request->start_date,
+                'end_date' => $request->end_date,
+                'guests' => $request->guests,
+                'total_price' => $totalPrice,
+                'status' => 'en attente',
+                'special_requests' => $request->special_requests,
+            ]);
+        } catch (\Exception $e) {
+            return back()->with('error', 'Erreur lors de la création de la réservation : ' . $e->getMessage());
+        }
 
         // Redirection avec message de succès
         return redirect()->route('hebergement.UI_index', $request->hebergement_id)

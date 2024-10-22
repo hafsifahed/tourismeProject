@@ -124,7 +124,7 @@
                     <tr>
                         <td>{{ $reservation->id }}</td>
                         <td>{{ $reservation->hebergement->name }}</td>
-                        <td>{{ $reservation->user->name }}</td>
+                        <td>{{ $reservation->user->username }}</td>
                         <td>{{ \Carbon\Carbon::parse($reservation->start_date)->format('d/m/Y') }}</td>
                         <td>{{ \Carbon\Carbon::parse($reservation->end_date)->format('d/m/Y') }}</td>
                         <td>{{ ucfirst($reservation->status) }}</td>

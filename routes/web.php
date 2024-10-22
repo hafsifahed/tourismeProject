@@ -42,7 +42,7 @@ Route::get('/hebergements-search', [HebergementController::class, 'search'])->na
 Route::get('/UIDetailsHebergement-{id}', [HebergementController::class, 'detailsHebergement'])->name('hebergement.details'); 
 Route::get('/UIhebergements', [HebergementController::class, 'UI_index'])->name('hebergement.UI_index');  
 
-Route::post('/reservations', [ReservationsHebergementController::class, 'store'])->name('reservations.store');
+Route::post('/reservations', [ReservationsHebergementController::class, 'store'])->name('reservationsHebergement.store');
 Route::get('/BOReservations', [ReservationsHebergementController::class, 'index_BackOffice'])->name('reservations.index_BackOffice');
 Route::get('/MyReservations', [ReservationsHebergementController::class, 'index'])->name('reservations.index');
 Route::get('/reservations-{reservation}-payment', [ReservationsHebergementController::class, 'showPaymentForm'])->name('reservations.payment');
