@@ -2,7 +2,7 @@
 
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'Ajouter Réservation de Tour'])
-    
+
     <div class="row mt-4 mx-4">
         <div class="col-12">
             <div class="card mb-4">
@@ -24,14 +24,14 @@
 
                         <div class="mb-3">
                             <label for="guide_local" class="form-label">Guide Local</label>
-                            <select class="form-select" id="guide_local" name="type_tour" required>
+                            <select class="form-select" id="guide_local" name="guide_local" required>
                                 <option value="" disabled>Selectionner un Guide</option>
                                 @if($guides->isEmpty())
                                     <option value="" disabled>Aucun Guide disponible</option>
                                 @else
                                     @foreach ($guides as $guide)
-                                        <option value="{{ $guide->id }}" 
-                                            {{ (old('nom', $guide->nom) == $guide->id) ? 'selected' : '' }}>
+                                        <option value="{{ $guide->id }}"
+                                            {{ (old('guide_local', $avis->guide_local) == $guide->id) ? 'selected' : '' }}>
                                             {{ $guide->nom }}
                                         </option>
                                     @endforeach
@@ -44,14 +44,14 @@
 
                         <div class="mb-3">
                             <label for="utilisateur" class="form-label">Utilisateur</label>
-                            <select class="form-select" id="utilisateur" name="type_tour" required>
+                            <select class="form-select" id="utilisateur" name="utilisateur" required>
                                 <option value="" disabled>Selectionner un Utilisateur</option>
                                 @if($utilisateur->isEmpty())
                                     <option value="" disabled>Aucun Utilisateurs disponible</option>
                                 @else
                                     @foreach ($utilisateur as $user)
-                                        <option value="{{ $user->id }}" 
-                                            {{ (old('username', $user->username) == $user->id) ? 'selected' : '' }}>
+                                        <option value="{{ $user->id }}"
+                                            {{ (old('utilisateur', $avis->utilisateur) == $user->id) ? 'selected' : '' }}>
                                             {{ $user->username }}
                                         </option>
                                     @endforeach
@@ -64,15 +64,16 @@
 
                         <div class="mb-3">
                             <label for="note" class="form-label">Note</label>
-                            <textarea class="form-control" id="note" name="note" required>{{ old('note', $avis->note) }}</textarea>
+                            <input type="number" class="form-control" id="note" name="note"
+                                   min="1" max="5" required value="{{ old('note', $avis->note) }}">
                         </div>
 
                         <div class="mb-3">
-                            <label for="Commentaire" class="form-label">Commentaire</label>
+                            <label for="commentaire" class="form-label">Commentaire</label>
                             <textarea class="form-control" id="commentaire" name="commentaire" required>{{ old('commentaire', $avis->commentaire) }}</textarea>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Mise a jour</button>
+                        <button type="submit" class="btn btn-primary">Mise à jour</button>
                     </form>
                 </div>
             </div>

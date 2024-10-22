@@ -45,7 +45,7 @@
                             @foreach ($reservations as $reservation)
                                 <tr>
                                     <td class="text-sm font-weight-bold mb-0">{{ $reservation->guideLocal->nom }}</td>
-                                    <td class="text-sm font-weight-bold mb-0">{{ App\Models\User::where('id', $reservation->utilisateur)->get()[0]["firstname"] }}</td>
+                                    <td class="text-sm font-weight-bold mb-0">{{ App\Models\User::find($reservation->utilisateur)->username }}</td>
                                     <td class="text-center text-sm">{{ $reservation->informations }}</td>
                                     <td class="align-middle text-end">
                                         <div class="d-flex justify-content-center align-items-center">

@@ -2,7 +2,7 @@
 
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'Ajouter Avis de Tour'])
-    
+
     <div class="row mt-4 mx-4">
         <div class="col-12">
             <div class="card mb-4">
@@ -43,7 +43,7 @@
 
                         <div class="mb-3">
                             <label for="note" class="form-label">Note</label>
-                            <textarea class="form-control" id="note" name="note" required></textarea>
+                            <input type="number" class="form-control" id="note" name="note" min="1" max="5" required>
                         </div>
 
                         <div class="mb-3">

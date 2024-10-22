@@ -2,7 +2,7 @@
 
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'Ajouter Réservation de Tour'])
-    
+
     <div class="row mt-4 mx-4">
         <div class="col-12">
             <div class="card mb-4">
@@ -35,7 +35,7 @@
                             <label for="utilisateur" class="form-label">Utilisateur</label>
                             <select class="form-select" id="utilisateur" name="utilisateur" required>
                                 <option value="" disabled selected>Sélectionner un utilisateur</option>
-                                @foreach ($utilisateurs as $utilisateur)
+                                @foreach ($utilisateur as $utilisateur)
                                     <option value="{{ $utilisateur->id }}">{{ $utilisateur->username }}</option>
                                 @endforeach
                             </select>

@@ -9,18 +9,16 @@ use Illuminate\Http\Request;
 
 class ReservationTourController extends Controller
 {
-    // Retrieve all reservations
     public function index()
     {
-        $reservations = ReservationTour::with(['guideLocal','utilisateur'])->get();
-        //dd($reservations);
+        $reservations = ReservationTour::with(['guideLocal', 'utilisateur'])->get();
         return view('pages.reservation.reservation-list', compact('reservations'));
     }
 
     public function create() {
         $guides = GuideLocal::all();
-        $utilisateurs = User::all();
-        return view('pages.reservation.reservation-create', compact('guides', 'utilisateurs'));
+        $utilisateur = User::all();
+        return view('pages.reservation.reservation-create', compact('guides', 'utilisateur'));
     }
 
     public function edit($id) {
@@ -30,7 +28,6 @@ class ReservationTourController extends Controller
         return view('pages.reservation.reservation-edit', compact('reservation', 'guides', 'utilisateur'));
     }
 
-    // Create a new reservation
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -39,32 +36,21 @@ class ReservationTourController extends Controller
             'informations' => 'required|string',
         ]);
 
-        //$reservation = 
         ReservationTour::create($validatedData);
-        //return response()->json($reservation, 201);
-        return to_route('reservationtour.list')->with('success', "Reservation de tour cree avec succes");
+        return to_route('reservationtour.list')->with('success', "Réservation de tour créée avec succès");
     }
 
-    // Retrieve a specific reservation by ID
-    public function show($id)
-    {
-        $reservation = ReservationTour::findOrFail($id);
-        return response()->json($reservation);
-    }
-
-    // Update a reservation
     public function update(Request $request, $id)
     {
         $reservation = ReservationTour::findOrFail($id);
         $reservation->update($request->all());
-        return to_route('reservationtour.list')->with('success', "Reservation de tour mise a jour avec succes");
+        return to_route('reservationtour.list')->with('success', "Réservation de tour mise à jour avec succès");
     }
 
-    // Delete a reservation
     public function destroy($id)
     {
         $reservation = ReservationTour::findOrFail($id);
         $reservation->delete();
-        return to_route('reservationtour.list')->with('success', "Reservation de tour supprimee avec succes");
+        return to_route('reservationtour.list')->with('success', "Réservation de tour supprimée avec succès");
     }
 }
