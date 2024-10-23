@@ -11,7 +11,7 @@ class ReservationRestaurantController extends Controller
     public function index()
     {
         $reservationsrestaurant = ReservationRestaurant::paginate(10);
-        return view('pages.reservation.reservation-list', compact('reservationsrestaurant'));
+        return view('pages.reservation.reservation-restaurant-list', compact('reservationsrestaurant'));
     }
 
     public function destroy($id)

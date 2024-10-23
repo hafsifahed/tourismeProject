@@ -84,11 +84,6 @@ Route::get('/location-edit-{id}', [LocationController::class, 'edit'])->name('lo
 Route::put('/location-transport/update/{id}', [LocationController::class, 'update'])->name('location-transport.update');
 Route::post('/location/louer', [LocationController::class, 'louerTransport'])->name('location.louer');
 
-
-
-
-use App\Http\Controllers\HebergementController;
-use App\Http\Controllers\ReservationsHebergementController;
 Route::get('/hebergements', [HebergementController::class,'index'])->name('hebergement.index');
 Route::get('/hebergement-create', [HebergementController::class,'create'])->name('hebergement.create');
 Route::post('/hebergement-store', [HebergementController::class,'store'])->name('hebergement.store');
