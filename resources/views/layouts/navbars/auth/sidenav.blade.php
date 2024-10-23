@@ -179,6 +179,40 @@
                     <span class="nav-link-text ms-1">bo Types Tours</span>
                 </a>
             </li>
+
+
+            <li class="nav-item">
+                <a class="nav-link {{ str_contains(request()->url(), 'candidatures.indexAdmin') == true ? 'active' : '' }}" href="{{ route('candidatures.indexAdmin') }}">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">candidatures-admin</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ str_contains(request()->url(), 'missions.indexAdmin') == true ? 'active' : '' }}" href="{{ route('missions.indexAdmin') }}">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">missions-admin</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ str_contains(request()->url(), 'missions.indexUser') == true ? 'active' : '' }}" href="{{ route('missions.indexUser') }}">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">UImission</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ str_contains(request()->url(), 'candidatures.indexUser') == true ? 'active' : '' }}" href="{{ route('candidatures.indexUser') }}">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">UI Mes candidatures</span>
+                </a>
+            </li>
         </ul>
     </div>
 
