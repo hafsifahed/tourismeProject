@@ -2,12 +2,14 @@
 
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'Liste des Réservations'])
-    
+
     <div class="row mt-4 mx-4">
         <div class="col-12">
             <div class="card mb-4">
                 <div class="card-header pb-0">
-                    <a href="{{ route('reservations.create') }}" class="btn btn-primary">Ajouter une Réservation</a>
+                    @if(auth()->user()->role === 'admin')
+                        <a href="{{ route('reservations.create') }}" class="btn btn-primary">Ajouter une Réservation</a>
+                    @endif
                 </div>
 
                 @if(session('success'))
@@ -55,13 +57,18 @@
                                         <td>{{ $reservation->nombre_places }}</td>
                                         <td class="align-middle text-end">
                                             <a href="{{ route('reservations.show', $reservation->id) }}" class="btn btn-info">Voir</a>
-                                            <a href="{{ route('reservations.edit', $reservation->id) }}" class="btn btn-warning">Modifier</a>
 
-                                            <form action="{{ route('reservations.destroy', $reservation->id) }}" method="POST" style="display:inline;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger">Supprimer</button>
-                                            </form>
+                                            @if(auth()->user()->role === 'admin')
+                                                <!-- Only show Edit and Delete buttons for admin users -->
+                                                <a href="{{ route('reservations.edit', $reservation->id) }}" class="btn btn-warning">Modifier</a>
+
+                                                <!-- Delete Button with Confirmation Alert -->
+                                                <form action="{{ route('reservations.destroy', $reservation->id) }}" method="POST" style="display:inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="button" class="btn btn-danger" onclick="confirmDelete(event)">Supprimer</button>
+                                                </form>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
@@ -69,10 +76,20 @@
                         </table>
 
                         <!-- Pagination Links -->
-                        {{ $reservations->links() }}
+                        {{ $reservations->links() }} <!-- If you're paginating users -->
                     </div> 
                 </div> 
             </div> 
         </div> 
     </div> 
+
+    <script>
+        function confirmDelete(event) {
+            if (confirm("Êtes-vous sûr de vouloir supprimer cette réservation ? Cette action ne peut pas être annulée.")) {
+                // If confirmed, submit the form
+                event.target.closest("form").submit();
+            }
+        }
+    </script>
+
 @endsection

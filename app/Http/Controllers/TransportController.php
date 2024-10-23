@@ -60,38 +60,41 @@ class TransportController extends Controller
      */
 
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'type' => 'required|string',
-            'model' => 'required|string',
-            'status' => 'required|string',
-            'prix_heure' => 'required|numeric|min:0',
-            'battrie' => 'required|integer|min:0|max:100',
-            'lieux_location' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validation de l'image
-        ]);
-
-        // Gérer le téléchargement de l'image
-        $imagePath = null;
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('transports', 'public');
-        }
-
-        // Enregistrement du transport
-        Transport::create([
-            'type' => $request->input('type'),
-            'model' => $request->input('model'),
-            'status' => $request->input('status'),
-            'prix_heure' => $request->input('prix_heure'),
-            'battrie' => $request->input('battrie'),
-            'lieux_location' => $request->input('lieux_location'),
-            'image_url' => $imagePath, // Enregistrer le chemin de l'image
-        ]);
-
-        return redirect()->route('transport.list')->with('success', 'Transport ajouté avec succès!');
-    }
-
+     public function store(Request $request)
+     {
+         // Validate the incoming request data
+         $request->validate([
+             'type' => 'required|string',
+             'model' => 'required|string',
+             'status' => 'required|string',
+             'prix_heure' => 'required|numeric|min:0',
+             'battrie' => 'required|integer|min:0|max:100',
+             'lieux_location' => 'required|string',
+             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Image validation
+         ]);
+     
+         // Handle the image upload
+         $imagePath = null;
+         if ($request->hasFile('image')) {
+             $imagePath = $request->file('image')->store('transports', 'public');
+         }
+     
+         // Create a new transport record
+         Transport::create([
+             'type' => $request->input('type'),
+             'model' => $request->input('model'),
+             'status' => $request->input('status'),
+             'prix_heure' => $request->input('prix_heure'),
+             'battrie' => $request->input('battrie'),
+             'lieux_location' => $request->input('lieux_location'),
+             'image_url' => $imagePath, // Save the image path
+         ]);
+     
+         // Redirect with success message
+         return redirect()->route('transport.list')->with('success', 'Transport ajouté avec succès!');
+     }
+     
+ 
     /**
      * Display the specified resource.
      *

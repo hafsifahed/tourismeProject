@@ -19,7 +19,11 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('region')->nullable();
             $table->string('ville')->nullable();
-            $table->string('type_tours')->nullable();
+            $table->foreignId('type_tour')
+                ->references('id')
+                ->on('types_tours')
+                ->constrained()
+                ->onDelete('cascade');
             $table->string('disponibilites')->nullable();
             $table->string('telephone', 20)->nullable();
             $table->string('email', 100)->nullable();

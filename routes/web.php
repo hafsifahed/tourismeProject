@@ -1,25 +1,15 @@
 <?php
-use App\Http\Controllers\GuidesLocauxController;
 use App\Http\Controllers\ActiviteController;
 use App\Http\Controllers\AvisActiviteController;
 
+
+use App\Http\Controllers\AvisTourController;
+use App\Http\Controllers\GuideLocalController;
+use App\Http\Controllers\HebergementController;
+use App\Http\Controllers\ReservationsHebergementController;
+use App\Http\Controllers\ReservationTourController;
+use App\Http\Controllers\TypeTourController;
 use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\RegisterController;
@@ -41,6 +31,45 @@ Route::get('/transport-edit-{id}', [TransportController::class, 'edit'])->name('
 Route::put('/transport/update/{id}', [TransportController::class, 'update'])->name('transport.update');
 Route::get('/transport-detail-{id}', [TransportController::class, 'show'])->name('transport.show');
 Route::get('/transport-search', [TransportController::class, 'search'])->name('transport.search');
+use App\Http\Controllers\MissionVolontariatController;
+use App\Http\Controllers\CandidatureVolontariatController; // Import du contrôleur
+
+// Routes pour l'admin - missions
+Route::get('/missions-admin', [MissionVolontariatController::class, 'indexAdmin'])->name('missions.indexAdmin');
+
+// Routes pour les utilisateurs - missions
+Route::get('/missions', [MissionVolontariatController::class, 'indexUser'])->name('missions.indexUser');
+
+// Routes pour la création, modification, suppression des missions
+Route::get('/missions-create', [MissionVolontariatController::class, 'create'])->name('missions.create');
+Route::post('/missions', [MissionVolontariatController::class, 'store'])->name('missions.store');
+Route::get('/missions-{mission}-edit', [MissionVolontariatController::class, 'edit'])->name('missions.edit');
+Route::put('/missions/{mission}', [MissionVolontariatController::class, 'update'])->name('missions.update');
+Route::delete('/missions/{mission}', [MissionVolontariatController::class, 'destroy'])->name('missions.destroy');
+
+// Routes pour l'admin - candidatures
+Route::get('/candidatures-admin', [CandidatureVolontariatController::class, 'indexAdmin'])->name('candidatures.indexAdmin');
+
+// Routes pour la création, modification, suppression des candidatures
+Route::get('/candidatures-create-{mission_id}', [CandidatureVolontariatController::class, 'create'])->name('candidatures.create');
+
+//Route::get('/candidatures/create/{missionId}', [CandidatureVolontariatController::class, 'create'])->name('candidatures.create');
+
+
+Route::post('/candidatures', [CandidatureVolontariatController::class, 'store'])->name('candidatures.store');
+Route::get('/candidatures-{candidature}-edit', [CandidatureVolontariatController::class, 'edit'])->name('candidatures.edit');
+Route::put('/candidatures/{candidature}', [CandidatureVolontariatController::class, 'update'])->name('candidatures.update');
+Route::delete('/candidatures/{candidature}', [CandidatureVolontariatController::class, 'destroy'])->name('candidatures.destroy');
+// Route pour afficher les détails d'une candidature
+Route::get('/candidatures/{candidature}', [CandidatureVolontariatController::class, 'show'])->name('candidatures.show');
+
+// Routes pour accepter et refuser une candidature avec des tirets
+Route::post('/candidatures-{id}-accepter', [CandidatureVolontariatController::class, 'accepter'])->name('candidatures.accepter');
+Route::post('/candidatures-{id}-refuser', [CandidatureVolontariatController::class, 'refuser'])->name('candidatures.refuser');
+
+
+// Route pour afficher les candidatures de l'utilisateur connecté
+Route::get('/candidatures-user', [CandidatureVolontariatController::class, 'indexUser'])->name('candidatures.indexUser')->middleware('auth');
 
 
 // Location Transport routes
@@ -50,8 +79,10 @@ Route::post('/location-transport', [LocationController::class, 'store'])->name('
 Route::delete('/location/{id}', [LocationController::class, 'destroy'])->name('location.delete');
 Route::get('/location-edit-{id}', [LocationController::class, 'edit'])->name('location.edit');
 Route::put('/location-transport/update/{id}', [LocationController::class, 'update'])->name('location-transport.update');
-use App\Http\Controllers\HebergementController;
-use App\Http\Controllers\ReservationsHebergementController;
+
+
+Route::post('/location/louer', [LocationController::class, 'louerTransport'])->name('location.louer');
+
 Route::get('/hebergements', [HebergementController::class,'index'])->name('hebergement.index');
 Route::get('/hebergement-create', [HebergementController::class,'create'])->name('hebergement.create');
 Route::post('/hebergement-store', [HebergementController::class,'store'])->name('hebergement.store');
@@ -63,27 +94,56 @@ Route::get('/hebergements-search', [HebergementController::class, 'search'])->na
 Route::get('/UIDetailsHebergement-{id}', [HebergementController::class, 'detailsHebergement'])->name('hebergement.details');
 Route::get('/UIhebergements', [HebergementController::class, 'UI_index'])->name('hebergement.UI_index');
 
+Route::get('/UIDetailsHebergement-{id}', [HebergementController::class, 'detailsHebergement'])->name('hebergement.details');
+Route::get('/UIhebergements', [HebergementController::class, 'UI_index'])->name('hebergement.UI_index');
+
 Route::post('/reservations', [ReservationsHebergementController::class, 'store'])->name('reservationsHebergement.store');
 Route::get('/BOReservations', [ReservationsHebergementController::class, 'index_BackOffice'])->name('reservations.index_BackOffice');
 Route::get('/MyReservations', [ReservationsHebergementController::class, 'index'])->name('reservations.index');
 Route::get('/reservations-{reservation}-payment', [ReservationsHebergementController::class, 'showPaymentForm'])->name('reservations.payment');
-Route::post('/reservations/{reservation}/createPaymentIntent', [ReservationsHebergementController::class, 'createPaymentIntent'])
-    ->name('reservations.createPaymentIntent');
+Route::post('/reservations/{reservation}/createPaymentIntent', [ReservationsHebergementController::class, 'createPaymentIntent'])->name('reservations.createPaymentIntent');
 Route::get('/reservations-{id}', [ReservationsHebergementController::class, 'show'])->name('reservations.details');
+Route::get('/reservations/{id}/delete', [ReservationsHebergementController::class, 'delete'])->name('reservations.delete');
+
 Route::get('/reservations/{id}/delete', [ReservationsHebergementController::class, 'delete'])->name('reservations.delete');
 
 use App\Http\Controllers\ReservationActiviteController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\AvisRestaurantController;
 use App\Http\Controllers\ReservationRestaurantController;
+use App\Http\Controllers\UserManagementController;
 
-Route::get('/guide-list', [GuidesLocauxController::class, 'index'])->name('guidelocal.list');
-Route::get('/guide-add', [GuidesLocauxController::class, 'create'])->name('guidelocal.add');
-Route::post('/guide-store', [GuidesLocauxController::class, 'store'])->name('guidelocal.store');
-Route::delete('/guide/{id}', [GuidesLocauxController::class, 'destroy'])->name('guidelocal.delete');
-Route::get('/guide-edit-{id}', [GuidesLocauxController::class, 'edit'])->name('guidelocal.edit');
-Route::put('/guide/update/{id}', [GuidesLocauxController::class, 'update'])->name('guidelocal.update');
-Route::get('/guide-details-{id}', [GuidesLocauxController::class, 'show'])->name('guidelocal.show');
+Route::get('/guide-list', [GuideLocalController::class, 'index'])->name('guidelocal.list');
+Route::get('/guide-add', [GuideLocalController::class, 'create'])->name('guidelocal.add');
+Route::post('/guide-store', [GuideLocalController::class, 'store'])->name('guidelocal.store');
+Route::delete('/guide/{id}', [GuideLocalController::class, 'destroy'])->name('guidelocal.delete');
+Route::get('/guide-edit-{id}', [GuideLocalController::class, 'edit'])->name('guidelocal.edit');
+Route::put('/guide/update/{id}', [GuideLocalController::class, 'update'])->name('guidelocal.update');
+Route::get('/guide-details-{id}', [GuideLocalController::class, 'show'])->name('guidelocal.show');
+
+Route::get('/type-tour-list', [TypeTourController::class, 'index'])->name('typetour.list');
+Route::get('/type-tour-add', [TypeTourController::class, 'create'])->name('typetour.add');
+Route::post('/type-tour-store', [TypeTourController::class, 'store'])->name('typetour.store');
+Route::delete('/type-tour/{id}', [TypeTourController::class, 'destroy'])->name('typetour.delete');
+Route::get('/type-tour-edit-{id}', [TypeTourController::class, 'edit'])->name('typetour.edit');
+Route::put('/type-tour/update/{id}', [TypeTourController::class, 'update'])->name('typetour.update');
+Route::get('/type-tour-details-{id}', [TypeTourController::class, 'show'])->name('typetour.show');
+
+Route::get('/reservationtour-list', [ReservationTourController::class, 'index'])->name('reservationtour.list');
+Route::get('/reservationtour-add', [ReservationTourController::class, 'create'])->name('reservationtour.add');
+Route::post('/reservationtour-store', [ReservationTourController::class, 'store'])->name('reservationtour.store');
+Route::delete('/reservationtour/{id}', [ReservationTourController::class, 'destroy'])->name('reservationtour.delete');
+Route::get('/reservationtour-edit-{id}', [ReservationTourController::class, 'edit'])->name('reservationtour.edit');
+Route::put('/reservationtour/update/{id}', [ReservationTourController::class, 'update'])->name('reservationtour.update');
+Route::get('/reservationtour-details-{id}', [ReservationTourController::class, 'show'])->name('reservationtour.show');
+
+Route::get('/avis-list', [AvisTourController::class, 'index'])->name('avistour.list');
+Route::get('/avis-add', [AvisTourController::class, 'create'])->name('avistour.add');
+Route::post('/avis-store', [AvisTourController::class, 'store'])->name('avistour.store');
+Route::delete('/avis/{id}', [AvisTourController::class, 'destroy'])->name('avistour.delete');
+Route::get('/avis-edit-{id}', [AvisTourController::class, 'edit'])->name('avistour.edit');
+Route::put('/avis/update/{id}', [AvisTourController::class, 'update'])->name('avistour.update');
+Route::get('/avis-details-{id}', [AvisTourController::class, 'show'])->name('avistour.show');
 
 
 
@@ -142,17 +202,28 @@ Route::post('/reservationactivites-storee', [ReservationActiviteController::clas
 Route::get('/activitesuser', [ActiviteController::class, 'indexx'])->name('activites.activities');
 
 
+Route::get('/users', [UserManagementController::class, 'index'])->name('users.index');
+Route::delete('/users-{id}', [UserManagementController::class, 'destroy'])->name('users.destroy');
+Route::get('/users-{id}-edit', [UserManagementController::class, 'edit'])->name('users.edit');
+Route::put('/users-{id}', [UserManagementController::class, 'update'])->name('users.update');
+Route::post('/users', [UserManagementController::class, 'store'])->name('users.store');
+Route::get('/users-{id}', [UserManagementController::class, 'show'])->name('users.show');
 
-Route::get('/', function () {return redirect('/dashboard');})->middleware('auth');
-	Route::get('/register', [RegisterController::class, 'create'])->middleware('guest')->name('register');
-	Route::post('/register', [RegisterController::class, 'store'])->middleware('guest')->name('register.perform');
-	Route::get('/login', [LoginController::class, 'show'])->middleware('guest')->name('login');
-	Route::post('/login', [LoginController::class, 'login'])->middleware('guest')->name('login.perform');
-	Route::get('/reset-password', [ResetPassword::class, 'show'])->middleware('guest')->name('reset-password');
-	Route::post('/reset-password', [ResetPassword::class, 'send'])->middleware('guest')->name('reset.perform');
-	Route::get('/change-password', [ChangePassword::class, 'show'])->middleware('guest')->name('change-password');
-	Route::post('/change-password', [ChangePassword::class, 'update'])->middleware('guest')->name('change.perform');
-	Route::get('/dashboard', [HomeController::class, 'index'])->name('home')->middleware('auth');
+// Other routes (already in your file)
+Route::get('/', function () {
+    return redirect('/dashboard');
+})->middleware('auth');
+
+Route::get('/register', [RegisterController::class, 'create'])->middleware('guest')->name('register');
+Route::post('/register', [RegisterController::class, 'store'])->middleware('guest')->name('register.perform');
+Route::get('/login', [LoginController::class, 'show'])->middleware('guest')->name('login');
+Route::post('/login', [LoginController::class, 'login'])->middleware('guest')->name('login.perform');
+Route::get('/reset-password', [ResetPassword::class, 'show'])->middleware('guest')->name('reset-password');
+Route::post('/reset-password', [ResetPassword::class, 'send'])->middleware('guest')->name('reset.perform');
+Route::get('/change-password', [ChangePassword::class, 'show'])->middleware('guest')->name('change-password');
+Route::post('/change-password', [ChangePassword::class, 'update'])->middleware('guest')->name('change.perform');
+Route::get('/dashboard', [HomeController::class, 'index'])->name('home')->middleware('auth');
+
 Route::group(['middleware' => 'auth'], function () {
 	Route::get('/virtual-reality', [PageController::class, 'vr'])->name('virtual-reality');
 	Route::get('/rtl', [PageController::class, 'rtl'])->name('rtl');

@@ -13,6 +13,7 @@ class Activite extends Model
         'description',
         'date',
         'lieu',
+        'image'
     ];
 
     public function reservations()

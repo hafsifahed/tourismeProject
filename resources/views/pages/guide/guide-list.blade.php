@@ -40,6 +40,7 @@
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">Email</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">Téléphone</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">Site Web</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">Description</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">Actions</th>
                             </tr>
                             </thead>
@@ -48,14 +49,14 @@
                                 <tr>
                                     <td>
                                         <div class="d-flex align-items-center">
-                                            <img src="{{ $guide->photo_url }}" alt="{{ $guide->nom }}" class="avatar" style="border-radius: 200px; width: 50px; height: 50px;">
+                                            <img src="{{ asset('storage/' . $guide->photo_url) }}" alt="{{ $guide->nom }}" class="avatar" style="border-radius: 200px; width: 50px; height: 50px;">
                                             <div class="ms-3">
                                                 <h6 class="mb-0 text-sm">
                                                     <a href="{{ route('guidelocal.show', $guide->id) }}" class="text-decoration-none text-primary">
                                                         {{ $guide->nom }}
                                                     </a>
                                                 </h6>
-                                                <p class="text-sm text-secondary mb-0">{{ $guide->adresse }}</p>
+                                                <p class="text-sm text-secondary mb-0">{{ $guide->adresse ?? 'N/A' }}</p>
                                             </div>
                                         </div>
                                     </td>
@@ -65,15 +66,16 @@
                                     <td class="text-center text-sm">
                                         <a href="{{ $guide->site_web }}" target="_blank" rel="noopener noreferrer" class="text-decoration-none">Voir site web</a>
                                     </td>
+                                    <td class="text-center text-sm">{{ $guide->description ?? 'N/A' }}</td>
                                     <td class="align-middle text-end">
                                         <div class="d-flex justify-content-center align-items-center">
-                                            <a href="{{ route('guidelocal.edit', $guide->id) }}" class="text-sm font-weight-bold" style="color: blue; margin-right: 10px;">
+                                            <a href="{{ route('guidelocal.edit', $guide->id) }}" class="btn btn-info btn-round me-2" title="Modifier">
                                                 <i class="fas fa-edit"></i>
                                             </a>
-                                            <form method="POST" action="{{ route('guidelocal.delete', $guide->id) }}" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce guide local ?');">
+                                            <form method="POST" action="{{ route('guidelocal.delete', $guide->id) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce guide local ?');">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="text-sm font-weight-bold" style="background: none; border: none; color: red; cursor: pointer;">
+                                                <button type="submit" class="btn btn-danger btn-round" title="Supprimer">
                                                     <i class="fas fa-trash-alt"></i>
                                                 </button>
                                             </form>
