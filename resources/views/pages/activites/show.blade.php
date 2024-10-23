@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Détails de l\'Activité'])
+@if(auth()->check())
+@include('layouts.navbars.auth.topnav', ['title' => 'Détails de l\'Activité'])
+@else
+@include('layouts.navbars.guest.navbar', ['title' => 'Détails de l\'Activité'])
+@endif
 
     <div class="row mt-4 mx-4">
         <div class="col-12">
@@ -35,7 +39,7 @@
                             <a href="{{ route('activites.activities') }}" class='btn btn-secondary mt-3'>Retour à la liste des Activités</a>
                         @endif
                     @else
-                        <a href="{{ route('activites.list') }}" class='btn btn-secondary mt-3'>Retour à la liste des Activités</a>
+                        <a href="{{ route('activites.activities') }}" class='btn btn-secondary mt-3'>Retour à la liste des Activités</a>
                     @endif
 
                 </div>

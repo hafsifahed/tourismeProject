@@ -1,8 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts.navbars.auth.topnav', ['title' => 'Réserver Activité'])
-
+@if(auth()->check())
+@include('layouts.navbars.auth.topnav', ['title' => 'Ajouter Activité'])
+@else
+@include('layouts.navbars.guest.navbar', ['title' => 'Réserver Activité'])
+@endif
 <div class="container">
     <h1 class="mb-4">Liste des Activités</h1>
 
@@ -23,13 +26,15 @@
                 <div class="card shadow-sm">
                     <!-- Display activity image -->
                     @if ($activite->image)
-                        <img src="{{ asset('images/' . $activite->image) }}" class="card-img-top" alt="{{ $activite->nom }}">
+                    <a href="{{ route('activites.show', $activite->id) }}" class="">   <img src="{{ asset('images/' . $activite->image) }}" class="card-img-top" alt="{{ $activite->nom }}"></a>      
                     @else
-                        <img src="https://via.placeholder.com/400x300" class="card-img-top" alt="Image non disponible">
+                    <a href="{{ route('activites.show', $activite->id) }}" class=""> <img src="https://via.placeholder.com/400x300" class="card-img-top" alt="Image non disponible"></a>      
                     @endif
 
                     <div class="card-header">
-                        <h5>{{ $activite->nom }}</h5>
+                        <h5>     
+                           <a href="{{ route('activites.show', $activite->id) }}" class="">{{ $activite->nom }}</a>                  
+                              </h5>
                     </div>
                     <div class="card-body">
                         <p>{{ $activite->description }}</p>
@@ -38,7 +43,7 @@
 
                         @if(auth()->check() && auth()->user()->role === 'user')
                             <!-- Input for number of places -->
-                            <form action="{{ route('reservations.store') }}" method="POST" style="display:inline;">
+                            <form action="{{ route('reservations.storee') }}" method="POST" style="display:inline;">
                                 @csrf <!-- CSRF Token -->
                                 <input type="hidden" name="activite_id" value="{{ $activite->id }}">
                                 
