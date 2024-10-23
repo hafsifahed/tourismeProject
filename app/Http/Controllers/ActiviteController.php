@@ -52,26 +52,39 @@ class ActiviteController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        // Validate incoming request data
+        $validatedData = $request->validate([
             'nom' => 'required|string|max:255',
             'description' => 'required|string',
             'date' => 'required|date',
             'lieu' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Image validation
         ], [
             'nom.required' => 'Le champ Nom est requis.',
-            'nom.string' => 'Le champ Nom doit être une chaîne de caractères.',
-            'nom.max' => 'Le champ Nom ne peut pas dépasser :max caractères.',
             'description.required' => 'Le champ Description est requis.',
-            'description.string' => 'Le champ Description doit être une chaîne de caractères.',
             'date.required' => 'Le champ Date est requis.',
-            'date.date' => 'Le champ Date doit être une date valide.',
             'lieu.required' => 'Le champ Lieu est requis.',
-            'lieu.string' => 'Le champ Lieu doit être une chaîne de caractères.',
-            'lieu.max' => 'Le champ Lieu ne peut pas dépasser :max caractères.',
+            'image.image' => "Le fichier doit être une image.",
+            'image.mimes' => "Les formats d'image autorisés sont jpeg, png, jpg, gif et svg.",
+            'image.max' => "L'image ne doit pas dépasser :max Ko.",
         ]);
-
-        Activite::create($request->all());
-
+    
+        // Handle image upload
+        if ($request->hasFile('image')) {
+            // Generate a unique filename
+            $imageName = time() . '.' . $request->image->extension();
+            
+            // Move the uploaded file to the public/images directory
+            $request->image->move(public_path('images'), $imageName);
+            
+            // Save the image path in validated data
+            $validatedData['image'] = $imageName;
+        }
+    
+        // Create new Activite record with validated data
+        Activite::create($validatedData);
+    
+        // Redirect with success message
         return redirect()->route('activites.list')->with('success', 'Activité créée avec succès.');
     }
 
@@ -83,7 +96,9 @@ class ActiviteController extends Controller
      */
     public function show($id)
     {
-        $activite = Activite::findOrFail($id);
+        // Find the activity by ID and load its associated reviews and users
+        $activite = Activite::with('avis.utilisateur')->findOrFail($id); // Eager load avis and their users
+    
         return view('pages.activites.show', compact('activite'));
     }
 
@@ -108,30 +123,42 @@ class ActiviteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
+        // Validate incoming request data
+        $validatedData = $request->validate([
             'nom' => 'required|string|max:255',
             'description' => 'required|string',
             'date' => 'required|date',
             'lieu' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Image validation
         ], [
             'nom.required' => 'Le champ Nom est requis.',
-            'nom.string' => 'Le champ Nom doit être une chaîne de caractères.',
-            'nom.max' => 'Le champ Nom ne doit pas dépasser :max caractères.',
-            
             'description.required' => 'Le champ Description est requis.',
-            'description.string' => 'Le champ Description doit être une chaîne de caractères.',
-            
             'date.required' => 'Le champ Date est requis.',
-            'date.date' => 'Le champ Date doit être une date valide.',
-            
             'lieu.required' => 'Le champ Lieu est requis.',
-            'lieu.string' => 'Le champ Lieu doit être une chaîne de caractères.',
-            'lieu.max' => 'Le champ Lieu ne doit pas dépasser :max caractères.',
+            'image.image' => "Le fichier doit être une image.",
+            'image.mimes' => "Les formats d'image autorisés sont jpeg, png, jpg, gif et svg.",
+            'image.max' => "L'image ne doit pas dépasser :max Ko.",
         ]);
-
+    
+        // Find the activity by ID
         $activite = Activite::findOrFail($id);
-        $activite->update($request->all());
-
+    
+        // Handle image upload if a new image is provided
+        if ($request->hasFile('image')) {
+            // Generate a unique filename
+            $imageName = time() . '.' . $request->image->extension();
+            
+            // Move the uploaded file to the public/images directory
+            $request->image->move(public_path('images'), $imageName);
+            
+            // Save the image path in validated data
+            $validatedData['image'] = $imageName;
+        }
+    
+        // Update the activity record with validated data
+        $activite->update($validatedData);
+    
+        // Redirect with success message
         return redirect()->route('activites.list')->with('success', 'Activité mise à jour avec succès.');
     }
 
