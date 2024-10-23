@@ -72,9 +72,6 @@ Route::post('/candidatures-{id}-refuser', [CandidatureVolontariatController::cla
 Route::get('/candidatures-user', [CandidatureVolontariatController::class, 'indexUser'])->name('candidatures.indexUser')->middleware('auth');
 
 
-
-
-
 // Location Transport routes
 Route::get('/location-list', [LocationController::class, 'index'])->name('location.list');
 Route::get('/location-add', [LocationController::class, 'create'])->name('location-transport.create');
@@ -82,6 +79,8 @@ Route::post('/location-transport', [LocationController::class, 'store'])->name('
 Route::delete('/location/{id}', [LocationController::class, 'destroy'])->name('location.delete');
 Route::get('/location-edit-{id}', [LocationController::class, 'edit'])->name('location.edit');
 Route::put('/location-transport/update/{id}', [LocationController::class, 'update'])->name('location-transport.update');
+
+
 Route::post('/location/louer', [LocationController::class, 'louerTransport'])->name('location.louer');
 
 Route::get('/hebergements', [HebergementController::class,'index'])->name('hebergement.index');
