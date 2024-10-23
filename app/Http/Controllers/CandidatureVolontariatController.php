@@ -21,13 +21,24 @@ class CandidatureVolontariatController extends Controller
     return view('pages.candidatures.index-user', compact('candidatures'));
 }
 
-    // Afficher toutes les candidatures (pour l'admin)
-    public function indexAdmin()
+public function indexAdmin(Request $request)
 {
+    // Récupérer toutes les missions disponibles
+    $missions = MissionVolontariat::all();
+
     // Récupérer uniquement les candidatures en attente
-    $candidatures = CandidatureVolontariat::where('etat', 'en attente')->get();
-    return view('pages.candidatures.index-admin', compact('candidatures'));
+    $query = CandidatureVolontariat::where('etat', 'en attente');
+
+    // Filtrer par mission si une mission est sélectionnée
+    if ($request->filled('mission')) {
+        $query->where('mission_id', $request->mission);
+    }
+
+    $candidatures = $query->get();
+
+    return view('pages.candidatures.index-admin', compact('candidatures', 'missions'));
 }
+
 
 
 public function create($mission_id)

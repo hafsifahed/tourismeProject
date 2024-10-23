@@ -4,8 +4,28 @@
 @include('layouts.navbars.auth.topnav', ['title' => 'Liste des Candidatures'])
 
 <div class="container mt-4">
-    <br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br>
     <h1 class="mb-4 text-center">Gestion des Candidatures de Volontariat</h1>
+
+    <!-- Formulaire de filtrage -->
+    <form method="GET" action="{{ route('candidatures.indexAdmin') }}" class="mb-3">
+        <div class="form-row align-items-center">
+            <div class="col-auto">
+                <label for="mission" class="sr-only">Sélectionnez une Mission</label>
+                <select name="mission" id="mission" class="form-control mb-2">
+                    <option value="">-- Sélectionnez une Mission --</option>
+                    @foreach($missions as $mission)
+                        <option value="{{ $mission->id }}" {{ request('mission') == $mission->id ? 'selected' : '' }}>
+                            {{ $mission->nom_association }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary mb-2">Filtrer</button>
+            </div>
+        </div>
+    </form>
 
     <!-- Table pour afficher la liste des candidatures -->
     <div class="table-responsive">
@@ -14,7 +34,9 @@
                 <tr class="text-center">
                     <th style="width: 20%;">Nom du Candidat</th>
                     <th style="width: 20%;">Email</th>
-                    <th style="width: 25%;">Motivation</th>
+                    <th style="width: 20%;">Nom de l'Association</th> <!-- Colonne pour le nom de l'association -->
+                    <th style="width: 20%;">Description de l'Association</th> <!-- Colonne pour la description de l'association -->
+                    <th style="width: 15%;">CV</th> <!-- Nouvelle colonne pour le CV -->
                     <th style="width: 15%;">Date de Candidature</th>
                     <th style="width: 20%;">Actions</th>
                 </tr>
@@ -24,10 +46,9 @@
                 <tr>
                     <td class="text-center">{{ $candidature->nom }}</td>
                     <td class="text-center">{{ $candidature->email }}</td>
-                    <td style="word-break: break-word;">{{ $candidature->motivation }}</td>
-                    <td class="text-center">{{ $candidature->created_at->format('d/m/Y') }}</td>
+                    <td class="text-center">{{ $candidature->mission->nom_association }}</td> <!-- Affiche le nom de l'association -->
+                    <td class="text-center">{{ $candidature->mission->description_association }}</td> <!-- Affiche la description de l'association -->
                     <td class="text-center">
-                        <!-- Bouton de prévisualisation du CV -->
                         @if($candidature->cv)
                         <a href="{{ asset('storage/' . $candidature->cv) }}" target="_blank" class="btn btn-primary btn-sm">
                             Voir CV
@@ -35,7 +56,9 @@
                         @else
                         <span class="text-muted">Aucun CV</span>
                         @endif
-
+                    </td> <!-- Colonne pour le CV -->
+                    <td class="text-center">{{ $candidature->created_at->format('d/m/Y') }}</td>
+                    <td class="text-center">
                         <!-- Formulaire pour accepter une candidature -->
                         <form action="{{ route('candidatures.accepter', $candidature->id) }}" method="POST" class="d-inline">
                             @csrf
