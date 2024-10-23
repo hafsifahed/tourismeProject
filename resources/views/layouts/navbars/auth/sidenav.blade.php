@@ -53,7 +53,7 @@
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1">UIHebergement</span>
+                    <span class="nav-link-text ms-1">List des Hebergement</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -61,7 +61,7 @@
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1">UIMes Reservations</span>
+                    <span class="nav-link-text ms-1">Reservations des Hebergements</span>
                 </a>
             </li>
             
@@ -77,7 +77,16 @@
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1">UIActivites</span>
+                    <span class="nav-link-text ms-1"> Les activites</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ Route::currentRouteName() == 'avisactivites' ? 'active' : '' }}" href="{{ route('reservations.list') }}">
+                    <div
+                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Reservation des activites</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -86,51 +95,27 @@
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1">B+F Avis Reservation</span>
+                    <span class="nav-link-text ms-1">Les avis des activités</span>
                 </a>
             </li>
 
+
             <li class="nav-item">
-                <a class="nav-link {{ str_contains(request()->url(), 'user-management') == true ? 'active' : '' }}" href="{{ route('usersM.index') }}">
+                <a class="nav-link {{ str_contains(request()->url(), 'restaurant-list') == true ? 'active' : '' }}" href="{{ route('restaurant.list.client') }}">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1">User Management</span>
+                    <span class="nav-link-text ms-1">List des restaurants</span>
                 </a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link {{ str_contains(request()->url(), 'restaurant-list') == true ? 'active' : '' }}" href="{{ route('restaurant.list') }}">
-                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">BORestaurants</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link {{ str_contains(request()->url(), 'avis-restaurant-list') == true ? 'active' : '' }}" href="{{ route('avis.restaurant.list') }}">
-                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Avis Restaurants</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link {{ str_contains(request()->url(), 'reservation-restaurant-list') == true ? 'active' : '' }}" href="{{ route('reservation.restaurant.list') }}">
-                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Reservation Restaurants</span>
-                </a>
-            </li>
+          
             <li class="nav-item">
                 <a class="nav-link {{ str_contains(request()->url(), 'missions.indexUser') == true ? 'active' : '' }}" href="{{ route('missions.indexUser') }}">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1">UImission</span>
+                    <span class="nav-link-text ms-1">Liste des missions</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -138,7 +123,7 @@
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1">UI Mes candidatures</span>
+                    <span class="nav-link-text ms-1">Mes candidatures</span>
                 </a>
             </li>
             @endif
@@ -154,7 +139,16 @@
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1">BOActivites</span>
+                    <span class="nav-link-text ms-1">les activites</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ Route::currentRouteName() == 'activites' ? 'active' : '' }}" href="{{ route('avis.list') }}">
+                    <div
+                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Avis sur les activites</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -162,25 +156,25 @@
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1">bo Guides Locaux</span>
+                    <span class="nav-link-text ms-1">Guides Locaux</span>
                 </a>
                 <a class="nav-link {{ Route::currentRouteName() == 'reservationtour.list' ? 'active' : '' }}" href="{{ route('reservationtour.list') }}">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1">bo Reservations Tours</span>
+                    <span class="nav-link-text ms-1"> Reservations Tours</span>
                 </a>
                 <a class="nav-link {{ Route::currentRouteName() == 'avistour.list' ? 'active' : '' }}" href="{{ route('avistour.list') }}">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1">bo Avis Tours</span>
+                    <span class="nav-link-text ms-1"> Avis Tours</span>
                 </a>
                 <a class="nav-link {{ Route::currentRouteName() == 'typetour.list' ? 'active' : '' }}" href="{{ route('typetour.list') }}">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1">bo Types Tours</span>
+                    <span class="nav-link-text ms-1"> Types des Tours</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -188,19 +182,29 @@
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1">BORestaurants</span>
+                    <span class="nav-link-text ms-1">List des Restaurants</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ str_contains(request()->url(), 'reservationactivites') == true ? 'active' : '' }}" href="{{ route('reservations.list') }}">
+                <a class="nav-link {{ str_contains(request()->url(), 'avis-restaurant-list') == true ? 'active' : '' }}" href="{{ route('avis.restaurant.list') }}">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1">BO Reservation</span>
+                    <span class="nav-link-text ms-1">Avis Sur les restaurants</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ str_contains(request()->url(), 'user-management') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'user-management']) }}">
+                <a class="nav-link {{ str_contains(request()->url(), 'reservation-restaurant-list') == true ? 'active' : '' }}" href="{{ route('reservation.restaurant.list') }}">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Reservation des Restaurants</span>
+                </a>
+            </li>
+         
+            
+            <li class="nav-item">
+                <a class="nav-link {{ str_contains(request()->url(), 'user-management') == true ? 'active' : '' }}" href="{{ route('usersM.index') }}">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
                     </div>
@@ -212,7 +216,7 @@
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1">BO Reservations</span>
+                    <span class="nav-link-text ms-1">Reservations des hebergements</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -228,7 +232,7 @@
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1">candidatures-admin</span>
+                    <span class="nav-link-text ms-1">List des candidatures</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -236,7 +240,7 @@
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1">missions-admin</span>
+                    <span class="nav-link-text ms-1">List des missions</span>
                 </a>
             </li>
             @endif
