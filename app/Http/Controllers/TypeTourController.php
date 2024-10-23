@@ -17,12 +17,18 @@ class TypeTourController extends Controller
     // Create a new type of tour
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'nom_tour' => 'required|string|max:255',
+        // Validate the form data
+        $request->validate([
+            'nom_tour' => 'required|string|min:3|max:100',
         ]);
 
-        TypeTour::create($validatedData);
-        return to_route('typetour.list')->with('success', 'Votre type de tour a été enregistré avec succès');
+        // Proceed with storing data in the database
+        TypeTour::create([
+            'nom_tour' => $request->input('nom_tour'),
+        ]);
+
+        // Redirect with success message
+        return redirect()->route('typetour.list')->with('success', 'Type de tour ajouté avec succès!');
     }
 
     // Show the form to create a new type of tour

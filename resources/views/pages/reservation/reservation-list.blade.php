@@ -30,8 +30,6 @@
                     }, 3000);
                 </script>
 
-
-
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
                         <table class="table align-items-center mb-0">
@@ -51,16 +49,16 @@
                                     <td class="text-center text-sm">{{ $reservation->informations }}</td>
                                     <td class="align-middle text-end">
                                         <div class="d-flex justify-content-center align-items-center">
-                                            <a href="{{ route('reservationtour.edit', $reservation->id) }}" class="text-sm font-weight-bold" style="color: blue; margin-right: 10px;">
+                                            <a href="{{ route('reservationtour.edit', $reservation->id) }}" class="btn btn-info btn-sm me-2" title="Modifier">
                                                 <i class="fas fa-edit"></i>
-                                                <span>Edit</span>
+                                                <span>Modifier</span>
                                             </a>
-                                            <form method="POST" action="{{ route('reservationtour.delete', $reservation->id) }}" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette réservation ?');">
+                                            <form method="POST" action="{{ route('reservationtour.delete', $reservation->id) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette réservation ?');">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="text-sm font-weight-bold" style="background: none; border: none; color: red; cursor: pointer;">
+                                                <button type="submit" class="btn btn-danger btn-sm" title="Supprimer">
                                                     <i class="fas fa-trash-alt"></i>
-                                                    <span>Delete</span>
+                                                    <span>Supprimer</span>
                                                 </button>
                                             </form>
                                         </div>

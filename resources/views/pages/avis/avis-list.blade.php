@@ -53,16 +53,16 @@
                                     <td class="text-center text-sm">{{ $avie->commentaire }}</td>
                                     <td class="align-middle text-end">
                                         <div class="d-flex justify-content-center align-items-center">
-                                            <a href="{{ route('avistour.edit', $avie->id) }}" class="text-sm font-weight-bold" style="color: blue; margin-right: 10px;">
+                                            <a href="{{ route('avistour.edit', $avie->id) }}" class="btn btn-info btn-sm me-2" title="Modifier">
                                                 <i class="fas fa-edit"></i>
-                                                <span>Edit</span>
+                                                <span>Modifier</span>
                                             </a>
-                                            <form method="POST" action="{{ route('avistour.delete', $avie->id) }}" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette réservation ?');">
+                                            <form method="POST" action="{{ route('avistour.delete', $avie->id) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet avis ?');">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="text-sm font-weight-bold" style="background: none; border: none; color: red; cursor: pointer;">
+                                                <button type="submit" class="btn btn-danger btn-sm" title="Supprimer">
                                                     <i class="fas fa-trash-alt"></i>
-                                                    <span>Delete</span>
+                                                    <span>Supprimer</span>
                                                 </button>
                                             </form>
                                         </div>
