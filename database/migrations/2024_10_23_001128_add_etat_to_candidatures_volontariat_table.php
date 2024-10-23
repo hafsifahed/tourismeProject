@@ -13,14 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('activites', function (Blueprint $table) {
-            $table->id();
-            $table->string('nom');
-            $table->text('description');
-            $table->date('date');
-            $table->string('lieu');
-            $table->string('image')->nullable();
-            $table->timestamps();
+        Schema::table('candidatures_volontariat', function (Blueprint $table) {
+            $table->string('etat')->default('en attente')->after('cv'); // Ajouter la colonne 'etat' après 'cv'
         });
     }
 
@@ -31,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('activites');
+        Schema::table('candidatures_volontariat', function (Blueprint $table) {
+            $table->dropColumn('etat'); // Supprimer la colonne 'etat'
+        });
     }
 };

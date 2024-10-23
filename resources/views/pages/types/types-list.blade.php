@@ -7,7 +7,7 @@
         <div class="col-12">
             <div class="card mb-4">
                 <div class="card-header pb-0">
-                    <a href="{{ route('typetour.add') }}" class="btn btn-primary">Ajouter Type de Tour</a>
+                    <a href="{{ route('typetour.add') }}" class="btn btn-primary">Ajouter un Type de Tour</a>
                 </div>
 
                 @if(session('success'))
@@ -35,26 +35,26 @@
                         <table class="table align-items-center mb-0">
                             <thead>
                             <tr>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nom du Type Tour</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nom du Type de Tour</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">Actions</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach ($types as $type)
                                 <tr>
-                                    <td class="text-sm font-weight-bold mb-0">{{ $type->nom_tour }}</td>
-                                    <td class="align-middle text-end">
+                                    <td class="align-middle">{{ $type->nom_tour }}</td>
+                                    <td class="align-middle text-center">
                                         <div class="d-flex justify-content-center align-items-center">
-                                            <a href="{{ route('typetour.edit', $type->id) }}" class="text-sm font-weight-bold" style="color: blue; margin-right: 10px;">
+                                            <a href="{{ route('typetour.edit', $type->id) }}" class="btn btn-info btn-sm me-2" title="Modifier">
                                                 <i class="fas fa-edit"></i>
-                                                <span>Edit</span>
+                                                <span>Modifier</span>
                                             </a>
-                                            <form method="POST" action="{{ route('typetour.delete', $type->id) }}" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette réservation ?');">
+                                            <form method="POST" action="{{ route('typetour.delete', $type->id) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce type de tour ?');">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="text-sm font-weight-bold" style="background: none; border: none; color: red; cursor: pointer;">
+                                                <button type="submit" class="btn btn-danger btn-sm" title="Supprimer">
                                                     <i class="fas fa-trash-alt"></i>
-                                                    <span>Delete</span>
+                                                    <span>Supprimer</span>
                                                 </button>
                                             </form>
                                         </div>
@@ -63,7 +63,6 @@
                             @endforeach
                             </tbody>
                         </table>
-                        <br/>
                     </div>
                 </div>
             </div>

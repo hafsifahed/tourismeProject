@@ -13,14 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('activites', function (Blueprint $table) {
-            $table->id();
-            $table->string('nom');
-            $table->text('description');
-            $table->date('date');
-            $table->string('lieu');
-            $table->string('image')->nullable();
-            $table->timestamps();
+        Schema::table('mission_volontariats', function (Blueprint $table) {
+            $table->string('image')->nullable()->after('description_association'); // Ajouter la colonne 'image' après 'description_association'
         });
     }
 
@@ -31,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('activites');
+        Schema::table('mission_volontariats', function (Blueprint $table) {
+            $table->dropColumn('image'); // Supprimer la colonne 'image'
+        });
     }
 };

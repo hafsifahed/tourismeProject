@@ -10,22 +10,6 @@ use App\Http\Controllers\ReservationsHebergementController;
 use App\Http\Controllers\ReservationTourController;
 use App\Http\Controllers\TypeTourController;
 use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\RegisterController;
@@ -47,6 +31,45 @@ Route::get('/transport-edit-{id}', [TransportController::class, 'edit'])->name('
 Route::put('/transport/update/{id}', [TransportController::class, 'update'])->name('transport.update');
 Route::get('/transport-detail-{id}', [TransportController::class, 'show'])->name('transport.show');
 Route::get('/transport-search', [TransportController::class, 'search'])->name('transport.search');
+use App\Http\Controllers\MissionVolontariatController;
+use App\Http\Controllers\CandidatureVolontariatController; // Import du contrôleur
+
+// Routes pour l'admin - missions
+Route::get('/missions-admin', [MissionVolontariatController::class, 'indexAdmin'])->name('missions.indexAdmin');
+
+// Routes pour les utilisateurs - missions
+Route::get('/missions', [MissionVolontariatController::class, 'indexUser'])->name('missions.indexUser');
+
+// Routes pour la création, modification, suppression des missions
+Route::get('/missions-create', [MissionVolontariatController::class, 'create'])->name('missions.create');
+Route::post('/missions', [MissionVolontariatController::class, 'store'])->name('missions.store');
+Route::get('/missions-{mission}-edit', [MissionVolontariatController::class, 'edit'])->name('missions.edit');
+Route::put('/missions/{mission}', [MissionVolontariatController::class, 'update'])->name('missions.update');
+Route::delete('/missions/{mission}', [MissionVolontariatController::class, 'destroy'])->name('missions.destroy');
+
+// Routes pour l'admin - candidatures
+Route::get('/candidatures-admin', [CandidatureVolontariatController::class, 'indexAdmin'])->name('candidatures.indexAdmin');
+
+// Routes pour la création, modification, suppression des candidatures
+Route::get('/candidatures-create-{mission_id}', [CandidatureVolontariatController::class, 'create'])->name('candidatures.create');
+
+//Route::get('/candidatures/create/{missionId}', [CandidatureVolontariatController::class, 'create'])->name('candidatures.create');
+
+
+Route::post('/candidatures', [CandidatureVolontariatController::class, 'store'])->name('candidatures.store');
+Route::get('/candidatures-{candidature}-edit', [CandidatureVolontariatController::class, 'edit'])->name('candidatures.edit');
+Route::put('/candidatures/{candidature}', [CandidatureVolontariatController::class, 'update'])->name('candidatures.update');
+Route::delete('/candidatures/{candidature}', [CandidatureVolontariatController::class, 'destroy'])->name('candidatures.destroy');
+// Route pour afficher les détails d'une candidature
+Route::get('/candidatures/{candidature}', [CandidatureVolontariatController::class, 'show'])->name('candidatures.show');
+
+// Routes pour accepter et refuser une candidature avec des tirets
+Route::post('/candidatures-{id}-accepter', [CandidatureVolontariatController::class, 'accepter'])->name('candidatures.accepter');
+Route::post('/candidatures-{id}-refuser', [CandidatureVolontariatController::class, 'refuser'])->name('candidatures.refuser');
+
+
+// Route pour afficher les candidatures de l'utilisateur connecté
+Route::get('/candidatures-user', [CandidatureVolontariatController::class, 'indexUser'])->name('candidatures.indexUser')->middleware('auth');
 
 
 
@@ -63,16 +86,9 @@ Route::post('/location/louer', [LocationController::class, 'louerTransport'])->n
 
 
 
-<<<<<<< HEAD
-
 
 use App\Http\Controllers\HebergementController;
 use App\Http\Controllers\ReservationsHebergementController;
-
-
-      
-=======
->>>>>>> 3cd8e19f1722b198d3b6c3c68bd98f47b9ba15e8
 Route::get('/hebergements', [HebergementController::class,'index'])->name('hebergement.index');
 Route::get('/hebergement-create', [HebergementController::class,'create'])->name('hebergement.create');
 Route::post('/hebergement-store', [HebergementController::class,'store'])->name('hebergement.store');
@@ -101,6 +117,7 @@ use App\Http\Controllers\ReservationActiviteController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\AvisRestaurantController;
 use App\Http\Controllers\ReservationRestaurantController;
+use App\Http\Controllers\UserManagementController;
 
 Route::get('/guide-list', [GuideLocalController::class, 'index'])->name('guidelocal.list');
 Route::get('/guide-add', [GuideLocalController::class, 'create'])->name('guidelocal.add');
@@ -191,17 +208,28 @@ Route::post('/reservationactivites-storee', [ReservationActiviteController::clas
 Route::get('/activitesuser', [ActiviteController::class, 'indexx'])->name('activites.activities');
 
 
+Route::get('/users', [UserManagementController::class, 'index'])->name('users.index');
+Route::delete('/users-{id}', [UserManagementController::class, 'destroy'])->name('users.destroy');
+Route::get('/users-{id}-edit', [UserManagementController::class, 'edit'])->name('users.edit');
+Route::put('/users-{id}', [UserManagementController::class, 'update'])->name('users.update');
+Route::post('/users', [UserManagementController::class, 'store'])->name('users.store');
+Route::get('/users-{id}', [UserManagementController::class, 'show'])->name('users.show');
 
-Route::get('/', function () {return redirect('/dashboard');})->middleware('auth');
-	Route::get('/register', [RegisterController::class, 'create'])->middleware('guest')->name('register');
-	Route::post('/register', [RegisterController::class, 'store'])->middleware('guest')->name('register.perform');
-	Route::get('/login', [LoginController::class, 'show'])->middleware('guest')->name('login');
-	Route::post('/login', [LoginController::class, 'login'])->middleware('guest')->name('login.perform');
-	Route::get('/reset-password', [ResetPassword::class, 'show'])->middleware('guest')->name('reset-password');
-	Route::post('/reset-password', [ResetPassword::class, 'send'])->middleware('guest')->name('reset.perform');
-	Route::get('/change-password', [ChangePassword::class, 'show'])->middleware('guest')->name('change-password');
-	Route::post('/change-password', [ChangePassword::class, 'update'])->middleware('guest')->name('change.perform');
-	Route::get('/dashboard', [HomeController::class, 'index'])->name('home')->middleware('auth');
+// Other routes (already in your file)
+Route::get('/', function () {
+    return redirect('/dashboard');
+})->middleware('auth');
+
+Route::get('/register', [RegisterController::class, 'create'])->middleware('guest')->name('register');
+Route::post('/register', [RegisterController::class, 'store'])->middleware('guest')->name('register.perform');
+Route::get('/login', [LoginController::class, 'show'])->middleware('guest')->name('login');
+Route::post('/login', [LoginController::class, 'login'])->middleware('guest')->name('login.perform');
+Route::get('/reset-password', [ResetPassword::class, 'show'])->middleware('guest')->name('reset-password');
+Route::post('/reset-password', [ResetPassword::class, 'send'])->middleware('guest')->name('reset.perform');
+Route::get('/change-password', [ChangePassword::class, 'show'])->middleware('guest')->name('change-password');
+Route::post('/change-password', [ChangePassword::class, 'update'])->middleware('guest')->name('change.perform');
+Route::get('/dashboard', [HomeController::class, 'index'])->name('home')->middleware('auth');
+
 Route::group(['middleware' => 'auth'], function () {
 	Route::get('/virtual-reality', [PageController::class, 'vr'])->name('virtual-reality');
 	Route::get('/rtl', [PageController::class, 'rtl'])->name('rtl');

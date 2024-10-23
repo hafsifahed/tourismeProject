@@ -12,7 +12,7 @@ class AvisTourController extends Controller
     // Retrieve all reviews
     public function index()
     {
-        $avis = AvisTour::with(['guideLocal', 'utilisateur'])->get(); // Eager load relations
+        $avis = AvisTour::with(['guideLocal', 'user'])->get(); // Eager load relations
         return view('pages.avis.avis-list', compact('avis'));
     }
 

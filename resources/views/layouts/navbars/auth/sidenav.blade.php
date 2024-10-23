@@ -153,10 +153,7 @@
                     <span class="nav-link-text ms-1">Reservation Restaurants</span>
                 </a>
             </li>
-<<<<<<< HEAD
 
-=======
->>>>>>> 3cd8e19f1722b198d3b6c3c68bd98f47b9ba15e8
             <li class="nav-item">
                 <a class="nav-link {{ str_contains(request()->url(), 'guidelocal-list') ? 'active' : '' }}" href="{{ route('guidelocal.list') }}">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -164,7 +161,6 @@
                     </div>
                     <span class="nav-link-text ms-1">bo Guides Locaux</span>
                 </a>
-<<<<<<< HEAD
             </li>
 
            
@@ -173,11 +169,11 @@
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
-=======
+
                 <a class="nav-link {{ Route::currentRouteName() == 'reservationtour.list' ? 'active' : '' }}" href="{{ route('reservationtour.list') }}">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
->>>>>>> 3cd8e19f1722b198d3b6c3c68bd98f47b9ba15e8
+
                     </div>
                     <span class="nav-link-text ms-1">bo Reservations Tours</span>
                 </a>
@@ -194,7 +190,7 @@
                     <span class="nav-link-text ms-1">bo Types Tours</span>
                 </a>
             </li>
-<<<<<<< HEAD
+
             <li class="nav-item">
                 <a class="nav-link {{ Route::currentRouteName() == 'rtl' ? 'active' : '' }}" href="{{ route('rtl') }}">
                     <div
@@ -234,8 +230,41 @@
                     <span class="nav-link-text ms-1">Sign Up</span>
                 </a>
             </li>-->
-=======
->>>>>>> 3cd8e19f1722b198d3b6c3c68bd98f47b9ba15e8
+
+
+
+            <li class="nav-item">
+                <a class="nav-link {{ str_contains(request()->url(), 'candidatures.indexAdmin') == true ? 'active' : '' }}" href="{{ route('candidatures.indexAdmin') }}">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">candidatures-admin</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ str_contains(request()->url(), 'missions.indexAdmin') == true ? 'active' : '' }}" href="{{ route('missions.indexAdmin') }}">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">missions-admin</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ str_contains(request()->url(), 'missions.indexUser') == true ? 'active' : '' }}" href="{{ route('missions.indexUser') }}">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">UImission</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ str_contains(request()->url(), 'candidatures.indexUser') == true ? 'active' : '' }}" href="{{ route('candidatures.indexUser') }}">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">UI Mes candidatures</span>
+                </a>
+            </li>
         </ul>
     </div>
 

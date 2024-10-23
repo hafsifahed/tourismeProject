@@ -18,35 +18,41 @@
                         </div>
                     @endif
 
-                    <form action="{{ route('activites.update', $activite->id) }}" method="POST">
+                    <form action="{{ route('activites.update', $activite->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 
                         <div class="mb-3">
                             <label for="nom" class="form-label">Nom</label>
-                            <input type="text" class="form-control" id="nom" name="nom" value="{{ old('nom', $activite->nom) }}" >
+                            <input type="text" class="form-control" id="nom" name="nom" value="{{ old('nom', $activite->nom) }}" required>
                         </div>
 
                         <div class="mb-3">
                             <label for="description" class="form-label">Description</label>
-                            <textarea class="form-control" id="description" name="description" >{{ old('description', $activite->description) }}</textarea>
+                            <textarea class="form-control" id="description" name="description" required>{{ old('description', $activite->description) }}</textarea>
                         </div>
 
                         <div class="mb-3">
                             <label for="date" class="form-label">Date</label>
-                            <input type="date" class="form-control" id="date" name="date" value="{{ old('date', $activite->date) }}" >
+                            <input type="date" class="form-control" id="date" name="date" value="{{ old('date', $activite->date) }}" required>
                         </div>
 
                         <div class="mb-3">
                             <label for="lieu" class="form-label">Lieu</label>
-                            <input type="text" class="form-control" id="lieu" name="lieu" value="{{ old('lieu', $activite->lieu) }}" >
+                            <input type="text" class="form-control" id="lieu" name="lieu" value="{{ old('lieu', $activite->lieu) }}" required>
                         </div>
 
-                        <!-- Bouton de soumission -->
-                        <button type="submit" class="btn btn-primary">Mettre à jour l'Activité</button>
+                        <div class="mb-3">
+                            <label for="image" class="form-label">Image (facultatif)</label>
+                            <input type="file" class="form-control" id="image" name="image" accept=".jpeg,.png,.jpg,gif,svg">
+                            <small class="text-muted">Formats autorisés: jpeg, png, jpg, gif, svg. Taille maximale: 2 Mo.</small>
+                        </div>
+
+                        <!-- Submit button -->
+                        <button type='submit' class='btn btn-primary'>Mettre à jour l'Activité</button>
                     </form>
 
-                    <!-- Lien de retour -->
+                    <!-- Back button -->
                     <a href="{{ route('activites.list') }}" class="btn btn-secondary mt-3">Retour à la liste</a>
                 </div>
             </div>

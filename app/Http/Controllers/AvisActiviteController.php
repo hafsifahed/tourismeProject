@@ -78,8 +78,7 @@ class AvisActiviteController extends Controller
         ]);
 
         AvisActivite::create($request->all());
-        return redirect()->route('avis.list')->with('success', 'Avis créé avec succès.');
-    }
+        return redirect()->route('activites.show', $request->activite_id)->with('success', 'Avis créé avec succès.');    }
 
  /**
  * Display the specified resource.
