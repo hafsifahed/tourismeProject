@@ -45,6 +45,11 @@ Route::post('/candidatures-{id}-accepter', [CandidatureVolontariatController::cl
 Route::post('/candidatures-{id}-refuser', [CandidatureVolontariatController::class, 'refuser'])->name('candidatures.refuser');
 
 
+// Route pour afficher les candidatures de l'utilisateur connecté
+Route::get('/candidatures-user', [CandidatureVolontariatController::class, 'indexUser'])->name('candidatures.indexUser')->middleware('auth');
+
+
+
 
 
 // Other routes (already in your file)

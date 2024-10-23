@@ -12,6 +12,15 @@ use Illuminate\Support\Facades\Auth;
 
 class CandidatureVolontariatController extends Controller
 {
+
+
+    public function indexUser()
+{
+    // Récupérer uniquement les candidatures de l'utilisateur connecté
+    $candidatures = CandidatureVolontariat::where('user_id', Auth::id())->get();
+    return view('pages.candidatures.index-user', compact('candidatures'));
+}
+
     // Afficher toutes les candidatures (pour l'admin)
     public function indexAdmin()
 {
@@ -34,6 +43,8 @@ public function create($mission_id)
     // Passez l'ID de la mission à la vue
     return view('pages.candidatures.create', compact('mission_id'));
 }
+
+
 
  // Enregistrer une nouvelle candidature avec fichier CV
 public function store(Request $request)
