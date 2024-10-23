@@ -84,6 +84,7 @@ use App\Http\Controllers\ReservationActiviteController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\AvisRestaurantController;
 use App\Http\Controllers\ReservationRestaurantController;
+use App\Http\Controllers\UserManagementController;
 
 Route::get('/guide-list', [GuidesLocauxController::class, 'index'])->name('guidelocal.list');
 Route::get('/guide-add', [GuidesLocauxController::class, 'create'])->name('guidelocal.add');
@@ -149,6 +150,13 @@ Route::put('/avisactivites-{id}', [AvisActiviteController::class, 'update'])->na
 Route::post('/reservationactivites-storee', [ReservationActiviteController::class, 'storee'])->name('reservations.storee');
 Route::get('/activitesuser', [ActiviteController::class, 'indexx'])->name('activites.activities');
 
+
+Route::get('/users', [UserManagementController::class, 'index'])->name('users.index');
+Route::delete('/users-{id}', [UserManagementController::class, 'destroy'])->name('users.destroy');
+Route::get('/users-{id}-edit', [UserManagementController::class, 'edit'])->name('users.edit');
+Route::put('/users-{id}', [UserManagementController::class, 'update'])->name('users.update');
+Route::post('/users', [UserManagementController::class, 'store'])->name('users.store');
+Route::get('/users-{id}', [UserManagementController::class, 'show'])->name('users.show');
 
 
 Route::get('/', function () {return redirect('/dashboard');})->middleware('auth');
