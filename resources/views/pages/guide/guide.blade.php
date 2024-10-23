@@ -25,7 +25,6 @@
                     <p><strong>Certification:</strong> {{ $guide->certification ? 'Oui' : 'Non' }}</p>
                     <p><strong>Tour de Groupe:</strong> {{ $guide->tour_groupe ? 'Oui' : 'Non' }}</p>
                     <p><strong>Tour Privé:</strong> {{ $guide->tour_prive ? 'Oui' : 'Non' }}</p>
-                    <p><strong>Commentaires:</strong> {{ $guide->commentaires }}</p>
                 </div>
             </div>
         </div>
