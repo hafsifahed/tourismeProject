@@ -83,7 +83,9 @@ class ActiviteController extends Controller
      */
     public function show($id)
     {
-        $activite = Activite::findOrFail($id);
+        // Find the activity by ID and load its associated reviews and users
+        $activite = Activite::with('avis.utilisateur')->findOrFail($id); // Eager load avis and their users
+    
         return view('pages.activites.show', compact('activite'));
     }
 
