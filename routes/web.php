@@ -28,7 +28,7 @@ Route::delete('/missions/{mission}', [MissionVolontariatController::class, 'dest
 Route::get('/candidatures-admin', [CandidatureVolontariatController::class, 'indexAdmin'])->name('candidatures.indexAdmin');
 
 // Routes pour la création, modification, suppression des candidatures
-Route::get('/candidatures-create', [CandidatureVolontariatController::class, 'create'])->name('candidatures.create');
+Route::get('/candidatures-create-{mission_id}', [CandidatureVolontariatController::class, 'create'])->name('candidatures.create');
 
 //Route::get('/candidatures/create/{missionId}', [CandidatureVolontariatController::class, 'create'])->name('candidatures.create');
 

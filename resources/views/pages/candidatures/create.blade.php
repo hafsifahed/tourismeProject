@@ -11,6 +11,9 @@
         <div class="col-md-8">
             <form action="{{ route('candidatures.store') }}" method="POST" enctype="multipart/form-data"> <!-- Add enctype -->
                 @csrf
+                <!-- Champ caché pour l'ID de la mission -->
+                <input type="hidden" name="mission_id" value="{{ request('mission_id') }}">
+
                 <div class="form-group">
                     <label for="nom">Nom du candidat</label>
                     <input type="text" id="nom" name="nom" class="form-control" required>
@@ -26,7 +29,7 @@
                     <textarea id="motivation" name="motivation" class="form-control" rows="4" required></textarea>
                 </div>
 
-                <!-- New field for CV upload -->
+                <!-- Nouveau champ pour le téléchargement du CV -->
                 <div class="form-group">
                     <label for="cv">Télécharger le CV (format PDF)</label>
                     <input type="file" id="cv" name="cv" class="form-control-file" accept=".pdf" required>

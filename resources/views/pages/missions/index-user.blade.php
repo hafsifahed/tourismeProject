@@ -35,7 +35,7 @@
                     <p class="card-text"><small>{{ Str::limit($mission->description_association, 100) }}</small></p>
 
                     <!-- Bouton Postuler qui redirige vers le formulaire de création d'une candidature -->
-                    <a href="{{ route('candidatures.create') }}" class="btn btn-success">Postuler</a>
+                    <a href="{{ route('candidatures.create', $mission->id) }}" class="btn btn-success">Postuler</a>
                 </div>
             </div>
         </div>
