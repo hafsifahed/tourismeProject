@@ -43,9 +43,6 @@ Route::get('/transport-detail-{id}', [TransportController::class, 'show'])->name
 Route::get('/transport-search', [TransportController::class, 'search'])->name('transport.search');
 
 
-
-
-
 // Location Transport routes
 Route::get('/location-list', [LocationController::class, 'index'])->name('location.list');
 Route::get('/location-add', [LocationController::class, 'create'])->name('location-transport.create');
@@ -53,13 +50,8 @@ Route::post('/location-transport', [LocationController::class, 'store'])->name('
 Route::delete('/location/{id}', [LocationController::class, 'destroy'])->name('location.delete');
 Route::get('/location-edit-{id}', [LocationController::class, 'edit'])->name('location.edit');
 Route::put('/location-transport/update/{id}', [LocationController::class, 'update'])->name('location-transport.update');
-
-
-
-
 use App\Http\Controllers\HebergementController;
 use App\Http\Controllers\ReservationsHebergementController;
-
 Route::get('/hebergements', [HebergementController::class,'index'])->name('hebergement.index');
 Route::get('/hebergement-create', [HebergementController::class,'create'])->name('hebergement.create');
 Route::post('/hebergement-store', [HebergementController::class,'store'])->name('hebergement.store');
