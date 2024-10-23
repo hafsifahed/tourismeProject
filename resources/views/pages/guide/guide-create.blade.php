@@ -6,7 +6,7 @@
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <div class="card shadow-lg border-0">
-                    <div class="card-header bg-primary text-white">
+                    <div class="card-header bg-success text-white">
                         <h4 class="mb-0">Ajouter Guide Local</h4>
                     </div>
                     <div class="card-body p-4">

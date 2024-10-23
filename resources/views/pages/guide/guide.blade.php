@@ -10,7 +10,7 @@
 
                     <!-- Display the photo at the top -->
                     @if($guide->photo_url)
-                        <img src="{{ $guide->photo_url }}" alt="Photo de {{ $guide->nom }}" class="img-fluid mb-3" style="max-height: 300px; object-fit: cover;">
+                        <img src="{{ asset('storage/' . $guide->photo_url) }}" alt="Photo de {{ $guide->nom }}" class="img-fluid mb-3" style="max-height: 300px; object-fit: cover;">
                     @endif
 
                     <h2 class="mt-2">{{ $guide->nom }}</h2>

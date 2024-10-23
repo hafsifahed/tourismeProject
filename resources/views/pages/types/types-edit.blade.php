@@ -6,7 +6,7 @@
     <div class="row mt-4 mx-4">
         <div class="col-12">
             <div class="card mb-4">
-                <div class="card-header bg-gradient-primary text-white">
+                <div class="card-header bg-success text-white">
                     <h4 class="mb-0">Éditer le Type de Tour</h4>
                 </div>
 
