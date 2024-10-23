@@ -31,7 +31,7 @@
                                     <td>{{ $user->username }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>{{ $user->role }}</td> <!-- Assuming roles relationship -->
-                                    <td>{{ $user->created_at->format('d M Y') }}</td>
+                                    <td>{{ $user->created_at }}</td>
                                     <td>
                                     <a href="{{ route('users.show', $user->id) }}" class="btn btn-info">Voir</a>
 
@@ -48,8 +48,7 @@
                     </table>
                 </div>
 
-                <!-- Pagination Links -->
-                {{ $users->links() }} <!-- If you're paginating users -->
+ <!-- If you're paginating users -->
             </div>
         </div>
     @endif

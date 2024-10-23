@@ -12,7 +12,7 @@ class UserManagementController extends Controller
     public function index()
     {
         // Retrieve all users from the database, paginated
-        $users = User::paginate(10); // Adjust the number as needed
+        $users = User::all(); // Adjust the number as needed
 
         // Pass the users data to the view
         return view('pages.user-management', compact('users'));

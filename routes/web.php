@@ -99,7 +99,7 @@ Route::get('/UIhebergements', [HebergementController::class, 'UI_index'])->name(
 
 Route::post('/reservations', [ReservationsHebergementController::class, 'store'])->name('reservationsHebergement.store');
 Route::get('/BOReservations', [ReservationsHebergementController::class, 'index_BackOffice'])->name('reservations.index_BackOffice');
-Route::get('/MyReservations', [ReservationsHebergementController::class, 'index'])->name('reservations.index');
+Route::get('/MyReservationss', [ReservationsHebergementController::class, 'index'])->name('reservationsss.index');
 Route::get('/reservations-{reservation}-payment', [ReservationsHebergementController::class, 'showPaymentForm'])->name('reservations.payment');
 Route::post('/reservations/{reservation}/createPaymentIntent', [ReservationsHebergementController::class, 'createPaymentIntent'])->name('reservations.createPaymentIntent');
 Route::get('/reservations-{id}', [ReservationsHebergementController::class, 'show'])->name('reservations.details');
@@ -202,7 +202,7 @@ Route::post('/reservationactivites-storee', [ReservationActiviteController::clas
 Route::get('/activitesuser', [ActiviteController::class, 'indexx'])->name('activites.activities');
 
 
-Route::get('/users', [UserManagementController::class, 'index'])->name('users.index');
+Route::get('/users', [UserManagementController::class, 'index'])->name('usersM.index');
 Route::delete('/users-{id}', [UserManagementController::class, 'destroy'])->name('users.destroy');
 Route::get('/users-{id}-edit', [UserManagementController::class, 'edit'])->name('users.edit');
 Route::put('/users-{id}', [UserManagementController::class, 'update'])->name('users.update');
